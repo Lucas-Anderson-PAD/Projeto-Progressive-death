@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://5skl85vaxw5t"]
 
 [ext_resource type="Script" uid="uid://b3gqu0nxegw2m" path="res://player.gd" id="1_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://cxf3rnfn0dvaa" path="res://icon.svg" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://bc452tr28goje" path="res://sprites/cardeal andando.png" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://mckw0fxm0d8d" path="res://floor.tscn" id="3_h2yge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
-size = Vector2(127, 128)
+size = Vector2(123, 116)
 
 [node name="Main" type="Node2D" unique_id=144474866]
 
@@ -14,9 +14,12 @@ position = Vector2(208, 101)
 script = ExtResource("1_0xm2m")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=437785537]
-texture = ExtResource("1_ig7tw")
+position = Vector2(-5, 7)
+scale = Vector2(0.074279785, 0.07153322)
+texture = ExtResource("2_h2yge")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1671512336]
+position = Vector2(0.5, 6)
 shape = SubResource("RectangleShape2D_0xm2m")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=604728915]
