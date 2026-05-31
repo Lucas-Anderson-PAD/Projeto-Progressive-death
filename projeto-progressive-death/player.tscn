@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://krndiu1c141n"]
+
+[ext_resource type="Script" uid="uid://b3gqu0nxegw2m" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://bc452tr28goje" path="res://sprites/cardeal andando.png" id="2_i3pqv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(123, 133)
+
+[node name="Player" type="CharacterBody2D" unique_id=929203449]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_onrkg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=964619976]
+position = Vector2(-4.7683716e-07, 6.0000005)
+scale = Vector2(0.04, 0.038)
+texture = ExtResource("2_i3pqv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2111982329]
+position = Vector2(0.5, 9.399999)
+scale = Vector2(0.4, 0.4)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2093983675]
+zoom = Vector2(3, 3)
