@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://w0ndm0cypowt"]
+
+[ext_resource type="Texture2D" uid="uid://cawjjpq21h22w" path="res://sprites/espinhos.png" id="1_fkuvm"]
+[ext_resource type="Script" uid="uid://q05ayrg3lpqw" path="res://scripts/espinhos.gd" id="1_i7foq"]
+
+[node name="Area2D" type="Area2D" unique_id=282389875]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_i7foq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1006719964]
+position = Vector2(0, -1)
+polygon = PackedVector2Array(192, 256, 192, 192, 176, 192, 176, -128, 32, -128, 32, -239, -32, -239, -32, -127, -176, -127, -176, 193, -192, 193, -192, 257)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1349472223]
+texture = ExtResource("1_fkuvm")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
