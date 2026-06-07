@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bq225dmubin2r"]
+
+[ext_resource type="Texture2D" uid="uid://dw6g2um3fwuw3" path="res://sprites/fundo/fase2/destroco.png" id="1_jn5xa"]
+[ext_resource type="Script" uid="uid://di2um014wn1cs" path="res://scripts/destrocos_fase_2.gd" id="1_xhjdc"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_xhjdc"]
+custom_solver_bias = 0.019
+points = PackedVector2Array(286.16666, -300.04297, -288.3527, -284.647, -289.73438, -183.41988, -132.67313, 444.16986, 20.590178, 557.10583, 138.31259, 320.01294, 283.026, -167.37169)
+
+[node name="Destrocos_fase2" type="Area2D" unique_id=1431548494]
+position = Vector2(204.99998, 73.99999)
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_xhjdc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1631796802]
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("1_jn5xa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1727756823]
+position = Vector2(-3.0517569e-05, -82.49995)
+rotation = 0.013969965
+scale = Vector2(1.2137911, 0.6411451)
+shape = SubResource("ConvexPolygonShape2D_xhjdc")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=772867066]
+position = Vector2(-9.999996, 80.000015)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
