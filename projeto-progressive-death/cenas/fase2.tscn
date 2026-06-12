@@ -1,238 +1,27 @@
-[gd_scene format=3 uid="uid://btidjbwnscgft"]
+[gd_scene format=3 uid="uid://btp0axjcronp4"]
 
-[ext_resource type="Texture2D" uid="uid://buadovbvtyu5d" path="res://sprites/Terrain (16x16).png" id="1_kuenn"]
 [ext_resource type="Texture2D" uid="uid://c3ur8faisffbp" path="res://sprites/fundo/fase2/camadas/camada01.png" id="2_u0wwy"]
 [ext_resource type="Texture2D" uid="uid://bpm5870n0hgi3" path="res://sprites/fundo/fase2/camadas/camada1.png" id="3_xlps0"]
 [ext_resource type="PackedScene" uid="uid://krndiu1c141n" path="res://player.tscn" id="4_ildsr"]
 [ext_resource type="Script" uid="uid://dg3b6udgdfhw8" path="res://scripts/playerfase2.gd" id="5_3dqna"]
 [ext_resource type="Texture2D" uid="uid://xyw7dgkcldc7" path="res://sprites/fundo/fase2/camadas/camada2.png" id="6_kpmld"]
-[ext_resource type="Script" uid="uid://dculqq1p53oh5" path="res://scripts/camera_2d_controller.gd" id="6_mytbp"]
+[ext_resource type="Script" path="res://scripts/camera_2d_controller.gd" id="6_mytbp"]
+[ext_resource type="Texture2D" uid="uid://7l2iw7ntmbmu" path="res://sprites/fundo/fase2/camadas/camada3repeticao.png" id="6_o8iim"]
+[ext_resource type="Script" uid="uid://bddyxggorhrl0" path="res://scripts/geradorde_cenario.gd" id="7_a22pd"]
 [ext_resource type="Texture2D" uid="uid://oef6krjdagjt" path="res://sprites/fundo/fase2/camadas/camada3.png" id="7_xlps0"]
-[ext_resource type="Script" uid="uid://dl6h7mkgvush1" path="res://scripts/gerador_destrocos_controller.gd" id="9_omfrd"]
+[ext_resource type="Texture2D" uid="uid://wljdcp20xq8n" path="res://sprites/fundo/fase2/camadas/camada01repetiçao.png" id="9_inxoc"]
+[ext_resource type="Script" path="res://scripts/gerador_destrocos_controller.gd" id="9_omfrd"]
 [ext_resource type="PackedScene" uid="uid://c1jrfdcaqao4r" path="res://cenas/tronco_fase_2.tscn" id="10_o8iim"]
+[ext_resource type="Texture2D" uid="uid://d2midqbx403oh" path="res://sprites/fundo/fase2/camadas/camada1repeticao.png" id="11_id5os"]
 [ext_resource type="PackedScene" uid="uid://bq225dmubin2r" path="res://cenas/destrocos_fase_2.tscn" id="11_uilhm"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u0wwy"]
-texture = ExtResource("1_kuenn")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-4:0/0 = 0
-6:0/0 = 0
-7:0/0 = 0
-8:0/0 = 0
-9:0/0 = 0
-10:0/0 = 0
-12:0/0 = 0
-13:0/0 = 0
-14:0/0 = 0
-15:0/0 = 0
-17:0/0 = 0
-18:0/0 = 0
-19:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-4:1/0 = 0
-6:1/0 = 0
-7:1/0 = 0
-8:1/0 = 0
-9:1/0 = 0
-10:1/0 = 0
-12:1/0 = 0
-13:1/0 = 0
-14:1/0 = 0
-15:1/0 = 0
-17:1/0 = 0
-18:1/0 = 0
-19:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-6:2/0 = 0
-7:2/0 = 0
-8:2/0 = 0
-13:2/0 = 0
-14:2/0 = 0
-15:2/0 = 0
-17:2/0 = 0
-18:2/0 = 0
-19:2/0 = 0
-0:4/0 = 0
-1:4/0 = 0
-2:4/0 = 0
-3:4/0 = 0
-4:4/0 = 0
-6:4/0 = 0
-7:4/0 = 0
-8:4/0 = 0
-9:4/0 = 0
-10:4/0 = 0
-12:4/0 = 0
-13:4/0 = 0
-14:4/0 = 0
-15:4/0 = 0
-17:4/0 = 0
-18:4/0 = 0
-19:4/0 = 0
-20:4/0 = 0
-21:4/0 = 0
-0:5/0 = 0
-1:5/0 = 0
-2:5/0 = 0
-3:5/0 = 0
-4:5/0 = 0
-6:5/0 = 0
-7:5/0 = 0
-8:5/0 = 0
-9:5/0 = 0
-10:5/0 = 0
-12:5/0 = 0
-13:5/0 = 0
-14:5/0 = 0
-15:5/0 = 0
-17:5/0 = 0
-18:5/0 = 0
-19:5/0 = 0
-20:5/0 = 0
-21:5/0 = 0
-0:6/0 = 0
-1:6/0 = 0
-2:6/0 = 0
-6:6/0 = 0
-7:6/0 = 0
-8:6/0 = 0
-13:6/0 = 0
-14:6/0 = 0
-15:6/0 = 0
-17:6/0 = 0
-18:6/0 = 0
-19:6/0 = 0
-0:8/0 = 0
-1:8/0 = 0
-2:8/0 = 0
-3:8/0 = 0
-4:8/0 = 0
-6:8/0 = 0
-7:8/0 = 0
-8:8/0 = 0
-9:8/0 = 0
-10:8/0 = 0
-12:8/0 = 0
-13:8/0 = 0
-14:8/0 = 0
-15:8/0 = 0
-17:8/0 = 0
-18:8/0 = 0
-19:8/0 = 0
-20:8/0 = 0
-0:9/0 = 0
-1:9/0 = 0
-2:9/0 = 0
-3:9/0 = 0
-4:9/0 = 0
-6:9/0 = 0
-7:9/0 = 0
-8:9/0 = 0
-9:9/0 = 0
-10:9/0 = 0
-12:9/0 = 0
-13:9/0 = 0
-14:9/0 = 0
-15:9/0 = 0
-17:9/0 = 0
-18:9/0 = 0
-19:9/0 = 0
-20:9/0 = 0
-0:10/0 = 0
-1:10/0 = 0
-2:10/0 = 0
-6:10/0 = 0
-7:10/0 = 0
-8:10/0 = 0
-13:10/0 = 0
-14:10/0 = 0
-15:10/0 = 0
-18:10/0 = 0
-19:10/0 = 0
-20:10/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_xlps0"]
-sources/0 = SubResource("TileSetAtlasSource_u0wwy")
+[ext_resource type="Texture2D" uid="uid://cvpajieevt1sm" path="res://sprites/fundo/fase2/camadas/camada2repeticao.png" id="13_ev4s7"]
 
 [node name="Node2D" type="Node2D" unique_id=709996969]
-
-[node name="Cenario" type="TileMapLayer" parent="." unique_id=1721468543]
-tile_set = SubResource("TileSet_xlps0")
-
-[node name="Camada0" type="Parallax2D" parent="." unique_id=173056179]
-scale = Vector2(2.5999994, 2)
-autoscroll = Vector2(0, -10)
-limit_begin = Vector2(0, 0)
-
-[node name="Horizonte" type="Sprite2D" parent="Camada0" unique_id=1842804638]
-texture_filter = 1
-texture = ExtResource("2_u0wwy")
-centered = false
-
-[node name="Camada1" type="Parallax2D" parent="." unique_id=159465482]
-scale = Vector2(2.4300008, 1.87)
-scroll_offset = Vector2(0, 700)
-autoscroll = Vector2(0, -12)
-
-[node name="Abismo" type="Sprite2D" parent="Camada1" unique_id=1008339341]
-texture_filter = 1
-texture = ExtResource("3_xlps0")
-centered = false
-
-[node name="Camada2" type="Parallax2D" parent="." unique_id=2100086670]
-scale = Vector2(3.0999992, 2.38)
-scroll_offset = Vector2(0, 700)
-autoscroll = Vector2(0, 4)
-limit_begin = Vector2(-10000000, 0)
-
-[node name="Profundesas" type="Sprite2D" parent="Camada2" unique_id=1881169162]
-texture_filter = 1
-texture = ExtResource("6_kpmld")
-centered = false
-
-[node name="Camada2_5" type="Parallax2D" parent="." unique_id=1972977171]
-scale = Vector2(9.609995, 5.6644006)
-repeat_size = Vector2(0, 600)
-autoscroll = Vector2(0, 10)
-
-[node name="Profundesas" type="Sprite2D" parent="Camada2_5" unique_id=281251749]
-texture_filter = 1
-position = Vector2(0, 832.5683)
-scale = Vector2(0.32082325, 1)
-texture = ExtResource("6_kpmld")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 1295.7651, 373, 688.23486)
-
-[node name="Camada3" type="Parallax2D" parent="." unique_id=1976695651]
-scale = Vector2(3.059999, 3.3800015)
-scroll_offset = Vector2(0, 4092)
-autoscroll = Vector2(0, 8)
-
-[node name="Espinhos" type="Sprite2D" parent="Camada3" unique_id=734698799]
-texture_filter = 1
-texture = ExtResource("7_xlps0")
-centered = false
 
 [node name="Camera2D2" type="Camera2D" parent="." unique_id=41815246]
 limit_left = 0
 limit_top = 0
 script = ExtResource("6_mytbp")
-
-[node name="Player" parent="." unique_id=929203449 node_paths=PackedStringArray("camera") instance=ExtResource("4_ildsr")]
-position = Vector2(588, 267)
-scale = Vector2(1, 1)
-motion_mode = 1
-script = ExtResource("5_3dqna")
-camera = NodePath("../Camera2D2")
 
 [node name="GeradorDestrocos" type="Node2D" parent="." unique_id=2101338016 node_paths=PackedStringArray("camera_da_fase")]
 script = ExtResource("9_omfrd")
@@ -242,5 +31,26 @@ camera_da_fase = NodePath("../Camera2D2")
 [node name="Timer" type="Timer" parent="GeradorDestrocos" unique_id=1076399988]
 wait_time = 1.5
 autostart = true
+
+[node name="GeradordeCenario" type="Node2D" parent="." unique_id=957729212]
+scale = Vector2(3, 3)
+script = ExtResource("7_a22pd")
+camada01 = ExtResource("2_u0wwy")
+camada01_repeticao = ExtResource("9_inxoc")
+repeticoes_estag_1 = 5
+camada1 = ExtResource("3_xlps0")
+camada1_repeticao = ExtResource("11_id5os")
+camada2 = ExtResource("6_kpmld")
+camada2_repeticao = ExtResource("13_ev4s7")
+repeticoes_camada2 = 5
+camada3 = ExtResource("7_xlps0")
+camada3_repeticao = ExtResource("6_o8iim")
+
+[node name="Player" parent="." unique_id=929203449 node_paths=PackedStringArray("camera") instance=ExtResource("4_ildsr")]
+position = Vector2(588, 267)
+scale = Vector2(1, 1)
+motion_mode = 1
+script = ExtResource("5_3dqna")
+camera = NodePath("../Camera2D2")
 
 [connection signal="timeout" from="GeradorDestrocos/Timer" to="GeradorDestrocos" method="_on_timer_timeout"]
