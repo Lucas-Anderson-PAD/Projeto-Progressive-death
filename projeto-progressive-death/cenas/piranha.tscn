@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cx6hsypqcjyk2"]
+
+[ext_resource type="Script" path="res://piranha.gd" id="1_mccpc"]
+[ext_resource type="Texture2D" path="res://sprites/Piranha/piranha_0.png" id="2_v1m63"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6f4m"]
+
+[node name="Piranha" type="CharacterBody2D" unique_id=132555850]
+scale = Vector2(0.12, 0.12)
+script = ExtResource("1_mccpc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2021240461]
+position = Vector2(8.333333, 958.3333)
+texture = ExtResource("2_v1m63")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=382401456]
+shape = SubResource("RectangleShape2D_v6f4m")
