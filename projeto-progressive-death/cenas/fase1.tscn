@@ -265,7 +265,11 @@ tile_map_data = PackedByteArray("AACyAAYAAAASAAkAAACyAAcAAAASAAoAAACzAAYAAAATAAk
 tile_set = SubResource("TileSet_32upe")
 
 [node name="Player" parent="TileMapLayer" unique_id=929203449 instance=ExtResource("2_2l3w2")]
+<<<<<<< Updated upstream
 position = Vector2(-64, 592)
+=======
+position = Vector2(48, 544)
+>>>>>>> Stashed changes
 
 [node name="armadilha1" type="Node2D" parent="." unique_id=308473177]
 
@@ -312,16 +316,22 @@ position = Vector2(784, 432)
 position = Vector2(816, 432)
 
 [node name="chao_falso15" parent="armadilha1" unique_id=214173563 instance=ExtResource("8_r1qh0")]
-position = Vector2(416, 480)
+position = Vector2(432, 400)
 
 [node name="chao_falso16" parent="armadilha1" unique_id=686583784 instance=ExtResource("8_r1qh0")]
-position = Vector2(480, 480)
+position = Vector2(400, 496)
 
 [node name="chao_falso17" parent="armadilha1" unique_id=562405656 instance=ExtResource("8_r1qh0")]
-position = Vector2(720, 480)
+position = Vector2(480, 496)
 
 [node name="chao_falso18" parent="armadilha1" unique_id=512468152 instance=ExtResource("8_r1qh0")]
-position = Vector2(784, 480)
+position = Vector2(688, 496)
+
+[node name="chao_falso19" parent="armadilha1" unique_id=411765717 instance=ExtResource("8_r1qh0")]
+position = Vector2(576, 400)
+
+[node name="chao_falso20" parent="armadilha1" unique_id=2140133 instance=ExtResource("8_r1qh0")]
+position = Vector2(624, 368)
 
 [node name="espinhos1" parent="." unique_id=282389875 instance=ExtResource("9_j17f1")]
 position = Vector2(352, 608)
