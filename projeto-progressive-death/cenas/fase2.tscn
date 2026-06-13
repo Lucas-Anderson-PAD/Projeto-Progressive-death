@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://clr21387ms73f"]
+[gd_scene format=3 uid="uid://cbmoi4jjulyx8"]
 
-[ext_resource type="PackedScene" uid="uid://d1jf5rqxm1d4t" path="res://cenas/ave_fase_2.tscn" id="1_inxoc"]
+[ext_resource type="PackedScene" path="res://cenas/ave_fase_2.tscn" id="1_inxoc"]
 [ext_resource type="Texture2D" uid="uid://c3ur8faisffbp" path="res://sprites/fundo/fase2/camadas/camada01.png" id="2_u0wwy"]
 [ext_resource type="Texture2D" uid="uid://bpm5870n0hgi3" path="res://sprites/fundo/fase2/camadas/camada1.png" id="3_xlps0"]
 [ext_resource type="PackedScene" uid="uid://krndiu1c141n" path="res://player.tscn" id="4_ildsr"]
@@ -8,10 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://xyw7dgkcldc7" path="res://sprites/fundo/fase2/camadas/camada2.png" id="6_kpmld"]
 [ext_resource type="Script" path="res://scripts/camera_2d_controller.gd" id="6_mytbp"]
 [ext_resource type="Texture2D" uid="uid://7l2iw7ntmbmu" path="res://sprites/fundo/fase2/camadas/camada3repeticao.png" id="6_o8iim"]
-[ext_resource type="Script" uid="uid://bddyxggorhrl0" path="res://scripts/geradorde_cenario.gd" id="7_a22pd"]
+[ext_resource type="Script" path="res://scripts/geradorde_cenario.gd" id="7_a22pd"]
 [ext_resource type="Texture2D" uid="uid://oef6krjdagjt" path="res://sprites/fundo/fase2/camadas/camada3.png" id="7_xlps0"]
 [ext_resource type="Texture2D" uid="uid://wljdcp20xq8n" path="res://sprites/fundo/fase2/camadas/camada01repetiçao.png" id="9_inxoc"]
-[ext_resource type="Script" uid="uid://dl6h7mkgvush1" path="res://scripts/gerador_destrocos_controller.gd" id="9_omfrd"]
+[ext_resource type="Script" path="res://scripts/gerador_destrocos_controller.gd" id="9_omfrd"]
 [ext_resource type="PackedScene" uid="uid://c1jrfdcaqao4r" path="res://cenas/tronco_fase_2.tscn" id="10_o8iim"]
 [ext_resource type="Texture2D" uid="uid://d2midqbx403oh" path="res://sprites/fundo/fase2/camadas/camada1repeticao.png" id="11_id5os"]
 [ext_resource type="PackedScene" uid="uid://bq225dmubin2r" path="res://cenas/destrocos_fase_2.tscn" id="11_uilhm"]
@@ -35,10 +35,10 @@ camada01_repeticao = ExtResource("9_inxoc")
 repeticoes_estag_1 = 5
 camada1 = ExtResource("3_xlps0")
 camada1_repeticao = ExtResource("11_id5os")
-repeticoes_estag_2 = 15
+repeticoes_estag_2 = 10
 camada2 = ExtResource("6_kpmld")
 camada2_repeticao = ExtResource("13_ev4s7")
-repeticoes_camada2 = 5
+repeticoes_camada2 = 10
 camada3 = ExtResource("7_xlps0")
 camada3_repeticao = ExtResource("6_o8iim")
 
