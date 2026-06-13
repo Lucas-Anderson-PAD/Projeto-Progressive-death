@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cpi2lc05vksj6"]
+
+[ext_resource type="Script" uid="uid://b14kyvo27l4oa" path="res://colunas.gd" id="1_c0fw8"]
+[ext_resource type="Texture2D" uid="uid://buadovbvtyu5d" path="res://sprites/Terrain (16x16).png" id="2_ftmyu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y63rd"]
+size = Vector2(32, 32)
+
+[node name="colunas" type="AnimatableBody2D" unique_id=1389843083]
+script = ExtResource("1_c0fw8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=533316526]
+shape = SubResource("RectangleShape2D_y63rd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=984662643]
+texture = ExtResource("2_ftmyu")
+region_enabled = true
+region_rect = Rect2(208, 16, 32, 32)
+
+[node name="Timer" type="Timer" parent="." unique_id=1382533883]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cs3ve2h28kgkm" path="res://cenas/chao faso.tscn" id="8_r1qh0"]
 [ext_resource type="PackedScene" uid="uid://w0ndm0cypowt" path="res://cenas/espinhos.tscn" id="9_j17f1"]
 [ext_resource type="PackedScene" uid="uid://dc4t2qvsvmbis" path="res://cenas/plataforma_temporal.tscn" id="10_20lmj"]
+[ext_resource type="PackedScene" uid="uid://cpi2lc05vksj6" path="res://cenas/colunas.tscn" id="11_3fp15"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qumu4"]
 texture = ExtResource("1_sydfx")
@@ -266,7 +267,8 @@ tile_map_data = PackedByteArray("AAAAACsAAAAHAAAAAAABACsAAAAMAAUAAAACACsAAAANAAU
 tile_set = SubResource("TileSet_32upe")
 
 [node name="Player" parent="TileMapLayer" unique_id=929203449 instance=ExtResource("2_2l3w2")]
-position = Vector2(1376, 576)
+position = Vector2(1472, 624)
+altura_jogador = 16.0
 
 [node name="armadilha1" type="Node2D" parent="." unique_id=308473177]
 
@@ -356,41 +358,115 @@ position = Vector2(736, 608)
 [node name="espinhos10" parent="armadilha2" unique_id=2021711143 instance=ExtResource("9_j17f1")]
 position = Vector2(784, 608)
 
-[node name="PlataformaTemporal0" parent="." unique_id=1171645129 instance=ExtResource("10_20lmj")]
-position = Vector2(1056, 384)
+[node name="armadilha3" type="Node2D" parent="." unique_id=762560981]
+position = Vector2(1568, 432)
+
+[node name="PlataformaTemporal0" parent="armadilha3" unique_id=1171645129 instance=ExtResource("10_20lmj")]
+position = Vector2(-496, -64)
 tempo_desligada = 1.0
 
-[node name="PlataformaTemporal1" parent="." unique_id=707966947 instance=ExtResource("10_20lmj")]
-position = Vector2(1136, 384)
+[node name="PlataformaTemporal1" parent="armadilha3" unique_id=77745613 instance=ExtResource("10_20lmj")]
+position = Vector2(-416, -64)
 tempo_ligada = 1.0
 tempo_desligada = 1.0
 atraso_inicial = 1.0
 
-[node name="PlataformaTemporal2" parent="." unique_id=669164194 instance=ExtResource("10_20lmj")]
-position = Vector2(1216, 384)
+[node name="PlataformaTemporal2" parent="armadilha3" unique_id=586002849 instance=ExtResource("10_20lmj")]
+position = Vector2(-336, -64)
 tempo_desligada = 1.0
 atraso_inicial = 2.0
 
-[node name="PlataformaTemporal3" parent="." unique_id=921434476 instance=ExtResource("10_20lmj")]
-position = Vector2(1328, 432)
+[node name="PlataformaTemporal3" parent="armadilha3" unique_id=309821526 instance=ExtResource("10_20lmj")]
+position = Vector2(-224, -16)
 tempo_ligada = 1.5
 tempo_desligada = 1.0
 atraso_inicial = 3.0
 
-[node name="PlataformaTemporal4" parent="." unique_id=593148352 instance=ExtResource("10_20lmj")]
-position = Vector2(1408, 432)
+[node name="PlataformaTemporal4" parent="armadilha3" unique_id=302471934 instance=ExtResource("10_20lmj")]
+position = Vector2(-144, -16)
 tempo_ligada = 1.5
 tempo_desligada = 1.0
 atraso_inicial = 4.0
 
-[node name="PlataformaTemporal5" parent="." unique_id=144782185 instance=ExtResource("10_20lmj")]
-position = Vector2(1488, 432)
+[node name="PlataformaTemporal5" parent="armadilha3" unique_id=1770638914 instance=ExtResource("10_20lmj")]
+position = Vector2(-64, -16)
 tempo_ligada = 0.5
 tempo_desligada = 1.0
 atraso_inicial = 5.0
 
-[node name="PlataformaTemporal6" parent="." unique_id=992612961 instance=ExtResource("10_20lmj")]
-position = Vector2(1568, 432)
+[node name="PlataformaTemporal6" parent="armadilha3" unique_id=245112553 instance=ExtResource("10_20lmj")]
+position = Vector2(16, -16)
 tempo_ligada = 1.5
 tempo_desligada = 1.0
 atraso_inicial = 5.0
+
+[node name="colunas1" parent="." unique_id=1389843083 instance=ExtResource("11_3fp15")]
+position = Vector2(2096, 784)
+delay_espera = 0.0
+velocidade = 160.0
+distancia_subida = 150.0
+
+[node name="colunas2" parent="." unique_id=1175616679 instance=ExtResource("11_3fp15")]
+position = Vector2(2160, 784)
+tamanho_coluna = 12
+velocidade = 240.0
+distancia_subida = 150.0
+
+[node name="colunas3" parent="." unique_id=1299284829 instance=ExtResource("11_3fp15")]
+position = Vector2(2304, 784)
+tamanho_coluna = 12
+delay_espera = 3.0
+velocidade = 320.0
+distancia_subida = 150.0
+
+[node name="colunas4" parent="." unique_id=1992389434 instance=ExtResource("11_3fp15")]
+position = Vector2(2400, 784)
+tamanho_coluna = 15
+delay_espera = 0.0
+velocidade = 80.0
+distancia_subida = 150.0
+
+[node name="colunas5" parent="." unique_id=261831714 instance=ExtResource("11_3fp15")]
+position = Vector2(2496, 784)
+tamanho_coluna = 15
+velocidade = 800.0
+distancia_subida = 150.0
+
+[node name="colunas6" parent="." unique_id=1820359035 instance=ExtResource("11_3fp15")]
+position = Vector2(2576, 784)
+tamanho_coluna = 15
+delay_espera = 0.0
+velocidade = 80.0
+distancia_subida = 150.0
+
+[node name="colunas7" parent="." unique_id=727045010 instance=ExtResource("11_3fp15")]
+position = Vector2(2672, 784)
+tamanho_coluna = 15
+delay_espera = 0.0
+velocidade = 160.0
+distancia_subida = 250.0
+
+[node name="colunas8" parent="." unique_id=1335348854 instance=ExtResource("11_3fp15")]
+position = Vector2(2800, 784)
+delay_espera = 0.0
+velocidade = 400.0
+distancia_subida = 150.0
+
+[node name="colunas9" parent="." unique_id=24524272 instance=ExtResource("11_3fp15")]
+position = Vector2(2864, 784)
+tamanho_coluna = 15
+delay_espera = 0.5
+velocidade = 160.0
+distancia_subida = 150.0
+
+[node name="espinhos1" parent="." unique_id=1494466529 instance=ExtResource("9_j17f1")]
+position = Vector2(2224.0002, 496)
+
+[node name="espinhos2" parent="." unique_id=2060266921 instance=ExtResource("9_j17f1")]
+position = Vector2(2352, 544)
+
+[node name="espinhos3" parent="." unique_id=110214298 instance=ExtResource("9_j17f1")]
+position = Vector2(2736, 384)
+
+[node name="espinhos4" parent="." unique_id=1116143173 instance=ExtResource("9_j17f1")]
+position = Vector2(2608, 480)
