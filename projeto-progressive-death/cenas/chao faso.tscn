@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cs3ve2h28kgkm"]
 
-[ext_resource type="Script" uid="uid://difyo3pyysl2x" path="res://chao_falso.gd" id="1_nkcye"]
+[ext_resource type="Script" uid="uid://difyo3pyysl2x" path="res://scripts/chao_falso.gd" id="1_nkcye"]
 [ext_resource type="Texture2D" uid="uid://buadovbvtyu5d" path="res://sprites/Terrain (16x16).png" id="2_20rbe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4bf6"]

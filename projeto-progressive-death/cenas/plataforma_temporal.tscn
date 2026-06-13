@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dc4t2qvsvmbis"]
 
-[ext_resource type="Script" uid="uid://b4rlhk8m58iqu" path="res://plataforma_temporal.gd" id="1_oaibu"]
+[ext_resource type="Script" uid="uid://b4rlhk8m58iqu" path="res://scripts/plataforma_temporal.gd" id="1_oaibu"]
 [ext_resource type="Texture2D" uid="uid://buadovbvtyu5d" path="res://sprites/Terrain (16x16).png" id="2_myrc1"]
-[ext_resource type="Script" uid="uid://cptebid7w4g73" path="res://timer.gd" id="3_61ayw"]
+[ext_resource type="Script" uid="uid://cptebid7w4g73" path="res://scripts/timer.gd" id="3_61ayw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_70eod"]
 size = Vector2(48, 16)
