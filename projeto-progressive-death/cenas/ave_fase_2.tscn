@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://d1jf5rqxm1d4t"]
+
+[ext_resource type="Script" uid="uid://jxed4kcfw13x" path="res://scripts/ave_fase_2.gd" id="1_lf3uf"]
+[ext_resource type="Texture2D" uid="uid://dw1vn42ivmmuh" path="res://sprites/inimigos/gaveao/gave_5.png" id="2_fuo36"]
+[ext_resource type="Texture2D" uid="uid://5mk8a8rcclkh" path="res://sprites/inimigos/gaveao/gave_4.png" id="3_3eofr"]
+[ext_resource type="Texture2D" uid="uid://blp6v56syfw5s" path="res://sprites/inimigos/gaveao/gave_3.png" id="4_jjbdt"]
+[ext_resource type="Texture2D" uid="uid://d1e67yht6fp37" path="res://sprites/inimigos/gaveao/gave_1.png" id="5_epv5s"]
+[ext_resource type="Texture2D" uid="uid://c5l3ehiktrwbu" path="res://sprites/inimigos/gaveao/gave_2.png" id="6_3eofr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rv44n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fuo36")
+}],
+"loop": true,
+"name": &"dive",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3eofr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jjbdt")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_epv5s")
+}],
+"loop": true,
+"name": &"prepare",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_3eofr")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_muxxl"]
+size = Vector2(43, 13.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lf3uf"]
+size = Vector2(42, 10)
+
+[node name="AveFase2" type="Area2D" unique_id=1063477893 node_paths=PackedStringArray("anim")]
+script = ExtResource("1_lf3uf")
+anim = NodePath("AnimaGaveao")
+
+[node name="AnimaGaveao" type="AnimatedSprite2D" parent="." unique_id=1014748411]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_rv44n")
+animation = &"up"
+autoplay = "fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1180897496]
+position = Vector2(2, 6)
+shape = SubResource("RectangleShape2D_muxxl")
+
+[node name="PontoFraco" type="Area2D" parent="." unique_id=295119052]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PontoFraco" unique_id=981766886]
+position = Vector2(2, -7)
+shape = SubResource("RectangleShape2D_lf3uf")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1884609752]
+position = Vector2(1, 2)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="PontoFraco" to="." method="_on_ponto_fraco_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
