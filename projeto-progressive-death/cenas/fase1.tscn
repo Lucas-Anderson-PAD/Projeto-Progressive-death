@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ba2xdnf5cjc0i" path="res://sprites/fundo/plx-5.png" id="5_r1qh0"]
 [ext_resource type="PackedScene" uid="uid://cs3ve2h28kgkm" path="res://cenas/chao faso.tscn" id="8_r1qh0"]
 [ext_resource type="PackedScene" uid="uid://w0ndm0cypowt" path="res://cenas/espinhos.tscn" id="9_j17f1"]
+[ext_resource type="PackedScene" uid="uid://tsh2jq31t60s" path="res://water.tscn" id="10_20lmj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qumu4"]
 texture = ExtResource("1_sydfx")
@@ -352,3 +353,5 @@ position = Vector2(736, 608)
 
 [node name="espinhos10" parent="." unique_id=2021711143 instance=ExtResource("9_j17f1")]
 position = Vector2(784, 608)
+
+[node name="Water" parent="." unique_id=1772926158 instance=ExtResource("10_20lmj")]
