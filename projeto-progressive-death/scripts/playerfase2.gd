@@ -21,9 +21,6 @@ var is_gliding: bool = false
 var glide_timer: float = 0.0
 const GLIDE_PUNISH_TIME = 3.0 # Segundos segurando o botão antes de atrair o inimigo
 
-# Sinal para instanciar o inimigo caçador
-signal spawn_hunter_enemy
-
 # Variável para receber o empurrão do vento
 var wind_force: Vector2 = Vector2.ZERO
 
@@ -46,15 +43,6 @@ func _physics_process(delta: float) -> void:
 		is_gliding = true
 		current_h_speed = GLIDE_HORIZONTAL_SPEED
 		target_v_speed = GLIDE_FALL_SPEED
-		
-		# Medidor de punição por abusar do controle fino
-		glide_timer += delta
-		if glide_timer >= GLIDE_PUNISH_TIME:
-			emit_signal("spawn_hunter_enemy")
-			glide_timer = 0.0
-	else:
-		is_gliding = false
-		glide_timer = max(0.0, glide_timer - delta * 2) # Esvazia o medidor
 
 	# 4. Aplicar Movimento Horizontal
 	if input_direction.x != 0:
@@ -63,7 +51,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 
 	# 5. Aplicar Movimento Vertical
-	# Faz a transição suave entre a queda base, o mergulho e o freio
+	# Faz a transição entre a queda base, o mergulho e o freio
 	velocity.y = move_toward(velocity.y, target_v_speed, ACCELERATION * delta)
 
 	# 6. Adiciona a força do vento e Move
@@ -80,15 +68,15 @@ func _physics_process(delta: float) -> void:
 	if camera:
 		_manter_na_camera()
 
-# --- Funções Auxiliares de Limite de Tela CORRIGIDA ---
+# --- Funções Auxiliares de Limite de Tela ---
 func _manter_na_camera() -> void:
 	var tamanho_tela = get_viewport_rect().size
 	var zoom = camera.zoom
 	
-	# CORREÇÃO: Pegamos o centro visual real da tela do jogo
+	# Pega o centro visual real da tela do jogo
 	var centro_visual_da_camera = camera.get_screen_center_position()
 	
-	# A matemática agora calcula as bordas baseando-se no que o jogador realmente vê
+	# calcula as bordas baseando-se no que o jogador vê
 	var limite_esq = centro_visual_da_camera.x - (tamanho_tela.x / 2) / zoom.x
 	var limite_dir = centro_visual_da_camera.x + (tamanho_tela.x / 2) / zoom.x
 	var limite_top = centro_visual_da_camera.y - (tamanho_tela.y / 2) / zoom.y
