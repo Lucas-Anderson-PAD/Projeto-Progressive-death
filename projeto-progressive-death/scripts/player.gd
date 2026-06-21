@@ -4,10 +4,18 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const WATER_GRAVITY = 0.1
 const WATER_SPEED = 80.0
+# Resistência da água: quanto maior, mais rápido a água freia a queda/movimento.
+const WATER_DRAG = 6.0
+# Tempo (em segundos) que o jogador aguenta na água SEM capacete antes de morrer.
+const TEMPO_AFOGAMENTO = 1.0
 
 # Coloquei a altura como Export.
 # Vá no Inspetor do Godot e coloque a altura aproximada do seu pássaro em pixels (ex: 32 ou 64).
 @export var altura_jogador: float = 32.0
+
+# Marque no Inspetor (ou defina por código ao pegar o item) se o jogador está com
+# o capacete. COM capacete ele respira na água; SEM, ele se afoga.
+@export var tem_capacete: bool = false
 
 @onready var sprite = $Sprite2D # Se o seu for AnimatedSprite2D, isso vai funcionar igual
 
@@ -17,6 +25,9 @@ var water = false
 var ponto_mais_alto: float = 0.0
 var estava_no_ar: bool = false
 var limite_queda_fatal: float = 0.0
+
+# Cronômetro de afogamento (conta o tempo dentro d'água sem capacete).
+var tempo_na_agua: float = 0.0
 
 
 func _ready():
@@ -33,7 +44,18 @@ func _physics_process(delta: float) -> void:
 		# Dentro d'água não há queda fatal: reseta o rastreamento.
 		swim(delta)
 		estava_no_ar = false
+
+		# Afogamento: sem capacete, morre TEMPO_AFOGAMENTO segundos após entrar.
+		if not tem_capacete:
+			tempo_na_agua += delta
+			if tempo_na_agua >= TEMPO_AFOGAMENTO:
+				print("!!! AFOGOU (sem capacete) - MORREU !!!")
+				get_tree().reload_current_scene()
+				return
 	else:
+		# Fora d'água: zera o cronômetro de afogamento.
+		tempo_na_agua = 0.0
+
 		# 1. JOGADOR NO AR
 		if not is_on_floor():
 			velocity += get_gravity() * delta
@@ -81,15 +103,21 @@ func _physics_process(delta: float) -> void:
 
 
 func swim(delta: float) -> void:
+	# Empuxo: dentro d'água a gravidade quase não age.
 	velocity += get_gravity() * WATER_GRAVITY * delta
 
+	# Resistência da água: freia QUALQUER velocidade, inclusive a velocidade de
+	# queda no instante em que o jogador entra na água (efeito de "splash").
+	# É isso que faz a queda perder velocidade ao tocar a água.
+	velocity = velocity.lerp(Vector2.ZERO, min(WATER_DRAG * delta, 1.0))
+
+	# Natação vertical controlada pelo jogador (sobe/desce).
 	var vertical := Input.get_axis("move_up", "move_down")
 	if vertical:
 		velocity.y = vertical * WATER_SPEED
 
+	# Natação horizontal controlada pelo jogador.
 	var direction := Input.get_axis("move_left", "move_right")
 	if direction:
 		velocity.x = direction * WATER_SPEED
 		sprite.flip_h = (direction > 0)
-	else:
-		velocity.x = move_toward(velocity.x, 0, WATER_SPEED)

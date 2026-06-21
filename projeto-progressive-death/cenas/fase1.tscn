@@ -221,6 +221,17 @@ sources/0 = SubResource("TileSetAtlasSource_qumu4")
 
 [node name="Node2D" type="Node2D" unique_id=1435896397]
 
+[node name="Water" parent="." unique_id=1772926158 instance=ExtResource("12_wat3r")]
+position = Vector2(896, 448)
+scale = Vector2(2, 2)
+
+[node name="ColorRect" type="ColorRect" parent="Water" unique_id=1207303733]
+offset_left = 8.0
+offset_top = -8.0
+offset_right = 508.0
+offset_bottom = 192.0
+color = Color(0.28627452, 0.17254902, 1, 0.5294118)
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1555323734]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1424378943]
@@ -401,75 +412,75 @@ tempo_ligada = 1.5
 tempo_desligada = 1.0
 atraso_inicial = 5.0
 
-[node name="colunas1" parent="." unique_id=1389843083 instance=ExtResource("11_3fp15")]
+[node name="armadilha4" type="Node2D" parent="." unique_id=1018779179]
+
+[node name="colunas1" parent="armadilha4" unique_id=1389843083 instance=ExtResource("11_3fp15")]
 position = Vector2(2096, 784)
 delay_espera = 0.0
 velocidade = 160.0
 distancia_subida = 150.0
 
-[node name="colunas2" parent="." unique_id=1175616679 instance=ExtResource("11_3fp15")]
+[node name="colunas2" parent="armadilha4" unique_id=1175616679 instance=ExtResource("11_3fp15")]
 position = Vector2(2160, 784)
 tamanho_coluna = 12
 velocidade = 240.0
 distancia_subida = 150.0
 
-[node name="colunas3" parent="." unique_id=1299284829 instance=ExtResource("11_3fp15")]
+[node name="colunas3" parent="armadilha4" unique_id=1299284829 instance=ExtResource("11_3fp15")]
 position = Vector2(2304, 784)
 tamanho_coluna = 12
 delay_espera = 3.0
 velocidade = 320.0
 distancia_subida = 150.0
 
-[node name="colunas4" parent="." unique_id=1992389434 instance=ExtResource("11_3fp15")]
+[node name="colunas4" parent="armadilha4" unique_id=1992389434 instance=ExtResource("11_3fp15")]
 position = Vector2(2400, 784)
 tamanho_coluna = 15
 delay_espera = 0.0
 velocidade = 80.0
 distancia_subida = 150.0
 
-[node name="colunas5" parent="." unique_id=261831714 instance=ExtResource("11_3fp15")]
+[node name="colunas5" parent="armadilha4" unique_id=261831714 instance=ExtResource("11_3fp15")]
 position = Vector2(2496, 784)
 tamanho_coluna = 15
 velocidade = 800.0
 distancia_subida = 150.0
 
-[node name="colunas6" parent="." unique_id=1820359035 instance=ExtResource("11_3fp15")]
+[node name="colunas6" parent="armadilha4" unique_id=1820359035 instance=ExtResource("11_3fp15")]
 position = Vector2(2576, 784)
 tamanho_coluna = 15
 delay_espera = 0.0
 velocidade = 80.0
 distancia_subida = 150.0
 
-[node name="colunas7" parent="." unique_id=727045010 instance=ExtResource("11_3fp15")]
+[node name="colunas7" parent="armadilha4" unique_id=727045010 instance=ExtResource("11_3fp15")]
 position = Vector2(2672, 784)
 tamanho_coluna = 15
 delay_espera = 0.0
 velocidade = 160.0
 distancia_subida = 250.0
 
-[node name="colunas8" parent="." unique_id=1335348854 instance=ExtResource("11_3fp15")]
+[node name="colunas8" parent="armadilha4" unique_id=1335348854 instance=ExtResource("11_3fp15")]
 position = Vector2(2800, 784)
 delay_espera = 0.0
 velocidade = 400.0
 distancia_subida = 150.0
 
-[node name="colunas9" parent="." unique_id=24524272 instance=ExtResource("11_3fp15")]
+[node name="colunas9" parent="armadilha4" unique_id=24524272 instance=ExtResource("11_3fp15")]
 position = Vector2(2864, 784)
 tamanho_coluna = 15
 delay_espera = 0.5
 velocidade = 160.0
 distancia_subida = 150.0
 
-[node name="espinhos1" parent="." unique_id=1494466529 instance=ExtResource("9_j17f1")]
+[node name="espinhos1" parent="armadilha4" unique_id=1494466529 instance=ExtResource("9_j17f1")]
 position = Vector2(2224.0002, 496)
 
-[node name="espinhos2" parent="." unique_id=2060266921 instance=ExtResource("9_j17f1")]
+[node name="espinhos2" parent="armadilha4" unique_id=2060266921 instance=ExtResource("9_j17f1")]
 position = Vector2(2352, 544)
 
-[node name="espinhos3" parent="." unique_id=110214298 instance=ExtResource("9_j17f1")]
+[node name="espinhos3" parent="armadilha4" unique_id=110214298 instance=ExtResource("9_j17f1")]
 position = Vector2(2736, 384)
 
-[node name="espinhos4" parent="." unique_id=1116143173 instance=ExtResource("9_j17f1")]
+[node name="espinhos4" parent="armadilha4" unique_id=1116143173 instance=ExtResource("9_j17f1")]
 position = Vector2(2608, 480)
-
-[node name="Water" parent="." unique_id=1772926158 instance=ExtResource("12_wat3r")]
