@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://w0ndm0cypowt" path="res://cenas/espinhos.tscn" id="9_j17f1"]
 [ext_resource type="PackedScene" uid="uid://dc4t2qvsvmbis" path="res://cenas/plataforma_temporal.tscn" id="10_20lmj"]
 [ext_resource type="PackedScene" uid="uid://cpi2lc05vksj6" path="res://cenas/colunas.tscn" id="11_3fp15"]
+[ext_resource type="PackedScene" uid="uid://tsh2jq31t60s" path="res://water.tscn" id="12_wat3r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qumu4"]
 texture = ExtResource("1_sydfx")
@@ -470,3 +471,5 @@ position = Vector2(2736, 384)
 
 [node name="espinhos4" parent="." unique_id=1116143173 instance=ExtResource("9_j17f1")]
 position = Vector2(2608, 480)
+
+[node name="Water" parent="." unique_id=1772926158 instance=ExtResource("12_wat3r")]
