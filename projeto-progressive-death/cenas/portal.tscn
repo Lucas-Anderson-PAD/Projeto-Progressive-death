@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cp7rt4lsc3n9q"]
+[gd_scene format=3 uid="uid://cp7rt4lsc3oaq"]
 
 [ext_resource type="Script" uid="uid://bp7rt4lg9dz1k" path="res://scripts/portal.gd" id="1_portal"]
 [ext_resource type="Texture2D" uid="uid://moj3xfu6q80h" path="res://sprites/Green Portal Sprite Sheet.png" id="2_verde"]
