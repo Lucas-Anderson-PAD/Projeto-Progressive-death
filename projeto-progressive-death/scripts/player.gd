@@ -32,7 +32,7 @@ var tempo_na_agua: float = 0.0
 
 func _ready():
 	# Calcula o limite baseado no valor do Inspetor
-	limite_queda_fatal = altura_jogador * 12
+	limite_queda_fatal = altura_jogador * 20
 
 	print("--- JOGO INICIADO ---")
 	print("Altura do pássaro: ", altura_jogador, " pixels")

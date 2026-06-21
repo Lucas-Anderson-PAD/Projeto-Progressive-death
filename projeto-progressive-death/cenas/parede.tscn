@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cpwq7n3k8d2vy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_parede"]
+size = Vector2(64, 720)
+
+[node name="Parede" type="StaticBody2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -32.0
+offset_top = -360.0
+offset_right = 32.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_parede")
