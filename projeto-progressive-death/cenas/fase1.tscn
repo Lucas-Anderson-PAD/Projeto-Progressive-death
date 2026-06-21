@@ -224,11 +224,12 @@ sources/0 = SubResource("TileSetAtlasSource_qumu4")
 
 [node name="Water2" parent="." unique_id=1772926158 instance=ExtResource("12_wat3r")]
 position = Vector2(2706, 549)
+portal_para = "res://cenas/fase2/fase2.tscn"
 
 [node name="ColorRect" type="ColorRect" parent="Water2" unique_id=1973165057]
 offset_right = 500.0
 offset_bottom = 200.0
-color = Color(0.28627452, 0.17254902, 1, 0.5294118)
+color = Color(0.30980393, 0.27450982, 0.52156866, 0.5294118)
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
@@ -241,7 +242,7 @@ offset_left = 8.0
 offset_top = -8.0
 offset_right = 508.0
 offset_bottom = 192.0
-color = Color(0.28627452, 0.17254902, 1, 0.5294118)
+color = Color(0.02022896, 1.347661e-06, 0.175623, 0.5294118)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1555323734]
 
@@ -285,7 +286,7 @@ texture = ExtResource("5_r1qh0")
 centered = false
 
 [node name="Player" parent="." unique_id=929203449 instance=ExtResource("2_2l3w2")]
-position = Vector2(2816, 256)
+position = Vector2(2933, 288)
 altura_jogador = 16.0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=526092004]
