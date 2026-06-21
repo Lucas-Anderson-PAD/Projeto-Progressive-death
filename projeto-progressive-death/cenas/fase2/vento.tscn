@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://g5ubhlsuyaod"]
+
+[ext_resource type="Texture2D" uid="uid://b7xjibcvp0a6x" path="res://sprites/efeitos/Dust Particle.png" id="1_ehx6s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehx6s"]
+
+[node name="Vento" type="Area2D" unique_id=1799534658]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=374596155]
+texture_filter = 1
+texture = ExtResource("1_ehx6s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=386703982]
+shape = SubResource("RectangleShape2D_ehx6s")

@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://cbmoi4jjulyx8"]
+
+[ext_resource type="PackedScene" uid="uid://d1jf5rqxm1d4t" path="res://cenas/fase2/ave_fase_2.tscn" id="1_etyhq"]
+[ext_resource type="Script" uid="uid://dculqq1p53oh5" path="res://scripts/camera_2d_controller.gd" id="2_vk7vm"]
+[ext_resource type="Script" uid="uid://bddyxggorhrl0" path="res://scripts/geradorde_cenario.gd" id="3_i2ujf"]
+[ext_resource type="Texture2D" uid="uid://c3ur8faisffbp" path="res://sprites/fundo/fase2/camadas/camada01.png" id="4_3gwud"]
+[ext_resource type="Texture2D" uid="uid://wljdcp20xq8n" path="res://sprites/fundo/fase2/camadas/camada01repetiçao.png" id="5_s0xjg"]
+[ext_resource type="Texture2D" uid="uid://bpm5870n0hgi3" path="res://sprites/fundo/fase2/camadas/camada1.png" id="6_p02pt"]
+[ext_resource type="Texture2D" uid="uid://d2midqbx403oh" path="res://sprites/fundo/fase2/camadas/camada1repeticao.png" id="7_3imoe"]
+[ext_resource type="Texture2D" uid="uid://xyw7dgkcldc7" path="res://sprites/fundo/fase2/camadas/camada2.png" id="8_f4np6"]
+[ext_resource type="Texture2D" uid="uid://cvpajieevt1sm" path="res://sprites/fundo/fase2/camadas/camada2repeticao.png" id="9_m2xvm"]
+[ext_resource type="PackedScene" uid="uid://caktc4vx2c0hd" path="res://cenas/fase2/estagio_3_espinhos.tscn" id="10_6odph"]
+[ext_resource type="PackedScene" uid="uid://krndiu1c141n" path="res://cenas/player.tscn" id="12_u1cx4"]
+[ext_resource type="Script" uid="uid://dg3b6udgdfhw8" path="res://scripts/playerfase2.gd" id="13_m8t00"]
+[ext_resource type="Script" uid="uid://dl6h7mkgvush1" path="res://scripts/gerador_destrocos_controller.gd" id="14_jc8ku"]
+[ext_resource type="PackedScene" uid="uid://c1jrfdcaqao4r" path="res://cenas/fase2/tronco_fase_2.tscn" id="15_ce7qd"]
+[ext_resource type="PackedScene" uid="uid://bq225dmubin2r" path="res://cenas/fase2/destrocos_fase_2.tscn" id="16_pw307"]
+
+[node name="Node2D" type="Node2D" unique_id=709996969]
+
+[node name="AveFase2" parent="." unique_id=1063477893 node_paths=PackedStringArray("camera") instance=ExtResource("1_etyhq")]
+camera = NodePath("../Camera2D2")
+
+[node name="Camera2D2" type="Camera2D" parent="." unique_id=41815246]
+limit_left = 0
+limit_top = 0
+script = ExtResource("2_vk7vm")
+
+[node name="GeradorDestrocos" type="Node2D" parent="." unique_id=2101338016 node_paths=PackedStringArray("camera_da_fase")]
+script = ExtResource("14_jc8ku")
+camera_da_fase = NodePath("../Camera2D2")
+cena_ave = ExtResource("1_etyhq")
+lista_de_destrocos = Array[PackedScene]([ExtResource("15_ce7qd"), ExtResource("16_pw307")])
+
+[node name="Timer" type="Timer" parent="GeradorDestrocos" unique_id=1076399988]
+wait_time = 1.5
+autostart = true
+
+[node name="GeradordeCenario" type="Node2D" parent="." unique_id=957729212 node_paths=PackedStringArray("camera", "gerador_de_desafios")]
+position = Vector2(1, 1)
+script = ExtResource("3_i2ujf")
+camera = NodePath("../Camera2D2")
+gerador_de_desafios = NodePath("../GeradorDestrocos")
+camada01 = ExtResource("4_3gwud")
+camada01_repeticao = ExtResource("5_s0xjg")
+repeticoes_estag_1 = 6
+camada1 = ExtResource("6_p02pt")
+camada1_repeticao = ExtResource("7_3imoe")
+repeticoes_estag_2 = 6
+camada2 = ExtResource("8_f4np6")
+camada2_repeticao = ExtResource("9_m2xvm")
+repeticoes_camada2 = 7
+cena_estagio_3 = ExtResource("10_6odph")
+
+[node name="Player" parent="." unique_id=929203449 node_paths=PackedStringArray("camera") instance=ExtResource("12_u1cx4")]
+position = Vector2(588, 267)
+scale = Vector2(1, 1)
+motion_mode = 1
+script = ExtResource("13_m8t00")
+camera = NodePath("../Camera2D2")
+
+[node name="Fundo" type="Sprite2D" parent="." unique_id=1035649788]
+z_index = -12
+position = Vector2(898.25, 70868.5)
+scale = Vector2(5.816354, 435.7761)
+texture = ExtResource("9_m2xvm")
+
+[connection signal="timeout" from="GeradorDestrocos/Timer" to="GeradorDestrocos" method="_on_timer_timeout"]

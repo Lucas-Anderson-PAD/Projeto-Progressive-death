@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c1jrfdcaqao4r"]
+
+[ext_resource type="Texture2D" uid="uid://b6wu4wr2idrxj" path="res://sprites/fundo/fase2/troncoT.png" id="1_5ojm7"]
+[ext_resource type="Script" uid="uid://j7uypsvb3x77" path="res://scripts/tronco_fase_2.gd" id="1_lgxsn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgxsn"]
+size = Vector2(386.93988, 213.36206)
+
+[node name="Tronco_fase2" type="Area2D" unique_id=1242051520]
+position = Vector2(188.99998, 63.999996)
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_lgxsn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1631796802]
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("1_5ojm7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1727756823]
+position = Vector2(-4.062012, 12.410715)
+rotation = 0.5056903
+scale = Vector2(1.2046374, 0.6376722)
+shape = SubResource("RectangleShape2D_lgxsn")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=214333589]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
