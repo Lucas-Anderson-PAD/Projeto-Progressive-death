@@ -286,7 +286,7 @@ texture = ExtResource("5_r1qh0")
 centered = false
 
 [node name="Player" parent="." unique_id=929203449 instance=ExtResource("2_2l3w2")]
-position = Vector2(2985, 91)
+position = Vector2(2988, 93)
 altura_jogador = 16.0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=526092004]
