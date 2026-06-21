@@ -224,12 +224,11 @@ sources/0 = SubResource("TileSetAtlasSource_qumu4")
 
 [node name="Water2" parent="." unique_id=1772926158 instance=ExtResource("12_wat3r")]
 position = Vector2(2706, 549)
-portal_para = "res://cenas/fase2/fase2.tscn"
 
 [node name="ColorRect" type="ColorRect" parent="Water2" unique_id=1973165057]
 offset_right = 500.0
 offset_bottom = 200.0
-color = Color(0.30980393, 0.27450982, 0.52156866, 0.5294118)
+color = Color(0.05962939, 2.023898e-05, 0.25300053, 0.5294118)
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 

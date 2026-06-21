@@ -24,6 +24,11 @@ const GLIDE_PUNISH_TIME = 3.0 # Segundos segurando o botão antes de atrair o in
 # Variável para receber o empurrão do vento
 var wind_force: Vector2 = Vector2.ZERO
 
+func _ready() -> void:
+	# Entra no grupo "player" para que os portais consigam encontrar o jogador.
+	add_to_group("player")
+
+
 func _physics_process(delta: float) -> void:
 	# 1. Capturar o Input nas 4 direções (Vector2)
 	var input_direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")

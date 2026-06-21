@@ -31,6 +31,9 @@ var tempo_na_agua: float = 0.0
 
 
 func _ready():
+	# Entra no grupo "player" para que os portais consigam encontrar o jogador.
+	add_to_group("player")
+
 	# Calcula o limite baseado no valor do Inspetor
 	limite_queda_fatal = altura_jogador * 20
 
