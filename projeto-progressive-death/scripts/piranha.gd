@@ -3,12 +3,12 @@ extends CharacterBody2D
 # Piranha: SÓ se move dentro da água. Persegue o jogador quando ele está na água
 # e dentro do alcance; senão, patrulha de um lado para o outro ATÉ bater numa
 # parede/obstáculo, quando então vira e vai para o outro lado.
-# Anima a mordida completa ao perseguir. Ao encostar por alguns segundos, mata.
+# Anima a mordida completa ao perseguir. Ao COLIDIR com o jogador por alguns
+# segundos, ele morre.
 
-@export var velocidade: float = 90.0           # velocidade ao perseguir
+@export var velocidade: float = 80.0           # velocidade ao perseguir
 @export var alcance: float = 500.0             # distância para detectar/perseguir
 @export var velocidade_patrulha: float = 70.0  # velocidade ao patrulhar
-@export var raio_mordida: float = 50.0         # distância para "morder"
 @export var tempo_para_matar: float = 1.0      # segundos de contato até matar
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -61,8 +61,9 @@ func _physics_process(delta: float) -> void:
 	if not perseguindo and is_on_wall():
 		_dir_patrulha *= -1
 
-	# Mordida: depois de tempo_para_matar segundos de contato, o jogador morre.
-	if jogador != null and global_position.distance_to(jogador.global_position) <= raio_mordida:
+	# Mordida pela COLISÃO real: enquanto a piranha estiver colidindo com o
+	# jogador, conta o tempo; ao atingir tempo_para_matar, ele morre.
+	if _colidindo_com_jogador():
 		_tempo_mordida += delta
 		if _tempo_mordida >= tempo_para_matar:
 			Inventario.limpar()
@@ -72,6 +73,15 @@ func _physics_process(delta: float) -> void:
 		_tempo_mordida = 0.0
 
 	_atualizar_sprite(delta, perseguindo)
+
+
+# Verifica se alguma colisão deste frame (move_and_slide) foi com o jogador.
+func _colidindo_com_jogador() -> bool:
+	for i in get_slide_collision_count():
+		var c := get_slide_collision(i).get_collider() as Node
+		if c != null and c.is_in_group("player"):
+			return true
+	return false
 
 
 func _atualizar_sprite(delta: float, perseguindo: bool) -> void:
