@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ce0l55bqeglie"]
+[gd_scene load_steps=4 format=3 uid="uid://ce0l55bqeglie"]
 
 [ext_resource type="Script" uid="uid://ckdrnidy24jn5" path="res://scripts/piranha.gd" id="1_mccpc"]
 [ext_resource type="Texture2D" uid="uid://c6eg61m08v0pq" path="res://sprites/Piranha/piranha_0.png" id="2_v1m63"]

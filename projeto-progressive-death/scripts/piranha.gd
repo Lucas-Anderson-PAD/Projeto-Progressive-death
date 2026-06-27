@@ -19,7 +19,6 @@ var _percorrido: float = 0.0
 
 
 func _ready() -> void:
-	# Frames da animação (mordida). Todos apontam para a esquerda.
 	_frames = [
 		load("res://sprites/Piranha/piranha_0.png"),
 		load("res://sprites/Piranha/piranha_1.png"),
@@ -33,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	var jogador = get_tree().get_first_node_in_group("player")
 
 	if jogador != null and global_position.distance_to(jogador.global_position) <= alcance:
-		# PERSEGUE: nada na direção do jogador (em 2D).
+		# PERSEGUE: nada na direção do jogador.
 		var dir := (jogador.global_position - global_position).normalized()
 		velocity = dir * velocidade
 	else:
@@ -46,7 +45,6 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	# Bateu na parede patrulhando: inverte.
 	if is_on_wall():
 		_dir_patrulha *= -1
 
