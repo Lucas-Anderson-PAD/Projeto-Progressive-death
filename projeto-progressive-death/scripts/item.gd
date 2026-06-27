@@ -35,9 +35,7 @@ func _on_body_entered(body: Node) -> void:
 	# So o jogador (grupo "player") coleta.
 	if not body.is_in_group("player"):
 		return
-	# So some se realmente coube no inventario (senao fica para pegar depois).
-	if Inventario.adicionar_item(icone):
-		# Item capacete: equipa o jogador (permite nadar e muda a aparencia).
-		if da_capacete and "tem_capacete" in body:
-			body.tem_capacete = true
+	# Guarda o item no inventario (com a info de capacete). NAO equipa sozinho:
+	# o jogador equipa pelas teclas 1/2/3.
+	if Inventario.adicionar_item(icone, da_capacete):
 		queue_free()

@@ -63,6 +63,7 @@ func _physics_process(delta: float) -> void:
 			tempo_na_agua += delta
 			if tempo_na_agua >= TEMPO_AFOGAMENTO:
 				print("!!! AFOGOU (sem capacete) - MORREU !!!")
+				Inventario.limpar()
 				get_tree().reload_current_scene()
 				return
 	else:
@@ -105,6 +106,7 @@ func _physics_process(delta: float) -> void:
 		var distancia_da_queda = global_position.y - ponto_mais_alto
 		if distancia_da_queda >= limite_queda_fatal:
 			print("!!! PASSOU DO LIMITE - MORREU !!!")
+			Inventario.limpar()
 			get_tree().reload_current_scene()
 		estava_no_ar = false
 
