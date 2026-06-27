@@ -2,13 +2,14 @@ extends CharacterBody2D
 
 # Piranha com IA simples: persegue o jogador quando ele entra no alcance e
 # patrulha (vai e volta) quando ele está longe. Anima a mordida (5 frames).
-# Ao encostar no jogador, ele morre.
+# Ao encostar no jogador por alguns segundos, ele morre.
 
 @export var velocidade: float = 90.0           # velocidade ao perseguir
 @export var alcance: float = 500.0             # distância para detectar/perseguir
 @export var velocidade_patrulha: float = 70.0
 @export var distancia_patrulha: float = 400.0  # quanto anda antes de virar
-@export var raio_mordida: float = 50.0         # distância para "morder" (matar)
+@export var raio_mordida: float = 50.0         # distância para "morder"
+@export var tempo_para_matar: float = 1.0      # segundos de contato até matar
 
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -18,6 +19,7 @@ var _frames: Array = []
 var _anim_t: float = 0.0
 var _dir_patrulha: int = 1
 var _percorrido: float = 0.0
+var _tempo_mordida: float = 0.0
 
 
 func _ready() -> void:
@@ -46,11 +48,16 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	# Encostou no jogador -> ele morre (perde os itens e reinicia a fase).
+	# Encostou no jogador: depois de tempo_para_matar segundos de contato, ele
+	# morre (perde os itens e reinicia a fase). Se escapar antes, o tempo zera.
 	if jogador != null and global_position.distance_to(jogador.global_position) <= raio_mordida:
-		Inventario.limpar()
-		get_tree().reload_current_scene()
-		return
+		_tempo_mordida += delta
+		if _tempo_mordida >= tempo_para_matar:
+			Inventario.limpar()
+			get_tree().reload_current_scene()
+			return
+	else:
+		_tempo_mordida = 0.0
 
 	if is_on_wall():
 		_dir_patrulha *= -1
