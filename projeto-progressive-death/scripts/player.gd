@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+# Pulinho dentro da água (impulso pra cima, para conseguir sair da água).
+const PULO_AGUA = -350.0
 const WATER_GRAVITY = 0.1
 const WATER_SPEED = 80.0
 # Resistência da água: quanto maior, mais rápido a água freia a queda/movimento.
@@ -81,9 +83,14 @@ func _physics_process(delta: float) -> void:
 			if global_position.y < ponto_mais_alto:
 				ponto_mais_alto = global_position.y
 
-	# 2. PULO (só em terra firme)
-	if Input.is_action_just_pressed("jump") and is_on_floor() and not water:
-		velocity.y = JUMP_VELOCITY
+	# 2. PULO
+	if Input.is_action_just_pressed("jump"):
+		if water:
+			# Dentro d'água: pulinho pra cima para conseguir sair da água.
+			velocity.y = PULO_AGUA
+		elif is_on_floor():
+			# Em terra firme: pulo normal.
+			velocity.y = JUMP_VELOCITY
 
 	# 3. MOVIMENTO LATERAL EM TERRA (na água quem cuida disso é o swim())
 	if not water:
