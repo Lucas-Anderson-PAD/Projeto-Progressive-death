@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-# Piranha com IA simples: persegue o jogador quando ele entra no alcance e
-# patrulha (vai e volta) quando ele está longe. Anima a mordida (5 frames).
-# Ao encostar no jogador por alguns segundos, ele morre.
+# Piranha: SÓ se move dentro da água. Persegue o jogador quando ele está na água
+# e dentro do alcance; senão, patrulha de um lado para o outro (frames calmos).
+# Anima a mordida completa ao perseguir. Ao encostar por alguns segundos, mata.
 
 @export var velocidade: float = 90.0           # velocidade ao perseguir
 @export var alcance: float = 500.0             # distância para detectar/perseguir
@@ -14,6 +14,9 @@ extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 
 const ANIM_FPS := 8.0
+
+# A água (water.gd) liga/desliga isto quando a piranha entra/sai dela.
+var water := false
 
 var _frames: Array = []
 var _anim_t: float = 0.0
@@ -33,9 +36,20 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# Fora da água a piranha não nada: afunda de volta para a água.
+	if not water:
+		velocity.x = move_toward(velocity.x, 0.0, velocidade)
+		velocity += get_gravity() * delta
+		move_and_slide()
+		_atualizar_sprite(delta, false)
+		return
+
 	var jogador := get_tree().get_first_node_in_group("player") as Node2D
 
-	if jogador != null and global_position.distance_to(jogador.global_position) <= alcance:
+	# Só persegue se o jogador TAMBÉM está na água e dentro do alcance.
+	var perseguindo := jogador != null and jogador.get("water") == true and global_position.distance_to(jogador.global_position) <= alcance
+
+	if perseguindo:
 		# PERSEGUE: nada na direção do jogador.
 		velocity = (jogador.global_position - global_position).normalized() * velocidade
 	else:
@@ -48,8 +62,10 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	# Encostou no jogador: depois de tempo_para_matar segundos de contato, ele
-	# morre (perde os itens e reinicia a fase). Se escapar antes, o tempo zera.
+	if is_on_wall():
+		_dir_patrulha *= -1
+
+	# Mordida: depois de tempo_para_matar segundos de contato, o jogador morre.
 	if jogador != null and global_position.distance_to(jogador.global_position) <= raio_mordida:
 		_tempo_mordida += delta
 		if _tempo_mordida >= tempo_para_matar:
@@ -59,21 +75,20 @@ func _physics_process(delta: float) -> void:
 	else:
 		_tempo_mordida = 0.0
 
-	if is_on_wall():
-		_dir_patrulha *= -1
-
-	_atualizar_sprite(delta)
+	_atualizar_sprite(delta, perseguindo)
 
 
-func _atualizar_sprite(delta: float) -> void:
+func _atualizar_sprite(delta: float, perseguindo: bool) -> void:
 	# Os frames apontam para a ESQUERDA; espelha quando vai para a direita.
 	if velocity.x > 1.0:
 		sprite.flip_h = true
 	elif velocity.x < -1.0:
 		sprite.flip_h = false
 
-	# Anima a mordida em loop.
 	if _frames.is_empty():
 		return
+
+	# Perseguindo: mordida completa (5 frames). Patrulhando: só frames 0 e 1.
+	var seq := [0, 1, 2, 3, 4] if perseguindo else [0, 1]
 	_anim_t += delta * ANIM_FPS
-	sprite.texture = _frames[int(_anim_t) % _frames.size()]
+	sprite.texture = _frames[seq[int(_anim_t) % seq.size()]]
