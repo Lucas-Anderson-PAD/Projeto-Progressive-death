@@ -23,6 +23,9 @@ const ANIM_FPS := 6.0
 @export var textura_andar: Texture2D
 @export var textura_andar_capacete: Texture2D
 @export var textura_nadar: Texture2D
+# Folhas dedicadas do PULO (também grid 2x2; frames apontam para a direita).
+@export var textura_pulo: Texture2D
+@export var textura_pulo_capacete: Texture2D
 
 @onready var sprite = $Sprite2D
 
@@ -144,20 +147,24 @@ func _atualizar_animacao(delta: float, movendo: bool) -> void:
 		native_dir = -1
 		anima = true
 	else:
-		# Folha conforme tem ou não o capacete.
-		tex = textura_andar_capacete if (tem_capacete and textura_andar_capacete != null) else textura_andar
 		native_dir = 1
 		if not is_on_floor():
-			# PULO / no ar: anima sempre, sem o frame 0 (coluna1/linha1).
+			# PULO / no ar: folha dedicada de pulo, frames [2,1,3] (sem o frame 0).
+			tex = textura_pulo_capacete if (tem_capacete and textura_pulo_capacete != null) else textura_pulo
+			if tex == null:
+				tex = textura_andar_capacete if (tem_capacete and textura_andar_capacete != null) else textura_andar
 			frames = [2, 1, 3]
 			anima = true
-		elif movendo:
-			# ANDAR.
-			frames = [1, 3]
-			anima = true
 		else:
-			# PARADO.
-			frames = [1]
+			# EM TERRA: folha de andar (com ou sem capacete).
+			tex = textura_andar_capacete if (tem_capacete and textura_andar_capacete != null) else textura_andar
+			if movendo:
+				# ANDAR.
+				frames = [1, 3]
+				anima = true
+			else:
+				# PARADO.
+				frames = [1]
 
 	if tex != null and sprite.texture != tex:
 		sprite.texture = tex
