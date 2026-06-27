@@ -125,25 +125,50 @@ func swim(delta: float) -> void:
 		_facing = 1 if direction > 0 else -1
 
 
-# Troca a folha de sprites conforme o estado e anima os frames pela direção.
+# Troca a folha e anima os frames conforme o estado e a direção.
+# Nas folhas de andar/pulo o pássaro aponta para a DIREITA (frames 1,2,3) e nas
+# de nadar para a ESQUERDA; o flip_h corrige a direção quando preciso.
 func _atualizar_animacao(delta: float, movendo: bool) -> void:
 	if sprite == null:
 		return
 
-	# Estado -> qual folha usar.
-	var tex: Texture2D = textura_andar
-	if water and tem_capacete and textura_nadar != null:
+	var tex: Texture2D
+	var frames: Array
+	var native_dir: int      # direção para a qual os frames já apontam
+	var anima := false
+
+	if water:
+		# NADANDO: anima sempre, só por estar na água.
 		tex = textura_nadar
-	elif tem_capacete and textura_andar_capacete != null:
-		tex = textura_andar_capacete
+		frames = [0, 1, 2, 3]
+		native_dir = -1
+		anima = true
+	else:
+		# Folha conforme tem ou não o capacete.
+		tex = textura_andar_capacete if (tem_capacete and textura_andar_capacete != null) else textura_andar
+		native_dir = 1
+		if not is_on_floor():
+			# PULO / no ar: anima sempre, sem o frame 0 (coluna1/linha1).
+			frames = [2, 1, 3]
+			anima = true
+		elif movendo:
+			# ANDAR.
+			frames = [1, 3]
+			anima = true
+		else:
+			# PARADO.
+			frames = [1]
+
 	if tex != null and sprite.texture != tex:
 		sprite.texture = tex
 
-	# Frames direcionais (grid 2x2): direita = [1, 3], esquerda = [0, 2].
-	var base := 1 if _facing > 0 else 0
-	if movendo:
+	# Direção: vira o sprite quando o jogador olha para o lado oposto ao nativo.
+	sprite.flip_h = (_facing != native_dir)
+
+	# Frame atual.
+	if anima and frames.size() > 1:
 		_anim_t += delta * ANIM_FPS
-		sprite.frame = base + (int(_anim_t) % 2) * 2
+		sprite.frame = frames[int(_anim_t) % frames.size()]
 	else:
 		_anim_t = 0.0
-		sprite.frame = base
+		sprite.frame = frames[0]
