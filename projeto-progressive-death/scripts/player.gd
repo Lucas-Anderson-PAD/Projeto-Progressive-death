@@ -142,12 +142,19 @@ func _atualizar_animacao(delta: float, movendo: bool) -> void:
 	var native_dir: int      # direção para a qual os frames já apontam
 	var anima := false
 
-	if water:
-		# NADANDO: anima sempre, só por estar na água.
+	if water and tem_capacete:
+		# NADANDO (só com capacete): anima sempre, só por estar na água.
 		tex = textura_nadar
 		frames = [0, 1, 2, 3]
 		native_dir = -1
 		anima = true
+	elif water:
+		# Na água SEM capacete: está se afogando (morre em 1s). NÃO usa o sprite
+		# de nado com capacete; mostra o pássaro normal, sem capacete.
+		tex = textura_andar
+		frames = [1]
+		native_dir = 1
+		anima = false
 	else:
 		native_dir = 1
 		if not is_on_floor():
