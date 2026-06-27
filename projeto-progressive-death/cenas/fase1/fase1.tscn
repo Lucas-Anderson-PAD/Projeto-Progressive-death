@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cpi2lc05vksj6" path="res://cenas/fase1/colunas.tscn" id="11_3fp15"]
 [ext_resource type="PackedScene" uid="uid://tsh2jq31t60s" path="res://cenas/water.tscn" id="12_wat3r"]
 [ext_resource type="PackedScene" uid="uid://cp7rt4lsc3oaq" path="res://cenas/portal.tscn" id="14_jy36d"]
+[ext_resource type="PackedScene" uid="uid://ccapac3t31t3m9" path="res://cenas/capacete.tscn" id="20_capac"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qumu4"]
 texture = ExtResource("1_sydfx")
@@ -286,7 +287,7 @@ texture = ExtResource("5_r1qh0")
 centered = false
 
 [node name="Player" parent="." unique_id=929203449 instance=ExtResource("2_2l3w2")]
-position = Vector2(2988, 93)
+position = Vector2(38, 207)
 altura_jogador = 16.0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=526092004]
@@ -514,12 +515,14 @@ position = Vector2(2736, 384)
 position = Vector2(2608, 480)
 
 [node name="Portal" parent="." unique_id=1748725754 instance=ExtResource("14_jy36d")]
-position = Vector2(3095, 494)
+position = Vector2(3087, 55.000004)
+scale = Vector2(1.5, 1.5)
 cena_destino = "uid://cbmoi4jjulyx8"
 id_destino = "entrada_f2"
 
 [node name="Portal2" parent="." unique_id=1754558467 instance=ExtResource("14_jy36d")]
-position = Vector2(3092, 60)
+position = Vector2(3088.0002, 484)
+scale = Vector2(1.5, 1.5)
 cena_destino = "uid://cr5kr0khvtmt4"
 id_destino = "chegada_f1"
 
@@ -527,3 +530,6 @@ id_destino = "chegada_f1"
 position = Vector2(11, 205)
 id_portal = "chegada_f1"
 eh_saida = true
+
+[node name="Capacete" parent="." instance=ExtResource("20_capac")]
+position = Vector2(120, 195)

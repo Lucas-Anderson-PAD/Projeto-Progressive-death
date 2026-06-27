@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccapac3t31t3m9"]
+
+[ext_resource type="Script" path="res://scripts/item.gd" id="1_item"]
+[ext_resource type="Texture2D" path="res://sprites/caedeal/nado/Escafandro.png" id="2_esca"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cap"]
+size = Vector2(300, 350)
+
+[node name="Capacete" type="Area2D"]
+scale = Vector2(0.12, 0.12)
+script = ExtResource("1_item")
+icone = ExtResource("2_esca")
+da_capacete = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_esca")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cap")

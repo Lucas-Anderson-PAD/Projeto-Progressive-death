@@ -8,16 +8,23 @@ const WATER_SPEED = 80.0
 const WATER_DRAG = 6.0
 # Tempo (em segundos) que o jogador aguenta na água SEM capacete antes de morrer.
 const TEMPO_AFOGAMENTO = 1.0
+# Velocidade da animação (frames por segundo).
+const ANIM_FPS := 6.0
 
-# Coloquei a altura como Export.
-# Vá no Inspetor do Godot e coloque a altura aproximada do seu pássaro em pixels (ex: 32 ou 64).
+# Vá no Inspetor e coloque a altura aproximada do seu pássaro em pixels.
 @export var altura_jogador: float = 32.0
 
-# Marque no Inspetor (ou defina por código ao pegar o item) se o jogador está com
-# o capacete. COM capacete ele respira na água; SEM, ele se afoga.
+# Se o jogador está com o capacete. COM capacete ele respira na água e nada;
+# SEM, ele se afoga. Começa false e vira true ao pegar o item capacete.
 @export var tem_capacete: bool = false
 
-@onready var sprite = $Sprite2D # Se o seu for AnimatedSprite2D, isso vai funcionar igual
+# Folhas de animação (cada uma é um grid 2x2 = 4 frames).
+# Frames por direção: esquerda = [0, 2], direita = [1, 3].
+@export var textura_andar: Texture2D
+@export var textura_andar_capacete: Texture2D
+@export var textura_nadar: Texture2D
+
+@onready var sprite = $Sprite2D
 
 var water = false
 
@@ -29,17 +36,17 @@ var limite_queda_fatal: float = 0.0
 # Cronômetro de afogamento (conta o tempo dentro d'água sem capacete).
 var tempo_na_agua: float = 0.0
 
+# Animação
+var _facing := 1      # 1 = direita, -1 = esquerda
+var _anim_t := 0.0
+
 
 func _ready():
-	# Entra no grupo "player" para que os portais consigam encontrar o jogador.
+	# Entra no grupo "player" para que portais e itens encontrem o jogador.
 	add_to_group("player")
 
 	# Calcula o limite baseado no valor do Inspetor
 	limite_queda_fatal = altura_jogador * 20
-
-	print("--- JOGO INICIADO ---")
-	print("Altura do pássaro: ", altura_jogador, " pixels")
-	print("Morte se cair mais de: ", limite_queda_fatal, " pixels")
 
 
 func _physics_process(delta: float) -> void:
@@ -63,13 +70,10 @@ func _physics_process(delta: float) -> void:
 		if not is_on_floor():
 			velocity += get_gravity() * delta
 
-			# Registra o exato momento que tirou o pé do chão
 			if not estava_no_ar:
 				estava_no_ar = true
 				ponto_mais_alto = global_position.y
-				print("-> Saiu do chão! Gravando altura inicial...")
 
-			# Atualiza o ponto mais alto (no Godot, subir = Y menor)
 			if global_position.y < ponto_mais_alto:
 				ponto_mais_alto = global_position.y
 
@@ -82,26 +86,23 @@ func _physics_process(delta: float) -> void:
 		var direction := Input.get_axis("move_left", "move_right")
 		if direction:
 			velocity.x = direction * SPEED
-			sprite.flip_h = (direction > 0)
+			_facing = 1 if direction > 0 else -1
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	# 4. APLICA A FÍSICA
 	move_and_slide()
 
-	# 5. IMPACTO (só faz sentido fora d'água)
+	# 5. ANIMAÇÃO (sprite conforme o estado e a direção)
+	var movendo := absf(velocity.x) > 5.0 or (water and absf(velocity.y) > 5.0)
+	_atualizar_animacao(delta, movendo)
+
+	# 6. IMPACTO (só faz sentido fora d'água)
 	if not water and is_on_floor() and estava_no_ar:
 		var distancia_da_queda = global_position.y - ponto_mais_alto
-		var proporcao = distancia_da_queda / altura_jogador
-
-		# Printa o relatório do impacto
-		print("=> Bateu no chão! Altura da queda: %.2fx (Total: %d pixels)" % [proporcao, int(distancia_da_queda)])
-
 		if distancia_da_queda >= limite_queda_fatal:
 			print("!!! PASSOU DO LIMITE - MORREU !!!")
 			get_tree().reload_current_scene()
-
-		# Sobreviveu, reseta para o próximo pulo
 		estava_no_ar = false
 
 
@@ -109,9 +110,7 @@ func swim(delta: float) -> void:
 	# Empuxo: dentro d'água a gravidade quase não age.
 	velocity += get_gravity() * WATER_GRAVITY * delta
 
-	# Resistência da água: freia QUALQUER velocidade, inclusive a velocidade de
-	# queda no instante em que o jogador entra na água (efeito de "splash").
-	# É isso que faz a queda perder velocidade ao tocar a água.
+	# Resistência da água: freia QUALQUER velocidade (inclui a queda ao entrar).
 	velocity = velocity.lerp(Vector2.ZERO, min(WATER_DRAG * delta, 1.0))
 
 	# Natação vertical controlada pelo jogador (sobe/desce).
@@ -123,4 +122,28 @@ func swim(delta: float) -> void:
 	var direction := Input.get_axis("move_left", "move_right")
 	if direction:
 		velocity.x = direction * WATER_SPEED
-		sprite.flip_h = (direction > 0)
+		_facing = 1 if direction > 0 else -1
+
+
+# Troca a folha de sprites conforme o estado e anima os frames pela direção.
+func _atualizar_animacao(delta: float, movendo: bool) -> void:
+	if sprite == null:
+		return
+
+	# Estado -> qual folha usar.
+	var tex: Texture2D = textura_andar
+	if water and tem_capacete and textura_nadar != null:
+		tex = textura_nadar
+	elif tem_capacete and textura_andar_capacete != null:
+		tex = textura_andar_capacete
+	if tex != null and sprite.texture != tex:
+		sprite.texture = tex
+
+	# Frames direcionais (grid 2x2): direita = [1, 3], esquerda = [0, 2].
+	var base := 1 if _facing > 0 else 0
+	if movendo:
+		_anim_t += delta * ANIM_FPS
+		sprite.frame = base + (int(_anim_t) % 2) * 2
+	else:
+		_anim_t = 0.0
+		sprite.frame = base

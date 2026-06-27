@@ -9,6 +9,10 @@ extends Area2D
 		icone = value
 		_aplicar_icone()
 
+# Se true, ao pegar este item o jogador ganha o capacete (tem_capacete = true):
+# muda a aparência e passa a poder nadar na água.
+@export var da_capacete: bool = false
+
 @onready var sprite: Sprite2D = $Sprite2D
 
 
@@ -33,4 +37,7 @@ func _on_body_entered(body: Node) -> void:
 		return
 	# So some se realmente coube no inventario (senao fica para pegar depois).
 	if Inventario.adicionar_item(icone):
+		# Item capacete: equipa o jogador (permite nadar e muda a aparencia).
+		if da_capacete and "tem_capacete" in body:
+			body.tem_capacete = true
 		queue_free()
