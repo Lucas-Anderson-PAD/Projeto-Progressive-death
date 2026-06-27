@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cinv7nt4r0sda"]
+
+[ext_resource type="Script" path="res://scripts/inventario.gd" id="1_inv"]
+[ext_resource type="Texture2D" path="res://sprites/ui/inventario_marrom.png" id="2_panel"]
+
+[node name="Inventario" type="CanvasLayer"]
+script = ExtResource("1_inv")
+
+[node name="Painel" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 240.0
+offset_bottom = 104.0
+texture = ExtResource("2_panel")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Slot0" type="TextureRect" parent="Painel"]
+texture_filter = 1
+offset_left = 20.0
+offset_top = 16.0
+offset_right = 80.0
+offset_bottom = 80.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot1" type="TextureRect" parent="Painel"]
+texture_filter = 1
+offset_left = 88.0
+offset_top = 16.0
+offset_right = 148.0
+offset_bottom = 80.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot2" type="TextureRect" parent="Painel"]
+texture_filter = 1
+offset_left = 156.0
+offset_top = 16.0
+offset_right = 216.0
+offset_bottom = 80.0
+expand_mode = 1
+stretch_mode = 5

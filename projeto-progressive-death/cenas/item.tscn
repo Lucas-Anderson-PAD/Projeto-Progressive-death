@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cit7mc0let5sc"]
+
+[ext_resource type="Script" path="res://scripts/item.gd" id="1_item"]
+[ext_resource type="Texture2D" path="res://sprites/ui/item_gema.png" id="2_gema"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_item"]
+size = Vector2(16, 16)
+
+[node name="Item" type="Area2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_item")
+icone = ExtResource("2_gema")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_gema")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_item")
