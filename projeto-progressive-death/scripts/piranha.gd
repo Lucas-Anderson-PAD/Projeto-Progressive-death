@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 	var jogador := get_tree().get_first_node_in_group("player") as Node2D
 
 	# Só persegue se o jogador TAMBÉM está na água e dentro do alcance.
-	var perseguindo := jogador != null and jogador.get("water") == true and global_position.distance_to(jogador.global_position) <= alcance
+	var perseguindo := jogador != null and bool(jogador.get("water")) and global_position.distance_to(jogador.global_position) <= alcance
 
 	if perseguindo:
 		# PERSEGUE: nada na direção do jogador.
