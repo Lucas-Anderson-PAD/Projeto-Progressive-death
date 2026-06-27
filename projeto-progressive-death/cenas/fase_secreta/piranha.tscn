@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ce0l55bqeglie"]
+[gd_scene format=3 uid="uid://ce0l55bqeglie"]
 
 [ext_resource type="Script" uid="uid://ckdrnidy24jn5" path="res://scripts/piranha.gd" id="1_mccpc"]
 [ext_resource type="Texture2D" uid="uid://c6eg61m08v0pq" path="res://sprites/Piranha/piranha_0.png" id="2_v1m63"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6f4m"]
-size = Vector2(450, 260)
+size = Vector2(141.66675, 108.33336)
 
 [node name="Piranha" type="CharacterBody2D" unique_id=132555850]
 scale = Vector2(0.12, 0.12)
@@ -14,4 +14,6 @@ script = ExtResource("1_mccpc")
 texture = ExtResource("2_v1m63")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=382401456]
+position = Vector2(-16.66667, 8.333332)
+scale = Vector2(0.99999946, 0.99999946)
 shape = SubResource("RectangleShape2D_v6f4m")

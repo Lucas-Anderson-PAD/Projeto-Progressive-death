@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
+const SPEED = 200.0
 const JUMP_VELOCITY = -400.0
 # Pulinho dentro da água (impulso pra cima, para conseguir sair da água).
 const PULO_AGUA = -350.0
 const WATER_GRAVITY = 0.1
-const WATER_SPEED = 80.0
+const WATER_SPEED = 90.0
 # Resistência da água: quanto maior, mais rápido a água freia a queda/movimento.
 const WATER_DRAG = 6.0
 # Tempo (em segundos) que o jogador aguenta na água SEM capacete antes de morrer.

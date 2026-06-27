@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cs3ve2h28kgkm" path="res://cenas/fase1/chao faso.tscn" id="8_r1qh0"]
 [ext_resource type="PackedScene" uid="uid://w0ndm0cypowt" path="res://cenas/fase1/espinhos.tscn" id="9_j17f1"]
 [ext_resource type="PackedScene" uid="uid://dc4t2qvsvmbis" path="res://cenas/fase1/plataforma_temporal.tscn" id="10_20lmj"]
+[ext_resource type="PackedScene" uid="uid://ce0l55bqeglie" path="res://cenas/fase_secreta/piranha.tscn" id="10_j84cb"]
 [ext_resource type="PackedScene" uid="uid://cpi2lc05vksj6" path="res://cenas/fase1/colunas.tscn" id="11_3fp15"]
 [ext_resource type="PackedScene" uid="uid://tsh2jq31t60s" path="res://cenas/water.tscn" id="12_wat3r"]
 [ext_resource type="PackedScene" uid="uid://cp7rt4lsc3oaq" path="res://cenas/portal.tscn" id="14_jy36d"]
@@ -311,6 +312,9 @@ scale = Vector2(60, 1)
 position = Vector2(1232, -80)
 scale = Vector2(60, 1)
 
+[node name="Piranha" parent="TileMapLayer" unique_id=132555850 instance=ExtResource("10_j84cb")]
+position = Vector2(1292, 732)
+
 [node name="armadilha1" type="Node2D" parent="." unique_id=308473177]
 
 [node name="chao_falso1" parent="armadilha1" unique_id=649006228 instance=ExtResource("8_r1qh0")]
@@ -533,3 +537,9 @@ eh_saida = true
 
 [node name="Capacete" parent="." unique_id=2087050338 instance=ExtResource("20_capac")]
 position = Vector2(90, 221)
+
+[node name="Portal4" parent="." unique_id=1807852694 instance=ExtResource("14_jy36d")]
+position = Vector2(1739, 730)
+id_portal = "entrada_fs"
+cena_destino = "uid://cr5kr0khvtmt4"
+id_destino = "chegada_f1"

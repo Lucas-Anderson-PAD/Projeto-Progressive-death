@@ -6,10 +6,10 @@ extends CharacterBody2D
 # Anima a mordida completa ao perseguir. Ao COLIDIR com o jogador por alguns
 # segundos, ele morre.
 
-@export var velocidade: float = 80.0           # velocidade ao perseguir
+@export var velocidade: float = 130.0           # velocidade ao perseguir
 @export var alcance: float = 500.0             # distância para detectar/perseguir
 @export var velocidade_patrulha: float = 70.0  # velocidade ao patrulhar
-@export var tempo_para_matar: float = 1.0      # segundos de contato até matar
+@export var tempo_para_matar: float = 0.5     # segundos de contato até matar
 
 @onready var sprite: Sprite2D = $Sprite2D
 
