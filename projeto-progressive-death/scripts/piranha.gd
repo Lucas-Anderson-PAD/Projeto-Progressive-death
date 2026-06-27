@@ -29,12 +29,11 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var jogador = get_tree().get_first_node_in_group("player")
+	var jogador := get_tree().get_first_node_in_group("player") as Node2D
 
 	if jogador != null and global_position.distance_to(jogador.global_position) <= alcance:
 		# PERSEGUE: nada na direção do jogador.
-		var dir := (jogador.global_position - global_position).normalized()
-		velocity = dir * velocidade
+		velocity = (jogador.global_position - global_position).normalized() * velocidade
 	else:
 		# PATRULHA: vai e volta na horizontal.
 		velocity = Vector2(_dir_patrulha * velocidade_patrulha, 0.0)
