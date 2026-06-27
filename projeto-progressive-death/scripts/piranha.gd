@@ -2,11 +2,13 @@ extends CharacterBody2D
 
 # Piranha com IA simples: persegue o jogador quando ele entra no alcance e
 # patrulha (vai e volta) quando ele está longe. Anima a mordida (5 frames).
+# Ao encostar no jogador, ele morre.
 
-@export var velocidade: float = 150.0          # velocidade ao perseguir
+@export var velocidade: float = 90.0           # velocidade ao perseguir
 @export var alcance: float = 500.0             # distância para detectar/perseguir
 @export var velocidade_patrulha: float = 70.0
 @export var distancia_patrulha: float = 400.0  # quanto anda antes de virar
+@export var raio_mordida: float = 50.0         # distância para "morder" (matar)
 
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -43,6 +45,12 @@ func _physics_process(delta: float) -> void:
 			_dir_patrulha *= -1
 
 	move_and_slide()
+
+	# Encostou no jogador -> ele morre (perde os itens e reinicia a fase).
+	if jogador != null and global_position.distance_to(jogador.global_position) <= raio_mordida:
+		Inventario.limpar()
+		get_tree().reload_current_scene()
+		return
 
 	if is_on_wall():
 		_dir_patrulha *= -1
