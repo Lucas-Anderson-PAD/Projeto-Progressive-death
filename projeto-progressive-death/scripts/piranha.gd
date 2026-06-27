@@ -24,8 +24,8 @@ func _ready() -> void:
 	_frames = [
 		load("res://sprites/Piranha/piranha_0.png"),
 		load("res://sprites/Piranha/piranha_1.png"),
-		load("res://sprites/Piranha/piranha_2.jpg"),
-		load("res://sprites/Piranha/piranha_3.jpg"),
+		load("res://sprites/Piranha/piranha_2.png"),
+		load("res://sprites/Piranha/piranha_3.png"),
 		load("res://sprites/Piranha/piranha_4.png"),
 	]
 
