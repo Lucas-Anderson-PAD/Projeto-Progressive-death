@@ -1,13 +1,13 @@
 extends CharacterBody2D
 
 # Piranha: SÓ se move dentro da água. Persegue o jogador quando ele está na água
-# e dentro do alcance; senão, patrulha de um lado para o outro (frames calmos).
+# e dentro do alcance; senão, patrulha de um lado para o outro ATÉ bater numa
+# parede/obstáculo, quando então vira e vai para o outro lado.
 # Anima a mordida completa ao perseguir. Ao encostar por alguns segundos, mata.
 
 @export var velocidade: float = 90.0           # velocidade ao perseguir
 @export var alcance: float = 500.0             # distância para detectar/perseguir
-@export var velocidade_patrulha: float = 70.0
-@export var distancia_patrulha: float = 400.0  # quanto anda antes de virar
+@export var velocidade_patrulha: float = 70.0  # velocidade ao patrulhar
 @export var raio_mordida: float = 50.0         # distância para "morder"
 @export var tempo_para_matar: float = 1.0      # segundos de contato até matar
 
@@ -21,7 +21,6 @@ var water := false
 var _frames: Array = []
 var _anim_t: float = 0.0
 var _dir_patrulha: int = 1
-var _percorrido: float = 0.0
 var _tempo_mordida: float = 0.0
 
 
@@ -53,16 +52,13 @@ func _physics_process(delta: float) -> void:
 		# PERSEGUE: nada na direção do jogador.
 		velocity = (jogador.global_position - global_position).normalized() * velocidade
 	else:
-		# PATRULHA: vai e volta na horizontal.
+		# PATRULHA: nada para um lado; vira só ao bater em algo (logo abaixo).
 		velocity = Vector2(_dir_patrulha * velocidade_patrulha, 0.0)
-		_percorrido += velocidade_patrulha * delta
-		if _percorrido >= distancia_patrulha:
-			_percorrido = 0.0
-			_dir_patrulha *= -1
 
 	move_and_slide()
 
-	if is_on_wall():
+	# Patrulhando e bateu numa parede/obstáculo -> vira para o outro lado.
+	if not perseguindo and is_on_wall():
 		_dir_patrulha *= -1
 
 	# Mordida: depois de tempo_para_matar segundos de contato, o jogador morre.
