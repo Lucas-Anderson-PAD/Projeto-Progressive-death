@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ckdptnjfh7h4q"]
+
+[ext_resource type="Script" uid="uid://dqnwfljluo0b6" path="res://scripts/item.gd" id="1_o37fs"]
+[ext_resource type="Texture2D" uid="uid://bckyclxlh6kwn" path="res://sprites/caedeal/botas/botas_item.png" id="2_o37fs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cap"]
+size = Vector2(300, 283.3333)
+
+[node name="Botas" type="Area2D" unique_id=1936310059]
+scale = Vector2(0.12, 0.12)
+script = ExtResource("1_o37fs")
+icone = ExtResource("2_o37fs")
+da_capacete = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=316013231]
+position = Vector2(1.5258789e-05, 33.333344)
+scale = Vector2(0.14648436, 0.13834634)
+texture = ExtResource("2_o37fs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=88953233]
+position = Vector2(0, 33.33333)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_cap")
