@@ -10,9 +10,9 @@ script = ExtResource("1_inv")
 [node name="Painel" type="TextureRect" parent="."]
 texture_filter = 1
 offset_left = 8.0
-offset_top = 64.0
+offset_top = 8.0
 offset_right = 240.0
-offset_bottom = 160.0
+offset_bottom = 104.0
 texture = ExtResource("2_panel")
 expand_mode = 1
 stretch_mode = 0
@@ -54,9 +54,11 @@ stretch_mode = 5
 
 [node name="Coracao0" type="TextureRect" parent="."]
 texture_filter = 1
-offset_left = 8.0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
 offset_top = 8.0
-offset_right = 56.0
+offset_right = -112.0
 offset_bottom = 56.0
 texture = ExtResource("3_heart")
 expand_mode = 1
@@ -64,9 +66,11 @@ stretch_mode = 5
 
 [node name="Coracao1" type="TextureRect" parent="."]
 texture_filter = 1
-offset_left = 60.0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -108.0
 offset_top = 8.0
-offset_right = 108.0
+offset_right = -60.0
 offset_bottom = 56.0
 texture = ExtResource("3_heart")
 expand_mode = 1
@@ -74,9 +78,11 @@ stretch_mode = 5
 
 [node name="Coracao2" type="TextureRect" parent="."]
 texture_filter = 1
-offset_left = 112.0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
 offset_top = 8.0
-offset_right = 160.0
+offset_right = -8.0
 offset_bottom = 56.0
 texture = ExtResource("3_heart")
 expand_mode = 1
