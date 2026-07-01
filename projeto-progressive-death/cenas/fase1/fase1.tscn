@@ -226,7 +226,7 @@ sources/0 = SubResource("TileSetAtlasSource_qumu4")
 [node name="Node2D" type="Node2D" unique_id=1435896397]
 
 [node name="Water2" parent="." unique_id=1772926158 instance=ExtResource("12_wat3r")]
-position = Vector2(2706, 549)
+position = Vector2(2713, 527)
 
 [node name="ColorRect" type="ColorRect" parent="Water2" unique_id=1973165057]
 offset_right = 500.0
@@ -541,5 +541,5 @@ position = Vector2(90, 221)
 [node name="Portal4" parent="." unique_id=1807852694 instance=ExtResource("14_jy36d")]
 position = Vector2(1739, 730)
 id_portal = "entrada_fs"
-cena_destino = "uid://cr5kr0khvtmt4"
-id_destino = "chegada_f1"
+cena_destino = "uid://dfs3cr3tam4pa"
+id_destino = "chegada_fs"
