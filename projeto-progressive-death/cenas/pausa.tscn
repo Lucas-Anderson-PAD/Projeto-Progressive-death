@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/pausa.gd" id="1_pausa"]
+[ext_resource type="Texture2D" path="res://sprites/ui/botao_pausa.png" id="2_pi"]
+[ext_resource type="Texture2D" path="res://sprites/ui/botao_pausa_press.png" id="3_pip"]
+[ext_resource type="Texture2D" path="res://sprites/ui/botao_continuar.png" id="4_c"]
+[ext_resource type="Texture2D" path="res://sprites/ui/botao_continuar_press.png" id="5_cp"]
+[ext_resource type="Texture2D" path="res://sprites/ui/botao_desistir.png" id="6_d"]
+[ext_resource type="Texture2D" path="res://sprites/ui/botao_desistir_press.png" id="7_dp"]
+
+[node name="Pausa" type="CanvasLayer"]
+layer = 10
+process_mode = 3
+script = ExtResource("1_pausa")
+
+[node name="BotaoPausa" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = 8.0
+offset_right = 32.0
+offset_bottom = 72.0
+texture_normal = ExtResource("2_pi")
+texture_pressed = ExtResource("3_pip")
+texture_hover = ExtResource("2_pi")
+
+[node name="MenuPausa" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Overlay" type="ColorRect" parent="MenuPausa"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.5)
+
+[node name="Continuar" type="TextureButton" parent="MenuPausa"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 160.0
+offset_bottom = -10.0
+texture_normal = ExtResource("4_c")
+texture_pressed = ExtResource("5_cp")
+texture_hover = ExtResource("4_c")
+
+[node name="Desistir" type="TextureButton" parent="MenuPausa"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 90.0
+texture_normal = ExtResource("6_d")
+texture_pressed = ExtResource("7_dp")
+texture_hover = ExtResource("6_d")

@@ -29,11 +29,22 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	# Esconde o HUD do inventário nas telas de menu (cenas/menus/): início/game over.
+	visible = not _em_menu()
+
 	# Mantém o efeito do item equipado aplicado ao jogador atual (inclusive
 	# após troca de cena). Sem nada equipado, garante tem_capacete = false.
 	var jogador = get_tree().get_first_node_in_group("player")
 	if jogador and "tem_capacete" in jogador:
 		jogador.tem_capacete = _capacete_equipado()
+
+
+# True quando a cena atual é uma tela de menu (pasta cenas/menus/).
+func _em_menu() -> bool:
+	var cena := get_tree().current_scene
+	if cena == null:
+		return false
+	return cena.scene_file_path.begins_with("res://cenas/menus/")
 
 
 func _unhandled_input(event: InputEvent) -> void:

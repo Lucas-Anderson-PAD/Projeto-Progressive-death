@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_go"]
+[ext_resource type="Texture2D" path="res://sprites/ui/fundo_gameover.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://sprites/ui/titulo_gameover.png" id="3_tit"]
+[ext_resource type="Texture2D" path="res://sprites/ui/botao_menu.png" id="4_m"]
+[ext_resource type="Texture2D" path="res://sprites/ui/botao_menu_press.png" id="5_mp"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_go")
+
+[node name="Fundo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Titulo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -140.0
+offset_right = 153.0
+offset_bottom = -75.0
+texture = ExtResource("3_tit")
+
+[node name="Voltar" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = 40.0
+offset_right = 160.0
+offset_bottom = 120.0
+texture_normal = ExtResource("4_m")
+texture_pressed = ExtResource("5_mp")
+texture_hover = ExtResource("4_m")
