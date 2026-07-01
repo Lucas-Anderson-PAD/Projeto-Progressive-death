@@ -288,7 +288,7 @@ texture = ExtResource("5_r1qh0")
 centered = false
 
 [node name="Player" parent="." unique_id=929203449 instance=ExtResource("2_2l3w2")]
-position = Vector2(2938, 497)
+position = Vector2(15, 338)
 altura_jogador = 16.0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=526092004]
@@ -419,7 +419,6 @@ atraso_inicial = 1.0
 [node name="PlataformaTemporal2" parent="armadilha3" unique_id=586002849 instance=ExtResource("10_20lmj")]
 position = Vector2(-336, -64)
 tempo_desligada = 1.0
-atraso_inicial = 2.0
 
 [node name="PlataformaTemporal3" parent="armadilha3" unique_id=309821526 instance=ExtResource("10_20lmj")]
 position = Vector2(-224, -16)
