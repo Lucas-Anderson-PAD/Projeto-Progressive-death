@@ -65,4 +65,6 @@ func _desistir() -> void:
 	# Despausa antes de trocar de cena (senão o Game Over abriria pausado).
 	get_tree().paused = false
 	menu.visible = false
+	# Guarda a fase atual (mesma regra da morte) para o botão "De novo".
+	Inventario.registrar_retry()
 	get_tree().change_scene_to_file(CENA_GAME_OVER)

@@ -23,6 +23,9 @@ const SLOT_RECTS := [
 var itens: Array = []
 var equipado := -1   # índice do slot equipado (-1 = nenhum)
 
+# Fase que o botão "De novo" do game over vai repetir (setada em morrer()).
+var cena_retry := "res://cenas/fase1/fase1.tscn"
+
 
 func _ready() -> void:
 	_atualizar()
@@ -84,16 +87,20 @@ func limpar() -> void:
 	_atualizar()
 
 
-# Mata o jogador: limpa o inventário e vai para a fase certa. Se estiver na fase
-# secreta, volta para a fase 1; senão, recarrega a fase atual.
+# Mata o jogador: limpa o inventário, guarda a fase para repetir e abre a tela
+# de Game Over (antes recarregava a fase direto; agora passa pelo Game Over).
 func morrer() -> void:
 	limpar()
+	registrar_retry()
+	get_tree().change_scene_to_file("res://cenas/menus/game_over.tscn")
+
+
+# Guarda a fase atual como a que o botão "De novo" do game over vai repetir.
+# A fase secreta (e cenas sem arquivo) voltam para a fase 1.
+func registrar_retry() -> void:
 	var cena := get_tree().current_scene
 	var caminho := cena.scene_file_path if cena != null else ""
-	if "fase_secreta" in caminho:
-		get_tree().change_scene_to_file("res://cenas/fase1/fase1.tscn")
-	else:
-		get_tree().reload_current_scene()
+	cena_retry = "res://cenas/fase1/fase1.tscn" if (caminho == "" or "fase_secreta" in caminho) else caminho
 
 
 func _capacete_equipado() -> bool:

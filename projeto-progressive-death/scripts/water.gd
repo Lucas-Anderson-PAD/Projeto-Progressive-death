@@ -21,6 +21,9 @@ func _aplicar_shader_agua() -> void:
 			mat.shader = SHADER_AGUA
 			mat.set_shader_parameter("cor_base", filho.color)
 			filho.material = mat
+			# Desenha a agua POR CIMA do que esta dentro dela (piranha, jogador),
+			# dando o efeito de estar submerso.
+			filho.z_index = 1
 
 
 func _on_body_entered(body):

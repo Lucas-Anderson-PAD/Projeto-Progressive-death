@@ -10,6 +10,7 @@ extends CharacterBody2D
 @export var alcance: float = 200.0             # distância para detectar/perseguir
 @export var velocidade_patrulha: float = 70.0  # velocidade ao patrulhar
 @export var tempo_para_matar: float = 0.5     # segundos de contato até matar
+@export var zona_morta: float = 8.0            # tolerância horizontal na espreita (evita tremer)
 
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -45,12 +46,21 @@ func _physics_process(delta: float) -> void:
 
 	var jogador := get_tree().get_first_node_in_group("player") as Node2D
 
-	# Só persegue se o jogador TAMBÉM está na água e dentro do alcance.
-	var perseguindo := jogador != null and bool(jogador.get("water")) and global_position.distance_to(jogador.global_position) <= alcance
+	# Enxerga o jogador se ele estiver no ALCANCE (campo de visão), MESMO que
+	# ele esteja FORA da água. A piranha só não consegue SAIR da água.
+	var no_alcance := jogador != null and global_position.distance_to(jogador.global_position) <= alcance
+	var jogador_na_agua := jogador != null and bool(jogador.get("water"))
 
-	if perseguindo:
-		# PERSEGUE: nada na direção do jogador.
+	if no_alcance and jogador_na_agua:
+		# Jogador na água: persegue de verdade (horizontal e vertical).
 		velocity = (jogador.global_position - global_position).normalized() * velocidade
+	elif no_alcance:
+		# Jogador fora da água: fica à espreita, só acompanhando na HORIZONTAL
+		# (velocity.y = 0), sem tentar subir e sair da água. A zona morta evita
+		# tremer/virar o sprite quando o jogador está quase em cima.
+		var dx := jogador.global_position.x - global_position.x
+		var dir_x := 0.0 if absf(dx) < zona_morta else signf(dx)
+		velocity = Vector2(dir_x * velocidade, 0.0)
 	else:
 		# PATRULHA: nada para um lado; vira só ao bater em algo (logo abaixo).
 		velocity = Vector2(_dir_patrulha * velocidade_patrulha, 0.0)
@@ -58,12 +68,13 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	# Patrulhando e bateu numa parede/obstáculo -> vira para o outro lado.
-	if not perseguindo and is_on_wall():
+	if not no_alcance and is_on_wall():
 		_dir_patrulha *= -1
 
-	# Mordida pela COLISÃO real: enquanto a piranha estiver colidindo com o
-	# jogador, conta o tempo; ao atingir tempo_para_matar, ele morre.
-	if _colidindo_com_jogador():
+	# Mordida pela COLISÃO real, mas SÓ com o jogador dentro da água (a piranha
+	# não morde quem está fora dela): conta o tempo de contato; ao atingir
+	# tempo_para_matar, ele morre.
+	if jogador_na_agua and _colidindo_com_jogador():
 		_tempo_mordida += delta
 		if _tempo_mordida >= tempo_para_matar:
 			Inventario.morrer()
@@ -71,7 +82,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		_tempo_mordida = 0.0
 
-	_atualizar_sprite(delta, perseguindo)
+	_atualizar_sprite(delta, no_alcance)
 
 
 # Verifica se alguma colisão deste frame (move_and_slide) foi com o jogador.
