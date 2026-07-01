@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://caktc4vx2c0hd"]
 
 [ext_resource type="Texture2D" uid="uid://oef6krjdagjt" path="res://sprites/fundo/fase2/camadas/camada3.png" id="1_hiy3q"]
-[ext_resource type="Script" uid="uid://c7luon76m21hp" path="res://cenas/fase2/estagio_3_espinhos.gd" id="1_motsm"]
+[ext_resource type="Script" uid="uid://c7luon76m21hp" path="res://scripts/estagio_3_espinhos.gd" id="1_motsm"]
 [ext_resource type="Texture2D" uid="uid://7l2iw7ntmbmu" path="res://sprites/fundo/fase2/camadas/camada3repeticao.png" id="2_motsm"]
 
 [node name="Estagio3Espinhos" type="Node2D" unique_id=32743519]

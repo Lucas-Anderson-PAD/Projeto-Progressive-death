@@ -3,11 +3,13 @@ class_name PlayerFase2
 
 @export var camera: Camera2D
 
+@onready var anim = $AnimatedSprite2D
+
 # --- Configurações de Movimento Vertical (A Queda) ---
 const BASE_FALL_SPEED = 400.0       # Sem apertar nada: queda padrão mantendo o ritmo da câmera
 const DIVE_FALL_SPEED = 900.0       # Apertando para baixo: mergulho rápido
 const BRAKE_FALL_SPEED = 200.0      # Apertando para cima: freia a queda
-const GLIDE_FALL_SPEED = 50.0      # Botão de planar: freio máximo/paraquedas
+const GLIDE_FALL_SPEED = 50.0       # Botão de planar: freio máximo/paraquedas
 
 # --- Configurações de Movimento Horizontal ---
 const HORIZONTAL_SPEED = 600.0      # Velocidade para os lados
@@ -28,7 +30,6 @@ func _ready() -> void:
 	# Entra no grupo "player" para que os portais consigam encontrar o jogador.
 	add_to_group("player")
 
-
 func _physics_process(delta: float) -> void:
 	# 1. Capturar o Input nas 4 direções (Vector2)
 	var input_direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -48,6 +49,9 @@ func _physics_process(delta: float) -> void:
 		is_gliding = true
 		current_h_speed = GLIDE_HORIZONTAL_SPEED
 		target_v_speed = GLIDE_FALL_SPEED
+	else:
+		# CORREÇÃO: Garante que ele para de planar ao soltar o botão!
+		is_gliding = false
 
 	# 4. Aplicar Movimento Horizontal
 	if input_direction.x != 0:
@@ -56,7 +60,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 
 	# 5. Aplicar Movimento Vertical
-	# Faz a transição entre a queda base, o mergulho e o freio
 	velocity.y = move_toward(velocity.y, target_v_speed, ACCELERATION * delta)
 
 	# 6. Adiciona a força do vento e Move
@@ -72,24 +75,46 @@ func _physics_process(delta: float) -> void:
 	# 7. Prende o jogador na tela
 	if camera:
 		_manter_na_camera()
+		
+	# 8. Atualiza as animações
+	_atualizar_animacoes(input_direction)
+
+
+# --- SISTEMA DE ANIMAÇÕES ---
+func _atualizar_animacoes(input_dir: Vector2) -> void:
+	# 1. Virar o sprite para a esquerda ou direita
+	if input_dir.x > 0:
+		anim.flip_h = false # Olha para a direita
+	elif input_dir.x < 0:
+		anim.flip_h = true  # Olha para a esquerda
+		
+	# 2. Máquina de Prioridades de Animação
+	if is_gliding:
+		anim.play("planar")
+	elif input_dir.x != 0:
+		anim.play("direita")
+	elif input_dir.y > 0:
+		anim.play("queda")
+	elif input_dir.y < 0:
+		anim.play("cima")
+	else:
+		anim.play("idle")
+
 
 # --- Funções Auxiliares de Limite de Tela ---
 func _manter_na_camera() -> void:
 	var tamanho_tela = get_viewport_rect().size
 	var zoom = camera.zoom
 	
-	# Pega o centro visual real da tela do jogo
 	var centro_visual_da_camera = camera.get_screen_center_position()
 	
-	# calcula as bordas baseando-se no que o jogador vê
 	var limite_esq = centro_visual_da_camera.x - (tamanho_tela.x / 2) / zoom.x
 	var limite_dir = centro_visual_da_camera.x + (tamanho_tela.x / 2) / zoom.x
 	var limite_top = centro_visual_da_camera.y - (tamanho_tela.y / 2) / zoom.y
 	var limite_bot = centro_visual_da_camera.y + (tamanho_tela.y / 2) / zoom.y
 	
-	var margem = 30.0 # Evita que ele saia metade do corpo nas bordas
+	var margem = 30.0
 	
-	# Aplica a trava em toda a extensão da tela de forma idêntica
 	global_position.x = clamp(global_position.x, limite_esq + margem, limite_dir - margem)
 	global_position.y = clamp(global_position.y, limite_top + margem, limite_bot - margem)
 
