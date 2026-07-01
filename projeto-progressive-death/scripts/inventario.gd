@@ -73,6 +73,18 @@ func limpar() -> void:
 	_atualizar()
 
 
+# Mata o jogador: limpa o inventário e vai para a fase certa. Se estiver na fase
+# secreta, volta para a fase 1; senão, recarrega a fase atual.
+func morrer() -> void:
+	limpar()
+	var cena := get_tree().current_scene
+	var caminho := cena.scene_file_path if cena != null else ""
+	if "fase_secreta" in caminho:
+		get_tree().change_scene_to_file("res://cenas/fase1/fase1.tscn")
+	else:
+		get_tree().reload_current_scene()
+
+
 func _capacete_equipado() -> bool:
 	return equipado >= 0 and equipado < itens.size() and itens[equipado].get("da_capacete", false)
 

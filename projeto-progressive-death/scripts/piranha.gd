@@ -6,8 +6,8 @@ extends CharacterBody2D
 # Anima a mordida completa ao perseguir. Ao COLIDIR com o jogador por alguns
 # segundos, ele morre.
 
-@export var velocidade: float = 130.0           # velocidade ao perseguir
-@export var alcance: float = 500.0             # distância para detectar/perseguir
+@export var velocidade: float = 100.0           # velocidade ao perseguir
+@export var alcance: float = 200.0             # distância para detectar/perseguir
 @export var velocidade_patrulha: float = 70.0  # velocidade ao patrulhar
 @export var tempo_para_matar: float = 0.5     # segundos de contato até matar
 
@@ -66,8 +66,7 @@ func _physics_process(delta: float) -> void:
 	if _colidindo_com_jogador():
 		_tempo_mordida += delta
 		if _tempo_mordida >= tempo_para_matar:
-			Inventario.limpar()
-			get_tree().reload_current_scene()
+			Inventario.morrer()
 			return
 	else:
 		_tempo_mordida = 0.0
