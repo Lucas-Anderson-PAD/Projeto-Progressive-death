@@ -14,6 +14,7 @@ func _ready() -> void:
 
 func _de_novo() -> void:
 	get_tree().paused = false
+	Inventario.resetar_vidas()
 	var alvo: String = Inventario.cena_retry
 	if alvo == "":
 		alvo = CENA_FASE1

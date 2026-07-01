@@ -77,8 +77,8 @@ func _physics_process(delta: float) -> void:
 	if jogador_na_agua and _colidindo_com_jogador():
 		_tempo_mordida += delta
 		if _tempo_mordida >= tempo_para_matar:
-			Inventario.morrer()
-			return
+			Inventario.perder_vida()
+			_tempo_mordida = 0.0
 	else:
 		_tempo_mordida = 0.0
 

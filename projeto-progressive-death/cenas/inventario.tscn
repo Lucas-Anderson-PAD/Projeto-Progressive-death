@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cinv7nt4r0sda"]
+[gd_scene load_steps=4 format=3 uid="uid://cinv7nt4r0sda"]
 
 [ext_resource type="Script" path="res://scripts/inventario.gd" id="1_inv"]
 [ext_resource type="Texture2D" path="res://sprites/ui/inventario_marrom.png" id="2_panel"]
+[ext_resource type="Texture2D" path="res://sprites/ui/coracao_cheio.png" id="3_heart"]
 
 [node name="Inventario" type="CanvasLayer"]
 script = ExtResource("1_inv")
@@ -9,9 +10,9 @@ script = ExtResource("1_inv")
 [node name="Painel" type="TextureRect" parent="."]
 texture_filter = 1
 offset_left = 8.0
-offset_top = 8.0
+offset_top = 64.0
 offset_right = 240.0
-offset_bottom = 104.0
+offset_bottom = 160.0
 texture = ExtResource("2_panel")
 expand_mode = 1
 stretch_mode = 0
@@ -48,5 +49,35 @@ offset_left = 156.0
 offset_top = 16.0
 offset_right = 216.0
 offset_bottom = 80.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coracao0" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 56.0
+texture = ExtResource("3_heart")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coracao1" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 60.0
+offset_top = 8.0
+offset_right = 108.0
+offset_bottom = 56.0
+texture = ExtResource("3_heart")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coracao2" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 112.0
+offset_top = 8.0
+offset_right = 160.0
+offset_bottom = 56.0
+texture = ExtResource("3_heart")
 expand_mode = 1
 stretch_mode = 5

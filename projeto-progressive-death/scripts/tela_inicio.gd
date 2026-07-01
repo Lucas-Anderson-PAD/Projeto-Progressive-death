@@ -10,6 +10,7 @@ func _ready() -> void:
 
 
 func _iniciar() -> void:
-	# Garante que o jogo não comece pausado.
+	# Garante que o jogo não comece pausado e com os 3 corações cheios.
 	get_tree().paused = false
+	Inventario.resetar_vidas()
 	get_tree().change_scene_to_file(CENA_FASE1)

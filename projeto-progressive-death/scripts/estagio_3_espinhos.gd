@@ -16,3 +16,6 @@ func _on_espinhos_body_entered(body: Node2D) -> void:
 		
 		# chamar função de dano que existe no script do Player
 		# Exemplo: body.tomar_dano(1)
+		# Espinho tira 1 coração; a invulnerabilidade do inventário evita drenar
+		# vários corações de uma vez no corredor de espinhos.
+		Inventario.perder_vida()

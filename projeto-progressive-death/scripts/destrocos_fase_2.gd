@@ -22,5 +22,6 @@ func _on_body_entered(body: Node2D) -> void:
 	# Verificamos se o corpo que bateu está no grupo "Player"
 	if body is PlayerFase2:
 		print("O JOGADOR BATEU NO OBSTÁCULO!")
-		
+		# Destroço tira 1 coração e some.
+		Inventario.perder_vida()
 		queue_free()

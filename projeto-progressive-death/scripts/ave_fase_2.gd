@@ -159,4 +159,9 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is PlayerFase2:
 		if is_queued_for_deletion():
 			return
+		# Mergulhando (ui_down) = ataque no ponto fraco: não toma dano do corpo.
+		if Input.is_action_pressed("ui_down"):
+			return
 		print("Cardeal tomou dano da ave!")
+		# Ave tira 1 coração; a invulnerabilidade do inventário limita a 1 por hit.
+		Inventario.perder_vida()

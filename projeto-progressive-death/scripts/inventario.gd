@@ -8,6 +8,8 @@ extends CanvasLayer
 # - Ao morrer, o inventário é esvaziado (limpar()).
 
 const MAX_SLOTS := 3
+const MAX_VIDAS := 3
+const INVULN_TEMPO := 1.0   # segundos de invulnerabilidade após levar dano
 
 # Retângulos dos 3 slots (coords locais do Painel) para a moldura de seleção.
 const SLOT_RECTS := [
@@ -18,6 +20,7 @@ const SLOT_RECTS := [
 
 @onready var _slots: Array = [$Painel/Slot0, $Painel/Slot1, $Painel/Slot2]
 @onready var _selecao: ColorRect = $Painel/Selecao
+@onready var _coracoes: Array = [$Coracao0, $Coracao1, $Coracao2]
 
 # Cada item é um dicionário: { "icone": Texture2D, "da_capacete": bool }
 var itens: Array = []
@@ -26,12 +29,25 @@ var equipado := -1   # índice do slot equipado (-1 = nenhum)
 # Fase que o botão "De novo" do game over vai repetir (setada em morrer()).
 var cena_retry := "res://cenas/fase1/fase1.tscn"
 
+# Vidas (corações). Persiste entre fases; só volta a 3 ao (re)começar a partida.
+var vidas := MAX_VIDAS
+var _invuln := 0.0    # segundos restantes de invulnerabilidade
+var _tex_cheio: Texture2D
+var _tex_vazio: Texture2D
+
 
 func _ready() -> void:
+	_tex_cheio = load("res://sprites/ui/coracao_cheio.png")
+	_tex_vazio = load("res://sprites/ui/coracao_vazio.png")
 	_atualizar()
+	_atualizar_coracoes()
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	# Conta a invulnerabilidade pós-dano.
+	if _invuln > 0.0:
+		_invuln = maxf(_invuln - delta, 0.0)
+
 	# Esconde o HUD do inventário nas telas de menu (cenas/menus/): início/game over.
 	visible = not _em_menu()
 
@@ -92,7 +108,9 @@ func limpar() -> void:
 func morrer() -> void:
 	limpar()
 	registrar_retry()
-	get_tree().change_scene_to_file("res://cenas/menus/game_over.tscn")
+	# Deferido: morrer() pode ser chamado de dentro da física (piranha/perigos),
+	# e trocar de cena durante o flush de física dá erro/free indevido.
+	get_tree().change_scene_to_file.call_deferred("res://cenas/menus/game_over.tscn")
 
 
 # Guarda a fase atual como a que o botão "De novo" do game over vai repetir.
@@ -101,6 +119,34 @@ func registrar_retry() -> void:
 	var cena := get_tree().current_scene
 	var caminho := cena.scene_file_path if cena != null else ""
 	cena_retry = "res://cenas/fase1/fase1.tscn" if (caminho == "" or "fase_secreta" in caminho) else caminho
+
+
+# Perde 1 coração (piranha, espinho da fase 2, destroço, tronco, ave). Durante a
+# invulnerabilidade ignora novos hits; ao zerar os corações, morre de vez.
+func perder_vida() -> void:
+	if _invuln > 0.0 or vidas <= 0:
+		return
+	vidas -= 1
+	_atualizar_coracoes()
+	if vidas <= 0:
+		morrer()
+	else:
+		_invuln = INVULN_TEMPO
+
+
+# Restaura os 3 corações. Só ao (re)começar a partida (Iniciar / De novo),
+# nunca ao trocar de fase.
+func resetar_vidas() -> void:
+	vidas = MAX_VIDAS
+	_invuln = 0.0
+	_atualizar_coracoes()
+
+
+# Mostra corações cheios até 'vidas' e vazios no resto.
+func _atualizar_coracoes() -> void:
+	for i in range(MAX_VIDAS):
+		if i < _coracoes.size():
+			_coracoes[i].texture = _tex_cheio if i < vidas else _tex_vazio
 
 
 func _capacete_equipado() -> bool:
