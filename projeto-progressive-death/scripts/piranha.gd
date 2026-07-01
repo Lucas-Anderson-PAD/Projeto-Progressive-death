@@ -9,7 +9,7 @@ extends CharacterBody2D
 @export var velocidade: float = 100.0           # velocidade ao perseguir
 @export var alcance: float = 200.0             # distância para detectar/perseguir
 @export var velocidade_patrulha: float = 70.0  # velocidade ao patrulhar
-@export var tempo_para_matar: float = 0.5     # segundos de contato até matar
+@export var tempo_para_matar: float = 0.2     # segundos de contato até matar
 @export var zona_morta: float = 8.0            # tolerância horizontal na espreita (evita tremer)
 
 @onready var sprite: Sprite2D = $Sprite2D
