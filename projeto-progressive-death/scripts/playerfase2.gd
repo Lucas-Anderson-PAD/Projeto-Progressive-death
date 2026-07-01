@@ -3,15 +3,20 @@ class_name PlayerFase2
 
 @export var camera: Camera2D
 
-# Usa o MESMO esquema visual da fase 1: um Sprite2D (grid 2x2) que troca de
-# textura. No ar (caindo ou subindo) o passaro usa a folha de PULO da fase 1
-# (asas abertas), frames [2, 1, 3].
-@onready var sprite: Sprite2D = $Sprite2D
+# Escolha da animação pelo Inspetor (aplica ao rodar o jogo):
+#   PULO_FASE1 -> Sprite2D com a folha de PULO da fase 1 (asas abertas).
+#   DIVE_BOMB  -> AnimatedSprite2D novo (atlas Cardeal-dive_bomb).
+enum EstiloAnimacao { PULO_FASE1, DIVE_BOMB }
+@export var estilo_animacao: EstiloAnimacao = EstiloAnimacao.PULO_FASE1
 
-# Folha de PULO da fase 1 (passaro de asas abertas no ar).
+# --- Animação estilo FASE 1 (Sprite2D + folha de pulo, grid 2x2) ---
+@onready var sprite: Sprite2D = $Sprite2D
 const TEXTURA_PULO := preload("res://sprites/caedeal/pulando/cardeal pulando.png")
 const ANIM_FPS := 6.0
 const FRAMES_PULO := [2, 1, 3]
+
+# --- Animação estilo FASE 2 (AnimatedSprite2D do parceiro) ---
+@onready var anim: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
 
 # --- Configurações de Movimento Vertical (A Queda) ---
 const BASE_FALL_SPEED = 400.0       # Sem apertar nada: queda padrão mantendo o ritmo da câmera
@@ -41,11 +46,19 @@ var _anim_t: float = 0.0
 func _ready() -> void:
 	# Entra no grupo "player" para que os portais consigam encontrar o jogador.
 	add_to_group("player")
-	# Prepara o Sprite2D (herdado do player.tscn) para a folha de pulo 2x2.
+	_configurar_animacao()
+
+# Mostra só o nó da animação escolhida no Inspetor e esconde o outro.
+func _configurar_animacao() -> void:
+	var usa_fase1 := estilo_animacao == EstiloAnimacao.PULO_FASE1
 	if sprite:
-		sprite.texture = TEXTURA_PULO
-		sprite.hframes = 2
-		sprite.vframes = 2
+		sprite.visible = usa_fase1
+		if usa_fase1:
+			sprite.texture = TEXTURA_PULO
+			sprite.hframes = 2
+			sprite.vframes = 2
+	if anim:
+		anim.visible = not usa_fase1
 
 func _physics_process(delta: float) -> void:
 	# 1. Capturar o Input nas 4 direções (Vector2)
@@ -97,25 +110,49 @@ func _physics_process(delta: float) -> void:
 	_atualizar_animacoes(input_direction, delta)
 
 
-# --- SISTEMA DE ANIMAÇÕES (igual à fase 1: folha de PULO, asas abertas) ---
+# --- SISTEMA DE ANIMAÇÕES (escolhe o estilo pelo Inspetor) ---
 func _atualizar_animacoes(input_dir: Vector2, delta: float) -> void:
+	if estilo_animacao == EstiloAnimacao.PULO_FASE1:
+		_anim_fase1(input_dir, delta)
+	else:
+		_anim_fase2(input_dir)
+
+# FASE 1: folha de PULO (asas abertas) — caindo ou subindo fica no ar.
+func _anim_fase1(input_dir: Vector2, delta: float) -> void:
 	if sprite == null:
 		return
-
-	# Caindo OU subindo, o pássaro está no ar: usa a folha de PULO da fase 1.
 	if sprite.texture != TEXTURA_PULO:
 		sprite.texture = TEXTURA_PULO
-
-	# Vira o sprite para a esquerda/direita (os frames apontam para a DIREITA).
+	# Vira o sprite (os frames apontam para a DIREITA).
 	if input_dir.x > 0:
 		_facing = 1
 	elif input_dir.x < 0:
 		_facing = -1
 	sprite.flip_h = (_facing != 1)
-
-	# Anima os frames de pulo (asas abertas), no mesmo ritmo da fase 1.
+	# Anima os frames de pulo (asas abertas).
 	_anim_t += delta * ANIM_FPS
 	sprite.frame = FRAMES_PULO[int(_anim_t) % FRAMES_PULO.size()]
+
+# FASE 2: AnimatedSprite2D do parceiro (cima/direita/idle/planar/queda).
+func _anim_fase2(input_dir: Vector2) -> void:
+	if anim == null:
+		return
+	# Virar o sprite para a esquerda ou direita
+	if input_dir.x > 0:
+		anim.flip_h = false # Olha para a direita
+	elif input_dir.x < 0:
+		anim.flip_h = true  # Olha para a esquerda
+	# Máquina de Prioridades de Animação
+	if is_gliding:
+		anim.play("planar")
+	elif input_dir.x != 0:
+		anim.play("direita")
+	elif input_dir.y > 0:
+		anim.play("queda")
+	elif input_dir.y < 0:
+		anim.play("cima")
+	else:
+		anim.play("idle")
 
 
 # --- Funções Auxiliares de Limite de Tela ---

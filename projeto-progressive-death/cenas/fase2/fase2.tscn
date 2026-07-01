@@ -47,7 +47,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vk7vm")
 }],
-"loop": 1,
+"loop": true,
 "name": &"cima",
 "speed": 12.0
 }, {
@@ -55,7 +55,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i2ujf")
 }],
-"loop": 1,
+"loop": true,
 "name": &"direita",
 "speed": 5.0
 }, {
@@ -66,7 +66,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vk7vm")
 }],
-"loop": 1,
+"loop": true,
 "name": &"idle",
 "speed": 7.0
 }, {
@@ -74,7 +74,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s0xjg")
 }],
-"loop": 1,
+"loop": true,
 "name": &"planar",
 "speed": 6.0
 }, {
@@ -82,7 +82,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p02pt")
 }],
-"loop": 1,
+"loop": true,
 "name": &"queda",
 "speed": 5.0
 }]
@@ -131,9 +131,15 @@ cena_estagio_3 = ExtResource("10_6odph")
 [node name="Player" parent="." unique_id=929203449 node_paths=PackedStringArray("camera") instance=ExtResource("12_u1cx4")]
 z_index = 1
 position = Vector2(588, 267)
+scale = Vector2(1, 1)
 motion_mode = 1
 script = ExtResource("13_m8t00")
 camera = NodePath("../Camera2D2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=299227303]
+visible = false
+sprite_frames = SubResource("SpriteFrames_3imoe")
+animation = &"cima"
 
 [node name="Fundo" type="Sprite2D" parent="." unique_id=1035649788]
 z_index = -12
