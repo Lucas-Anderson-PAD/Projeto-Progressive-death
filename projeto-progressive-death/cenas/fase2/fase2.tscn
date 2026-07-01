@@ -47,7 +47,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vk7vm")
 }],
-"loop": true,
+"loop": 1,
 "name": &"cima",
 "speed": 12.0
 }, {
@@ -55,7 +55,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i2ujf")
 }],
-"loop": true,
+"loop": 1,
 "name": &"direita",
 "speed": 5.0
 }, {
@@ -66,7 +66,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vk7vm")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 7.0
 }, {
@@ -74,7 +74,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s0xjg")
 }],
-"loop": true,
+"loop": 1,
 "name": &"planar",
 "speed": 6.0
 }, {
@@ -82,7 +82,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p02pt")
 }],
-"loop": true,
+"loop": 1,
 "name": &"queda",
 "speed": 5.0
 }]
@@ -135,13 +135,9 @@ motion_mode = 1
 script = ExtResource("13_m8t00")
 camera = NodePath("../Camera2D2")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=299227303]
-sprite_frames = SubResource("SpriteFrames_3imoe")
-animation = &"cima"
-
 [node name="Fundo" type="Sprite2D" parent="." unique_id=1035649788]
 z_index = -12
-position = Vector2(898.25, 70868.5)
+position = Vector2(931, 70855)
 scale = Vector2(5.816354, 435.7761)
 texture = ExtResource("9_m2xvm")
 

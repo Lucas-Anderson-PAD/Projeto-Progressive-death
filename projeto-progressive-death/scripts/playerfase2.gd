@@ -3,7 +3,15 @@ class_name PlayerFase2
 
 @export var camera: Camera2D
 
-@onready var anim = $AnimatedSprite2D
+# Usa o MESMO esquema visual da fase 1: um Sprite2D (grid 2x2) que troca de
+# textura. No ar (caindo ou subindo) o passaro usa a folha de PULO da fase 1
+# (asas abertas), frames [2, 1, 3].
+@onready var sprite: Sprite2D = $Sprite2D
+
+# Folha de PULO da fase 1 (passaro de asas abertas no ar).
+const TEXTURA_PULO := preload("res://sprites/caedeal/pulando/cardeal pulando.png")
+const ANIM_FPS := 6.0
+const FRAMES_PULO := [2, 1, 3]
 
 # --- Configurações de Movimento Vertical (A Queda) ---
 const BASE_FALL_SPEED = 400.0       # Sem apertar nada: queda padrão mantendo o ritmo da câmera
@@ -26,24 +34,33 @@ const GLIDE_PUNISH_TIME = 3.0 # Segundos segurando o botão antes de atrair o in
 # Variável para receber o empurrão do vento
 var wind_force: Vector2 = Vector2.ZERO
 
+# Direção horizontal atual (1 = direita, -1 = esquerda) para virar o sprite.
+var _facing: int = 1
+var _anim_t: float = 0.0
+
 func _ready() -> void:
 	# Entra no grupo "player" para que os portais consigam encontrar o jogador.
 	add_to_group("player")
+	# Prepara o Sprite2D (herdado do player.tscn) para a folha de pulo 2x2.
+	if sprite:
+		sprite.texture = TEXTURA_PULO
+		sprite.hframes = 2
+		sprite.vframes = 2
 
 func _physics_process(delta: float) -> void:
 	# 1. Capturar o Input nas 4 direções (Vector2)
 	var input_direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	
+
 	# 2. Definir Velocidades Alvo Iniciais
 	var target_v_speed = BASE_FALL_SPEED # Sempre quer cair por padrão
 	var current_h_speed = HORIZONTAL_SPEED
-	
+
 	# Verifica o eixo Y para alterar a velocidade de queda (se não estiver planando)
 	if input_direction.y > 0:
 		target_v_speed = DIVE_FALL_SPEED # Mergulho
 	elif input_direction.y < 0:
 		target_v_speed = BRAKE_FALL_SPEED # Freio leve
-	
+
 	# 3. Lógica de Planar (Sobrescreve as configurações acima)
 	if Input.is_action_pressed("planar"):
 		is_gliding = true
@@ -64,57 +81,57 @@ func _physics_process(delta: float) -> void:
 
 	# 6. Adiciona a força do vento e Move
 	var final_velocity = velocity + wind_force
-	
+
 	var original_velocity = velocity
 	velocity = final_velocity
-	
+
 	move_and_slide()
-	
+
 	velocity = original_velocity
-	
+
 	# 7. Prende o jogador na tela
 	if camera:
 		_manter_na_camera()
-		
+
 	# 8. Atualiza as animações
-	_atualizar_animacoes(input_direction)
+	_atualizar_animacoes(input_direction, delta)
 
 
-# --- SISTEMA DE ANIMAÇÕES ---
-func _atualizar_animacoes(input_dir: Vector2) -> void:
-	# 1. Virar o sprite para a esquerda ou direita
+# --- SISTEMA DE ANIMAÇÕES (igual à fase 1: folha de PULO, asas abertas) ---
+func _atualizar_animacoes(input_dir: Vector2, delta: float) -> void:
+	if sprite == null:
+		return
+
+	# Caindo OU subindo, o pássaro está no ar: usa a folha de PULO da fase 1.
+	if sprite.texture != TEXTURA_PULO:
+		sprite.texture = TEXTURA_PULO
+
+	# Vira o sprite para a esquerda/direita (os frames apontam para a DIREITA).
 	if input_dir.x > 0:
-		anim.flip_h = false # Olha para a direita
+		_facing = 1
 	elif input_dir.x < 0:
-		anim.flip_h = true  # Olha para a esquerda
-		
-	# 2. Máquina de Prioridades de Animação
-	if is_gliding:
-		anim.play("planar")
-	elif input_dir.x != 0:
-		anim.play("direita")
-	elif input_dir.y > 0:
-		anim.play("queda")
-	elif input_dir.y < 0:
-		anim.play("cima")
-	else:
-		anim.play("idle")
+		_facing = -1
+	sprite.flip_h = (_facing != 1)
+
+	# Anima os frames de pulo (asas abertas), no mesmo ritmo da fase 1.
+	_anim_t += delta * ANIM_FPS
+	sprite.frame = FRAMES_PULO[int(_anim_t) % FRAMES_PULO.size()]
 
 
 # --- Funções Auxiliares de Limite de Tela ---
 func _manter_na_camera() -> void:
 	var tamanho_tela = get_viewport_rect().size
 	var zoom = camera.zoom
-	
+
 	var centro_visual_da_camera = camera.get_screen_center_position()
-	
+
 	var limite_esq = centro_visual_da_camera.x - (tamanho_tela.x / 2) / zoom.x
 	var limite_dir = centro_visual_da_camera.x + (tamanho_tela.x / 2) / zoom.x
 	var limite_top = centro_visual_da_camera.y - (tamanho_tela.y / 2) / zoom.y
 	var limite_bot = centro_visual_da_camera.y + (tamanho_tela.y / 2) / zoom.y
-	
+
 	var margem = 30.0
-	
+
 	global_position.x = clamp(global_position.x, limite_esq + margem, limite_dir - margem)
 	global_position.y = clamp(global_position.y, limite_top + margem, limite_bot - margem)
 
