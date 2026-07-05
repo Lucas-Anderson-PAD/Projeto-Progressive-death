@@ -12,6 +12,7 @@ const CENA_FASE1 := "res://cenas/fase1/fase1.tscn"
 
 func _ready() -> void:
 	$Reiniciar.pressed.connect(_jogar_novamente)
+	Sfx.tocar("vitoria")   # fanfarra ao abrir a tela de vitória
 
 
 func _jogar_novamente() -> void:

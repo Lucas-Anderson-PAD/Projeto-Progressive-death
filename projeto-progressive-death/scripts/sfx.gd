@@ -17,6 +17,9 @@ const SONS := {
 	"dano": "res://sons/sfx/dano.wav",
 	"pisar": "res://sons/sfx/pisar.wav",
 	"morte": "res://sons/sfx/morte.wav",
+	"splash": "res://sons/sfx/splash.wav",
+	"passo": "res://sons/sfx/passo.wav",
+	"vitoria": "res://sons/sfx/vitoria.wav",
 }
 
 const N_PLAYERS := 8   # quantos sons podem tocar sobrepostos

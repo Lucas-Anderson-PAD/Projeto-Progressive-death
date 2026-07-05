@@ -15,6 +15,8 @@ const WATER_DRAG = 6.0
 const TEMPO_AFOGAMENTO = 1.0
 # Velocidade da animação (frames por segundo).
 const ANIM_FPS := 6.0
+# Intervalo (s) entre os sons de passo enquanto anda no chão.
+const PASSO_INTERVALO := 0.32
 
 # Vá no Inspetor e coloque a altura aproximada do seu pássaro em pixels.
 @export var altura_jogador: float = 32.0
@@ -55,6 +57,8 @@ var tempo_na_agua: float = 0.0
 var _facing := 1      # 1 = direita, -1 = esquerda
 var _anim_t := 0.0
 var _quique_timer := 0.0   # tempo restante do quique do pisão (subida forçada)
+var _estava_na_agua := false   # p/ tocar o splash só na transição fora->dentro d'água
+var _passo_timer := 0.0        # intervalo entre os sons de passo (anda no chão)
 
 
 func _ready():
@@ -68,6 +72,14 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if _quique_timer > 0.0:
 		_quique_timer -= delta
+	if _passo_timer > 0.0:
+		_passo_timer -= delta
+
+	# Splash ao CAIR na água: só na transição fora->dentro e descendo (velocity.y > 5),
+	# p/ não tocar ao boiar na superfície nem ao nascer já dentro d'água.
+	if water and not _estava_na_agua and velocity.y > 5.0:
+		Sfx.tocar("splash")
+	_estava_na_agua = water
 
 	if water:
 		# Dentro d'água não há queda fatal: reseta o rastreamento.
@@ -125,6 +137,15 @@ func _physics_process(delta: float) -> void:
 	# em cima de um inimigo o mata. Exigir vy_antes > 0 evita matar por contato lateral.
 	if tem_bota and vy_antes > 10.0:
 		_pisar_em_inimigo()
+
+	# 4c. PASSOS: som ritmado enquanto anda no chão (fora d'água). Reseta o timer
+	# ao parar/pular/entrar na água, p/ o próximo passo sair logo ao voltar a andar.
+	if not water and is_on_floor() and absf(velocity.x) > 5.0:
+		if _passo_timer <= 0.0:
+			Sfx.tocar("passo")
+			_passo_timer = PASSO_INTERVALO
+	else:
+		_passo_timer = 0.0
 
 	# 5. ANIMAÇÃO (sprite conforme o estado e a direção)
 	var movendo := absf(velocity.x) > 5.0 or (water and absf(velocity.y) > 5.0)
