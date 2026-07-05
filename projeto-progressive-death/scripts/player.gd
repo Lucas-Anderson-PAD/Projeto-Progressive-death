@@ -67,12 +67,12 @@ func _physics_process(delta: float) -> void:
 		swim(delta)
 		estava_no_ar = false
 
-		# Afogamento: sem capacete NEM bota, morre TEMPO_AFOGAMENTO seg após entrar.
-		# A bota (como o capacete) deixa o jogador sobreviver na água.
-		if not tem_capacete and not tem_bota:
+		# Afogamento: sem capacete, morre TEMPO_AFOGAMENTO segundos após entrar.
+		# (A bota NÃO ajuda na água — só o capacete deixa sobreviver e nadar.)
+		if not tem_capacete:
 			tempo_na_agua += delta
 			if tempo_na_agua >= TEMPO_AFOGAMENTO:
-				print("!!! AFOGOU (sem item) - MORREU !!!")
+				print("!!! AFOGOU (sem capacete) - MORREU !!!")
 				Inventario.morrer()
 				return
 	else:
@@ -180,14 +180,8 @@ func _atualizar_animacao(delta: float, movendo: bool) -> void:
 		frames = [0, 1, 2, 3]
 		native_dir = -1
 		anima = true
-	elif water and tem_bota:
-		# Na água COM a bota: sobrevive (não afoga) e mostra o pássaro de bota.
-		tex = textura_andar_bota if textura_andar_bota != null else textura_andar
-		frames = [1, 3]
-		native_dir = 1
-		anima = true
 	elif water:
-		# Na água SEM item (nem capacete nem bota): afogando (morre em 1s).
+		# Na água SEM capacete (inclui com a bota): afogando (morre em 1s).
 		tex = textura_andar
 		frames = [1]
 		native_dir = 1
