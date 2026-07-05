@@ -12,13 +12,14 @@ config_version=5
 
 config/name="Projeto Progressive-death"
 run/main_scene="res://cenas/menus/tela_inicio.tscn"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Inventario="*res://cenas/inventario.tscn"
 Pausa="*res://cenas/pausa.tscn"
+Musica="*res://scripts/musica.gd"
 
 [input]
 
