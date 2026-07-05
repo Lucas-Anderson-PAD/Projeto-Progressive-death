@@ -102,9 +102,11 @@ func _physics_process(delta: float) -> void:
 		if water:
 			# Dentro d'água: pulinho pra cima para conseguir sair da água.
 			velocity.y = PULO_AGUA
+			Sfx.tocar("pulo")
 		elif is_on_floor():
 			# Em terra firme: pulo normal.
 			velocity.y = JUMP_VELOCITY
+			Sfx.tocar("pulo")
 
 	# 3. MOVIMENTO LATERAL EM TERRA (na água quem cuida disso é o swim())
 	if not water:
@@ -146,6 +148,7 @@ func _pisar_em_inimigo() -> void:
 		if alvo != null and alvo.is_in_group("inimigo") and col.get_normal().y < -0.5:
 			if alvo.has_method("morrer"):
 				alvo.morrer()
+			Sfx.tocar("pisar")
 			velocity.y = QUIQUE_FORCA   # impulso pra cima ao matar o inimigo
 			_quique_timer = QUIQUE_TEMPO
 			return

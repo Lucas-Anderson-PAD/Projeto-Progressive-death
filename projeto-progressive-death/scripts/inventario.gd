@@ -81,7 +81,10 @@ func _unhandled_input(event: InputEvent) -> void:
 func _usar_slot(i: int) -> void:
 	if i < 0 or i >= itens.size():
 		return
+	var vai_equipar := equipado != i   # equipar (som) só quando NÃO é desequipar
 	equipado = -1 if equipado == i else i
+	if vai_equipar:
+		Sfx.tocar("equipar")
 	_atualizar()
 
 
@@ -108,6 +111,7 @@ func limpar() -> void:
 # Mata o jogador: limpa o inventário, guarda a fase para repetir e abre a tela
 # de Game Over (antes recarregava a fase direto; agora passa pelo Game Over).
 func morrer() -> void:
+	Sfx.tocar("morte")
 	limpar()
 	registrar_retry()
 	# Deferido: morrer() pode ser chamado de dentro da física (piranha/perigos),
@@ -134,6 +138,7 @@ func perder_vida() -> void:
 		morrer()
 	else:
 		_invuln = INVULN_TEMPO
+		Sfx.tocar("dano")
 
 
 # Restaura os 3 corações. Só ao (re)começar a partida (Iniciar / De novo),

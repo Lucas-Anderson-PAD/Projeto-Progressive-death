@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Inventario="*res://cenas/inventario.tscn"
 Pausa="*res://cenas/pausa.tscn"
 Musica="*res://scripts/musica.gd"
+Sfx="*res://scripts/sfx.gd"
 
 [input]
 

@@ -42,4 +42,5 @@ func _on_body_entered(body: Node) -> void:
 	# Guarda o item no inventario (com a info de capacete). NAO equipa sozinho:
 	# o jogador equipa pelas teclas 1/2/3.
 	if Inventario.adicionar_item(icone, da_capacete, da_bota):
+		Sfx.tocar("equipar")
 		queue_free()
