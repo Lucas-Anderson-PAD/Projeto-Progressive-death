@@ -26,6 +26,8 @@ var _tempo_mordida: float = 0.0
 
 
 func _ready() -> void:
+	# Grupo "inimigo": pode ser morta quando o jogador pula em cima com a bota.
+	add_to_group("inimigo")
 	_frames = [
 		load("res://sprites/Piranha/piranha_0.png"),
 		load("res://sprites/Piranha/piranha_1.png"),
@@ -33,6 +35,12 @@ func _ready() -> void:
 		load("res://sprites/Piranha/piranha_3.png"),
 		load("res://sprites/Piranha/piranha_4.png"),
 	]
+
+
+# Chamado pelo jogador quando ele pula em cima com a bota equipada.
+func morrer() -> void:
+	set_physics_process(false)
+	queue_free()
 
 
 func _physics_process(delta: float) -> void:

@@ -56,6 +56,8 @@ func _process(delta: float) -> void:
 	var jogador = get_tree().get_first_node_in_group("player")
 	if jogador and "tem_capacete" in jogador:
 		jogador.tem_capacete = _capacete_equipado()
+	if jogador and "tem_bota" in jogador:
+		jogador.tem_bota = _bota_equipado()
 
 
 # True quando a cena atual é uma tela de menu (pasta cenas/menus/).
@@ -84,10 +86,10 @@ func _usar_slot(i: int) -> void:
 
 
 # Adiciona o item na primeira caixinha livre. NÃO equipa automaticamente.
-func adicionar_item(icone: Texture2D, da_capacete: bool = false) -> bool:
+func adicionar_item(icone: Texture2D, da_capacete: bool = false, da_bota: bool = false) -> bool:
 	if icone == null or itens.size() >= MAX_SLOTS:
 		return false
-	itens.append({ "icone": icone, "da_capacete": da_capacete })
+	itens.append({ "icone": icone, "da_capacete": da_capacete, "da_bota": da_bota })
 	_atualizar()
 	return true
 
@@ -151,6 +153,10 @@ func _atualizar_coracoes() -> void:
 
 func _capacete_equipado() -> bool:
 	return equipado >= 0 and equipado < itens.size() and itens[equipado].get("da_capacete", false)
+
+
+func _bota_equipado() -> bool:
+	return equipado >= 0 and equipado < itens.size() and itens[equipado].get("da_bota", false)
 
 
 func _atualizar() -> void:

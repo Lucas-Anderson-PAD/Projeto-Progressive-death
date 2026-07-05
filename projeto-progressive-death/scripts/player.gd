@@ -20,6 +20,10 @@ const ANIM_FPS := 6.0
 # SEM, ele se afoga. Começa false e vira true ao pegar o item capacete.
 @export var tem_capacete: bool = false
 
+# Se o jogador está com a BOTA equipada. COM bota ele mata inimigos pulando em
+# cima deles e muda a aparência de andar/pulo. Começa false; vira true ao equipar.
+@export var tem_bota: bool = false
+
 # Folhas de animação (cada uma é um grid 2x2 = 4 frames).
 # Frames por direção: esquerda = [0, 2], direita = [1, 3].
 @export var textura_andar: Texture2D
@@ -28,6 +32,9 @@ const ANIM_FPS := 6.0
 # Folhas dedicadas do PULO (também grid 2x2; frames apontam para a direita).
 @export var textura_pulo: Texture2D
 @export var textura_pulo_capacete: Texture2D
+# Folhas dedicadas da BOTA (mesmo grid 2x2 que as de andar/pulo).
+@export var textura_andar_bota: Texture2D
+@export var textura_pulo_bota: Texture2D
 
 @onready var sprite = $Sprite2D
 
@@ -60,11 +67,12 @@ func _physics_process(delta: float) -> void:
 		swim(delta)
 		estava_no_ar = false
 
-		# Afogamento: sem capacete, morre TEMPO_AFOGAMENTO segundos após entrar.
-		if not tem_capacete:
+		# Afogamento: sem capacete NEM bota, morre TEMPO_AFOGAMENTO seg após entrar.
+		# A bota (como o capacete) deixa o jogador sobreviver na água.
+		if not tem_capacete and not tem_bota:
 			tempo_na_agua += delta
 			if tempo_na_agua >= TEMPO_AFOGAMENTO:
-				print("!!! AFOGOU (sem capacete) - MORREU !!!")
+				print("!!! AFOGOU (sem item) - MORREU !!!")
 				Inventario.morrer()
 				return
 	else:
@@ -101,7 +109,13 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	# 4. APLICA A FÍSICA
+	var vy_antes := velocity.y   # velocidade vertical ANTES do slide (queda/mergulho)
 	move_and_slide()
+
+	# 4b. PISAR EM INIMIGO: com a BOTA e DESCENDO (queda/mergulho deliberado), cair
+	# em cima de um inimigo o mata. Exigir vy_antes > 0 evita matar por contato lateral.
+	if tem_bota and vy_antes > 10.0:
+		_pisar_em_inimigo()
 
 	# 5. ANIMAÇÃO (sprite conforme o estado e a direção)
 	var movendo := absf(velocity.x) > 5.0 or (water and absf(velocity.y) > 5.0)
@@ -114,6 +128,19 @@ func _physics_process(delta: float) -> void:
 			print("!!! PASSOU DO LIMITE - MORREU !!!")
 			Inventario.morrer()
 		estava_no_ar = false
+
+
+# Com a bota, pular/cair em cima de um inimigo (grupo "inimigo") o mata e dá um
+# quique. A colisão precisa vir de CIMA (normal apontando para cima).
+func _pisar_em_inimigo() -> void:
+	for i in get_slide_collision_count():
+		var col := get_slide_collision(i)
+		var alvo := col.get_collider() as Node2D
+		if alvo != null and alvo.is_in_group("inimigo") and col.get_normal().y < -0.5:
+			if alvo.has_method("morrer"):
+				alvo.morrer()
+			velocity.y = PULO_AGUA if water else JUMP_VELOCITY * 0.6   # quique ao pisar
+			return
 
 
 func swim(delta: float) -> void:
@@ -153,9 +180,14 @@ func _atualizar_animacao(delta: float, movendo: bool) -> void:
 		frames = [0, 1, 2, 3]
 		native_dir = -1
 		anima = true
+	elif water and tem_bota:
+		# Na água COM a bota: sobrevive (não afoga) e mostra o pássaro de bota.
+		tex = textura_andar_bota if textura_andar_bota != null else textura_andar
+		frames = [1, 3]
+		native_dir = 1
+		anima = true
 	elif water:
-		# Na água SEM capacete: está se afogando (morre em 1s). NÃO usa o sprite
-		# de nado com capacete; mostra o pássaro normal, sem capacete.
+		# Na água SEM item (nem capacete nem bota): afogando (morre em 1s).
 		tex = textura_andar
 		frames = [1]
 		native_dir = 1
@@ -164,14 +196,30 @@ func _atualizar_animacao(delta: float, movendo: bool) -> void:
 		native_dir = 1
 		if not is_on_floor():
 			# PULO / no ar: folha dedicada de pulo, frames [2,1,3] (sem o frame 0).
-			tex = textura_pulo_capacete if (tem_capacete and textura_pulo_capacete != null) else textura_pulo
+			# Prioridade: capacete, senão bota, senão normal (só 1 fica equipado).
+			if tem_capacete and textura_pulo_capacete != null:
+				tex = textura_pulo_capacete
+			elif tem_bota and textura_pulo_bota != null:
+				tex = textura_pulo_bota
+			else:
+				tex = textura_pulo
 			if tex == null:
-				tex = textura_andar_capacete if (tem_capacete and textura_andar_capacete != null) else textura_andar
+				if tem_capacete and textura_andar_capacete != null:
+					tex = textura_andar_capacete
+				elif tem_bota and textura_andar_bota != null:
+					tex = textura_andar_bota
+				else:
+					tex = textura_andar
 			frames = [2, 1, 3]
 			anima = true
 		else:
-			# EM TERRA: folha de andar (com ou sem capacete).
-			tex = textura_andar_capacete if (tem_capacete and textura_andar_capacete != null) else textura_andar
+			# EM TERRA: folha de andar (normal, com capacete OU com bota).
+			if tem_capacete and textura_andar_capacete != null:
+				tex = textura_andar_capacete
+			elif tem_bota and textura_andar_bota != null:
+				tex = textura_andar_bota
+			else:
+				tex = textura_andar
 			if movendo:
 				# ANDAR.
 				frames = [1, 3]

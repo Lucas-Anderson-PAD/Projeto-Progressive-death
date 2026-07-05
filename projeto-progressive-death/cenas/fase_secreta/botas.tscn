@@ -10,7 +10,7 @@ size = Vector2(300, 283.3333)
 scale = Vector2(0.12, 0.12)
 script = ExtResource("1_o37fs")
 icone = ExtResource("2_o37fs")
-da_capacete = true
+da_bota = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=316013231]
 position = Vector2(1.5258789e-05, 33.333344)

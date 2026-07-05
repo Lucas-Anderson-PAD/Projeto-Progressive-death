@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dppyjquwg6w44" path="res://sprites/caedeal/nado/cardeal_nadando_animado.png" id="4_nadar"]
 [ext_resource type="Texture2D" uid="uid://cvcj5y8jslxi8" path="res://sprites/caedeal/pulando/cardeal pulando.png" id="5_pulo"]
 [ext_resource type="Texture2D" uid="uid://calni8hnjw434" path="res://sprites/caedeal/pulando/cardeal pulando com capacete.png" id="6_pulocap"]
+[ext_resource type="Texture2D" uid="uid://b64eodae7m7rw" path="res://sprites/caedeal/andando/cardeal andando_bota_animado.png" id="7_andarbota"]
+[ext_resource type="Texture2D" uid="uid://c6xavcfte8byy" path="res://sprites/caedeal/pulando/cardeal pulando com bota.png" id="8_pulobota"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(123, 133)
@@ -18,6 +20,8 @@ textura_andar_capacete = ExtResource("3_capac")
 textura_nadar = ExtResource("4_nadar")
 textura_pulo = ExtResource("5_pulo")
 textura_pulo_capacete = ExtResource("6_pulocap")
+textura_andar_bota = ExtResource("7_andarbota")
+textura_pulo_bota = ExtResource("8_pulobota")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=964619976]
 scale = Vector2(0.08, 0.076)

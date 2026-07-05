@@ -13,6 +13,10 @@ extends Area2D
 # muda a aparência e passa a poder nadar na água.
 @export var da_capacete: bool = false
 
+# Se true, ao pegar este item o jogador ganha a BOTA (tem_bota = true): muda a
+# aparencia de andar/pulo e permite matar inimigos pulando em cima deles.
+@export var da_bota: bool = false
+
 @onready var sprite: Sprite2D = $Sprite2D
 
 
@@ -37,5 +41,5 @@ func _on_body_entered(body: Node) -> void:
 		return
 	# Guarda o item no inventario (com a info de capacete). NAO equipa sozinho:
 	# o jogador equipa pelas teclas 1/2/3.
-	if Inventario.adicionar_item(icone, da_capacete):
+	if Inventario.adicionar_item(icone, da_capacete, da_bota):
 		queue_free()
