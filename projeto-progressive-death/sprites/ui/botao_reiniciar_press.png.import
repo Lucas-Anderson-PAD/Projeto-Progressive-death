@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bco340p32hcsp"
-path="res://.godot/imported/cardeal pulando com capacete.png-4a75ba0d24666dc1a0a4346c5fb49a8c.ctex"
+uid="uid://cudafsnytk7ff"
+path="res://.godot/imported/botao_reiniciar_press.png-26213153d661eed3b8123075ef524823.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/caedeal/pulando/cardeal pulando com capacete.png"
-dest_files=["res://.godot/imported/cardeal pulando com capacete.png-4a75ba0d24666dc1a0a4346c5fb49a8c.ctex"]
+source_file="res://sprites/ui/botao_reiniciar_press.png"
+dest_files=["res://.godot/imported/botao_reiniciar_press.png-26213153d661eed3b8123075ef524823.ctex"]
 
 [params]
 
