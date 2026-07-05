@@ -150,17 +150,22 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 # --- SISTEMA DE COMBATE ---
 func _on_ponto_fraco_body_entered(body: Node2D) -> void:
 	if body is PlayerFase2:
-		if Input.is_action_pressed("ui_down"):
+		var jogador := body as PlayerFase2
+		# Só derrota a ave mergulhando (ui_down) E com a BOTA equipada.
+		if Input.is_action_pressed("ui_down") and jogador.tem_bota:
 			print("Ave derrotada!")
-			body.velocity.y = -600.0 
+			jogador.velocity.y = -600.0
+			Sfx.tocar("pisar")
 			queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is PlayerFase2:
 		if is_queued_for_deletion():
 			return
-		# Mergulhando (ui_down) = ataque no ponto fraco: não toma dano do corpo.
-		if Input.is_action_pressed("ui_down"):
+		var jogador := body as PlayerFase2
+		# Mergulhar (ui_down) COM a bota vence a ave (ataque no ponto fraco): sem dano.
+		# Sem a bota, mesmo mergulhando, o Cardeal NÃO vence e toma dano.
+		if Input.is_action_pressed("ui_down") and jogador.tem_bota:
 			return
 		print("Cardeal tomou dano da ave!")
 		# Ave tira 1 coração; a invulnerabilidade do inventário limita a 1 por hit.

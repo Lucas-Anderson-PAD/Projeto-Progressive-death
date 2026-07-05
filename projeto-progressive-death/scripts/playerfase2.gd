@@ -43,9 +43,16 @@ var wind_force: Vector2 = Vector2.ZERO
 var _facing: int = 1
 var _anim_t: float = 0.0
 
+# Bota equipada (o autoload Inventario preenche isto a cada frame, como na fase 1).
+# Na fase 2 serve para poder derrotar as aves mergulhando no ponto fraco.
+var tem_bota := false
+
 func _ready() -> void:
 	# Entra no grupo "player" para que os portais consigam encontrar o jogador.
 	add_to_group("player")
+	# Já começa com o estado certo da bota (evita a janela de 1 frame antes do
+	# Inventario._process; depois ele mantém atualizado se o jogador trocar de item).
+	tem_bota = Inventario.bota_equipada()
 	_configurar_animacao()
 
 # Mostra só o nó da animação escolhida no Inspetor e esconde o outro.

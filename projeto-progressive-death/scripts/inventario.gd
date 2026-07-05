@@ -164,6 +164,12 @@ func _bota_equipado() -> bool:
 	return equipado >= 0 and equipado < itens.size() and itens[equipado].get("da_bota", false)
 
 
+# Consulta pública do estado da bota (a fase 2 usa no _ready para já começar com
+# o valor certo, sem depender do timing do _process do autoload).
+func bota_equipada() -> bool:
+	return _bota_equipado()
+
+
 func _atualizar() -> void:
 	for i in range(MAX_SLOTS):
 		_slots[i].texture = itens[i]["icone"] if i < itens.size() else null
