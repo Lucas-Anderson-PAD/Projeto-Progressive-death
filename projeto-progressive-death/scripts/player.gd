@@ -4,6 +4,9 @@ const SPEED = 200.0
 const JUMP_VELOCITY = -400.0
 # Pulinho dentro da água (impulso pra cima, para conseguir sair da água).
 const PULO_AGUA = -350.0
+# Impulso pra cima ao pisar/matar um inimigo com a bota (quique do "stomp").
+const QUIQUE_FORCA = -400.0
+const QUIQUE_TEMPO = 0.3   # segundos em que o quique ignora o controle de nado
 const WATER_GRAVITY = 0.1
 const WATER_SPEED = 90.0
 # Resistência da água: quanto maior, mais rápido a água freia a queda/movimento.
@@ -51,6 +54,7 @@ var tempo_na_agua: float = 0.0
 # Animação
 var _facing := 1      # 1 = direita, -1 = esquerda
 var _anim_t := 0.0
+var _quique_timer := 0.0   # tempo restante do quique do pisão (subida forçada)
 
 
 func _ready():
@@ -62,6 +66,9 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
+	if _quique_timer > 0.0:
+		_quique_timer -= delta
+
 	if water:
 		# Dentro d'água não há queda fatal: reseta o rastreamento.
 		swim(delta)
@@ -139,11 +146,21 @@ func _pisar_em_inimigo() -> void:
 		if alvo != null and alvo.is_in_group("inimigo") and col.get_normal().y < -0.5:
 			if alvo.has_method("morrer"):
 				alvo.morrer()
-			velocity.y = PULO_AGUA if water else JUMP_VELOCITY * 0.6   # quique ao pisar
+			velocity.y = QUIQUE_FORCA   # impulso pra cima ao matar o inimigo
+			_quique_timer = QUIQUE_TEMPO
 			return
 
 
 func swim(delta: float) -> void:
+	# Durante o quique do pisão: não freia nem deixa o input sobrescrever a
+	# subida, para o impulso pra cima ser sentido também dentro d'água.
+	if _quique_timer > 0.0:
+		var lado := Input.get_axis("move_left", "move_right")
+		if lado:
+			velocity.x = lado * WATER_SPEED
+			_facing = 1 if lado > 0 else -1
+		return
+
 	# Empuxo: dentro d'água a gravidade quase não age.
 	velocity += get_gravity() * WATER_GRAVITY * delta
 
