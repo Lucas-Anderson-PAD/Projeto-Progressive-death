@@ -5,7 +5,10 @@ extends Area2D
 # (static = sobrevive a troca de cena, sem precisar de autoload.)
 static var id_destino_pendente: String = ""
 
-enum Cor { VERDE, ROXO }
+# Portal DOURADO leva para a tela de vitória por padrão (sem precisar setar destino).
+const CENA_VITORIA := "res://cenas/menus/vitoria.tscn"
+
+enum Cor { VERDE, ROXO, DOURADO }
 
 # ------------------------ Aparencia ------------------------
 # Escolha no Inspetor qual portal usar; a imagem troca sozinha.
@@ -16,6 +19,7 @@ enum Cor { VERDE, ROXO }
 
 @export var textura_verde: Texture2D
 @export var textura_roxo: Texture2D
+@export var textura_dourado: Texture2D
 
 # ------------------------ Ligacao entre portais ------------------------
 # Identificador unico deste portal (ex.: "A", "saida_fase2").
@@ -72,7 +76,13 @@ func _process(delta: float) -> void:
 func _atualizar_textura() -> void:
 	if sprite == null:
 		return
-	sprite.texture = textura_roxo if cor == Cor.ROXO else textura_verde
+	match cor:
+		Cor.DOURADO:
+			sprite.texture = textura_dourado
+		Cor.ROXO:
+			sprite.texture = textura_roxo
+		_:
+			sprite.texture = textura_verde
 
 
 func _on_body_entered(body: Node) -> void:
@@ -85,10 +95,16 @@ func _on_body_entered(body: Node) -> void:
 	# Marca em qual saida o jogador deve reaparecer.
 	id_destino_pendente = id_destino
 
+	# Portal DOURADO leva à VITÓRIA por padrão (a menos que um destino explícito
+	# seja informado no Inspetor).
+	var destino := cena_destino
+	if destino == "" and cor == Cor.DOURADO:
+		destino = CENA_VITORIA
+
 	var cena_atual := get_tree().current_scene.scene_file_path
-	if cena_destino != "" and cena_destino != cena_atual:
+	if destino != "" and destino != cena_atual:
 		# Portal para OUTRA cena (deferido p/ nao trocar cena durante a fisica).
-		get_tree().change_scene_to_file.call_deferred(cena_destino)
+		get_tree().change_scene_to_file.call_deferred(destino)
 	else:
 		# Teleporte dentro da MESMA cena: vai direto para a saida ligada.
 		_teleportar_local(body as Node2D)
