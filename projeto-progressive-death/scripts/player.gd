@@ -180,8 +180,15 @@ func _atualizar_animacao(delta: float, movendo: bool) -> void:
 		frames = [0, 1, 2, 3]
 		native_dir = -1
 		anima = true
+	elif water and tem_bota:
+		# Na água com a bota: NÃO ajuda a sobreviver (ainda afoga em 1s), mas
+		# mantém a bota VISÍVEL enquanto está na água (não "desequipa" na tela).
+		tex = textura_andar_bota if textura_andar_bota != null else textura_andar
+		frames = [1, 3]
+		native_dir = 1
+		anima = true
 	elif water:
-		# Na água SEM capacete (inclui com a bota): afogando (morre em 1s).
+		# Na água SEM item: afogando (morre em 1s), pássaro normal.
 		tex = textura_andar
 		frames = [1]
 		native_dir = 1
