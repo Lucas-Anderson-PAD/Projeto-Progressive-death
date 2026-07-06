@@ -53,7 +53,7 @@ func parar_destrocos() -> void:
 func _spawnar_ave() -> void:
 	if cena_ave == null or not camera_da_fase: return
 	
-	if max_num_aves > 3:
+	if max_num_aves > 2:
 		return
 	max_num_aves+=1
 	var nova_ave = cena_ave.instantiate()

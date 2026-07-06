@@ -135,9 +135,11 @@ scale = Vector2(1, 1)
 motion_mode = 1
 script = ExtResource("13_m8t00")
 camera = NodePath("../Camera2D2")
+estilo_animacao = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=299227303]
 visible = false
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_3imoe")
 animation = &"cima"
 

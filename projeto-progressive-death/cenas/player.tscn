@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://ca4rj02mumwbg" path="res://sprites/caedeal/andando/cardeal andando_animado.png" id="2_andar"]
 [ext_resource type="Texture2D" uid="uid://buayppi01yepy" path="res://sprites/caedeal/nado/andando com capacete.png" id="3_capac"]
 [ext_resource type="Texture2D" uid="uid://dppyjquwg6w44" path="res://sprites/caedeal/nado/cardeal_nadando_animado.png" id="4_nadar"]
-[ext_resource type="Texture2D" uid="uid://cvcj5y8jslxi8" path="res://sprites/caedeal/pulando/cardeal pulando.png" id="5_pulo"]
-[ext_resource type="Texture2D" uid="uid://calni8hnjw434" path="res://sprites/caedeal/pulando/cardeal pulando com capacete.png" id="6_pulocap"]
+[ext_resource type="Texture2D" uid="uid://cgme3h0gfkg17" path="res://sprites/caedeal/pulando/cardeal pulando.png" id="5_pulo"]
+[ext_resource type="Texture2D" uid="uid://bco340p32hcsp" path="res://sprites/caedeal/pulando/cardeal pulando com capacete.png" id="6_pulocap"]
 [ext_resource type="Texture2D" uid="uid://b64eodae7m7rw" path="res://sprites/caedeal/andando/cardeal andando_bota_animado.png" id="7_andarbota"]
-[ext_resource type="Texture2D" uid="uid://c6xavcfte8byy" path="res://sprites/caedeal/pulando/cardeal pulando com bota.png" id="8_pulobota"]
+[ext_resource type="Texture2D" uid="uid://b823wbeajedvl" path="res://sprites/caedeal/pulando/cardeal pulando com bota.png" id="8_pulobota"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(123, 133)
@@ -35,5 +35,6 @@ scale = Vector2(0.4, 0.4)
 shape = SubResource("RectangleShape2D_0xm2m")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2093983675]
-visible = false
 zoom = Vector2(3, 3)
+limit_left = 0
+limit_top = 0
