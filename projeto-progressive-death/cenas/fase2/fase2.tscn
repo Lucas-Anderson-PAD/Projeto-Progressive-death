@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://c1jrfdcaqao4r" path="res://cenas/fase2/tronco_fase_2.tscn" id="15_ce7qd"]
 [ext_resource type="PackedScene" uid="uid://bq225dmubin2r" path="res://cenas/fase2/destrocos_fase_2.tscn" id="16_pw307"]
 [ext_resource type="Texture2D" uid="uid://cx7s63crrkj06" path="res://sprites/caedeal/Cardeal-dive_bomb.png" id="17_vk7vm"]
+[ext_resource type="PackedScene" uid="uid://ckdptnjfh7h4q" path="res://cenas/itens/botas.tscn" id="18_i2ujf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3gwud"]
 atlas = ExtResource("17_vk7vm")
@@ -47,7 +48,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vk7vm")
 }],
-"loop": true,
+"loop": 1,
 "name": &"cima",
 "speed": 12.0
 }, {
@@ -55,7 +56,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i2ujf")
 }],
-"loop": true,
+"loop": 1,
 "name": &"direita",
 "speed": 5.0
 }, {
@@ -66,7 +67,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vk7vm")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 7.0
 }, {
@@ -74,7 +75,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s0xjg")
 }],
-"loop": true,
+"loop": 1,
 "name": &"planar",
 "speed": 6.0
 }, {
@@ -82,7 +83,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p02pt")
 }],
-"loop": true,
+"loop": 1,
 "name": &"queda",
 "speed": 5.0
 }]
@@ -135,7 +136,7 @@ scale = Vector2(1, 1)
 motion_mode = 1
 script = ExtResource("13_m8t00")
 camera = NodePath("../Camera2D2")
-estilo_animacao = 1
+estilo_animacao = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=299227303]
 visible = false
@@ -145,8 +146,11 @@ animation = &"cima"
 
 [node name="Fundo" type="Sprite2D" parent="." unique_id=1035649788]
 z_index = -12
-position = Vector2(931, 70855)
+position = Vector2(907, 70862)
 scale = Vector2(5.816354, 435.7761)
 texture = ExtResource("9_m2xvm")
+
+[node name="Botas" parent="." unique_id=1936310059 instance=ExtResource("18_i2ujf")]
+position = Vector2(587, 267)
 
 [connection signal="timeout" from="GeradorDestrocos/Timer" to="GeradorDestrocos" method="_on_timer_timeout"]

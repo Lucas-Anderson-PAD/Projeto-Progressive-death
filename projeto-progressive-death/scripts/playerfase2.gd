@@ -12,6 +12,8 @@ enum EstiloAnimacao { PULO_FASE1, DIVE_BOMB }
 # --- Animação estilo FASE 1 (Sprite2D + folha de pulo, grid 2x2) ---
 @onready var sprite: Sprite2D = $Sprite2D
 const TEXTURA_PULO := preload("res://sprites/caedeal/pulando/cardeal pulando.png")
+# Folha de pulo COM a bota equipada (mesmo grid 2x2 da folha de pulo normal).
+const TEXTURA_PULO_BOTA := preload("res://sprites/caedeal/pulando/cardeal pulando com bota.png")
 const ANIM_FPS := 6.0
 const FRAMES_PULO := [2, 1, 3]
 
@@ -128,8 +130,13 @@ func _atualizar_animacoes(input_dir: Vector2, delta: float) -> void:
 func _anim_fase1(input_dir: Vector2, delta: float) -> void:
 	if sprite == null:
 		return
-	if sprite.texture != TEXTURA_PULO:
-		sprite.texture = TEXTURA_PULO
+	# Troca a folha conforme a bota equipada (o autoload Inventario mantem
+	# tem_bota atualizado a cada frame). Com a bota, usa a folha de pulo com bota.
+	var tex_alvo: Texture2D = TEXTURA_PULO_BOTA if tem_bota else TEXTURA_PULO
+	if sprite.texture != tex_alvo:
+		sprite.texture = tex_alvo
+		sprite.hframes = 2
+		sprite.vframes = 2
 	# Vira o sprite (os frames apontam para a DIREITA).
 	if input_dir.x > 0:
 		_facing = 1

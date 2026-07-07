@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://oef6krjdagjt" path="res://sprites/fundo/fase2/camadas/camada3.png" id="1_hiy3q"]
 [ext_resource type="Script" uid="uid://c7luon76m21hp" path="res://scripts/estagio_3_espinhos.gd" id="1_motsm"]
 [ext_resource type="Texture2D" uid="uid://7l2iw7ntmbmu" path="res://sprites/fundo/fase2/camadas/camada3repeticao.png" id="2_motsm"]
+[ext_resource type="PackedScene" path="res://cenas/portal_vitoria.tscn" id="4_gtgoq"]
 
 [node name="Estagio3Espinhos" type="Node2D" unique_id=32743519]
 script = ExtResource("1_motsm")
@@ -201,3 +202,8 @@ polygon = PackedVector2Array(47, -90, 57, -50, -61, -25)
 [node name="CollisionPolygon2D38" type="CollisionPolygon2D" parent="ZonaDeDano" unique_id=726180796]
 position = Vector2(323.40002, 6757)
 polygon = PackedVector2Array(8.599976, 53, -79.400024, 94, -1.4000244, 9)
+
+[node name="PortalVitoria" parent="." unique_id=787588442 instance=ExtResource("4_gtgoq")]
+position = Vector2(217, 7021)
+rotation = 1.5707964
+scale = Vector2(4, 4)
