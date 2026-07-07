@@ -1,11 +1,13 @@
 # Documentação — Progressive Death
 
 - **`Apresentacao_Progressive_Death.pptx`** — Apresentação em slides (PowerPoint, 16:9, 14 slides
-  com notas). Abra no PowerPoint ou Google Slides para apresentar/editar. Um slide reserva
-  espaço para inserir o vídeo de gameplay.
+  com notas). Abra no PowerPoint ou Google Slides para apresentar/editar. O slide de gameplay
+  traz o **vídeo embutido** — no modo Apresentação, clique no vídeo para reproduzir.
 - **`Apresentacao_Progressive_Death_slides.pdf`** — a mesma apresentação em PDF (abre em qualquer lugar).
 - **`apresentacao_progressive_death.html`** — versão interativa (web), autossuficiente e animada.
-  Abra no navegador e navegue com as setas ← →.
+  Abra no navegador e navegue com as setas ← →. O vídeo de gameplay toca ao clicar
+  (requer o arquivo **`gameplay.mp4`** na mesma pasta que o HTML).
+- **`gameplay.mp4`** — vídeo de gameplay usado pela apresentação HTML.
 - **`GDD_Progressive_Death.pdf`** — Game Design Document (Conceito, Gameplay, Personagens,
   Controles, Câmera, Universo, Inimigos, Interface, Cutscenes, Cronograma). Foco nas
   Fases 1, 2 e Secreta; a Fase 3 consta como não finalizada.
