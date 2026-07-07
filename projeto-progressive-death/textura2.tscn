@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bks1fux1bbf4h"]
+
+[ext_resource type="Texture2D" uid="uid://buadovbvtyu5d" path="res://sprites/Terrain (16x16).png" id="1_sg5pf"]
+
+[node name="Textura" type="Sprite2D" unique_id=1155956241]
+texture = ExtResource("1_sg5pf")
+region_enabled = true
+region_rect = Rect2(119.02294, 92.123566, 6.074463, 4.8869934)

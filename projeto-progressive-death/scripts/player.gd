@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 200.0
+const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 # Pulinho dentro da água (impulso pra cima, para conseguir sair da água).
 const PULO_AGUA = -350.0

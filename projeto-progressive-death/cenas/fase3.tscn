@@ -1,0 +1,721 @@
+[gd_scene format=3 uid="uid://rod6pra5bscb"]
+
+[ext_resource type="PackedScene" uid="uid://ce0l55bqeglie" path="res://cenas/fase_secreta/piranha.tscn" id="1_q64wp"]
+[ext_resource type="PackedScene" uid="uid://krndiu1c141n" path="res://player.tscn" id="2_xxxrn"]
+[ext_resource type="PackedScene" uid="uid://tsh2jq31t60s" path="res://cenas/water.tscn" id="3_gef60"]
+[ext_resource type="PackedScene" uid="uid://w0ndm0cypowt" path="res://cenas/fase1/espinhos.tscn" id="5_qlcbn"]
+[ext_resource type="PackedScene" uid="uid://blixs03eijptk" path="res://textura.tscn" id="6_gef60"]
+[ext_resource type="PackedScene" uid="uid://bks1fux1bbf4h" path="res://textura2.tscn" id="7_bm6g6"]
+[ext_resource type="PackedScene" uid="uid://c5e8x54chs5co" path="res://textura3.tscn" id="8_qlcbn"]
+[ext_resource type="PackedScene" uid="uid://cp7rt4lsc3oaq" path="res://cenas/portal.tscn" id="9_qlcbn"]
+[ext_resource type="PackedScene" uid="uid://beoionuswmg6i" path="res://textura4.tscn" id="9_qvhoy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hekwe"]
+size = Vector2(1000, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6f3xt"]
+size = Vector2(1000, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q64wp"]
+size = Vector2(1000, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_co23e"]
+size = Vector2(50, 500)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e015v"]
+size = Vector2(50, 550)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5g31"]
+size = Vector2(150, 550)
+
+[node name="Fase3" type="Node2D" unique_id=1346516586]
+
+[node name="Piranha" parent="." unique_id=132555850 instance=ExtResource("1_q64wp")]
+position = Vector2(0, -100)
+
+[node name="Player" parent="." unique_id=929203449 instance=ExtResource("2_xxxrn")]
+position = Vector2(707, -479)
+
+[node name="Water" parent="." unique_id=1772926158 instance=ExtResource("3_gef60")]
+position = Vector2(997, -34)
+
+[node name="ColorRect" type="ColorRect" parent="Water" unique_id=1603517924]
+offset_left = -2502.0
+offset_top = -217.0
+offset_right = -529.0
+offset_bottom = 810.0
+color = Color(0.28627452, 0.17254902, 1, 0.5294118)
+
+[node name="Chao1" type="StaticBody2D" parent="." unique_id=2015574377]
+position = Vector2(25, 275)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao1" unique_id=1917432655]
+shape = SubResource("RectangleShape2D_hekwe")
+
+[node name="ColorRect" type="ColorRect" parent="Chao1" unique_id=629091395]
+offset_left = -500.0
+offset_top = -25.0
+offset_right = 500.0
+offset_bottom = 25.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Chao2" type="StaticBody2D" parent="." unique_id=832827974]
+position = Vector2(1000, -225)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao2" unique_id=319628191]
+shape = SubResource("RectangleShape2D_6f3xt")
+
+[node name="ColorRect" type="ColorRect" parent="Chao2" unique_id=462241471]
+offset_left = -500.0
+offset_top = -25.0
+offset_right = 500.0
+offset_bottom = 25.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Chao4" type="StaticBody2D" parent="." unique_id=1770750771]
+position = Vector2(2000, -225)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao4" unique_id=1492299018]
+shape = SubResource("RectangleShape2D_6f3xt")
+
+[node name="ColorRect" type="ColorRect" parent="Chao4" unique_id=416753335]
+offset_left = -500.0
+offset_top = -25.0
+offset_right = 500.0
+offset_bottom = 25.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Chao3" type="StaticBody2D" parent="." unique_id=550641289]
+position = Vector2(-1000, -275)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao3" unique_id=512146107]
+position = Vector2(881, 32)
+shape = SubResource("RectangleShape2D_6f3xt")
+
+[node name="ColorRect" type="ColorRect" parent="Chao3" unique_id=1991223954]
+offset_left = 381.0
+offset_top = 7.0
+offset_right = 1381.0
+offset_bottom = 57.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Chao6" type="StaticBody2D" parent="." unique_id=2073228235]
+position = Vector2(-1450, -275)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao6" unique_id=1225568876]
+position = Vector2(881, 32)
+shape = SubResource("RectangleShape2D_6f3xt")
+
+[node name="ColorRect" type="ColorRect" parent="Chao6" unique_id=1126777737]
+offset_left = 381.0
+offset_top = 7.0
+offset_right = 1381.0
+offset_bottom = 57.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Chao5" type="StaticBody2D" parent="." unique_id=1420695379]
+position = Vector2(-1014, 230)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao5" unique_id=1585652545]
+position = Vector2(0, 546)
+shape = SubResource("RectangleShape2D_q64wp")
+
+[node name="ColorRect" type="ColorRect" parent="Chao5" unique_id=1897544286]
+offset_left = -500.0
+offset_top = 521.0
+offset_right = 500.0
+offset_bottom = 571.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Parede1" type="StaticBody2D" parent="." unique_id=705246636]
+position = Vector2(-500, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parede1" unique_id=592858046]
+position = Vector2(2, 92)
+shape = SubResource("RectangleShape2D_co23e")
+
+[node name="ColorRect" type="ColorRect" parent="Parede1" unique_id=156854217]
+offset_left = -23.0
+offset_top = -158.0
+offset_right = 27.0
+offset_bottom = 342.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Parede8" type="StaticBody2D" parent="." unique_id=966440663]
+position = Vector2(-500, 600)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parede8" unique_id=127612355]
+position = Vector2(2, 92)
+shape = SubResource("RectangleShape2D_co23e")
+
+[node name="ColorRect" type="ColorRect" parent="Parede8" unique_id=1298349066]
+offset_left = -23.0
+offset_top = -158.0
+offset_right = 27.0
+offset_bottom = 342.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Parede6" type="StaticBody2D" parent="." unique_id=322996476]
+position = Vector2(-1060, -112)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parede6" unique_id=1924283353]
+position = Vector2(2, 94)
+shape = SubResource("RectangleShape2D_co23e")
+
+[node name="ColorRect" type="ColorRect" parent="Parede6" unique_id=18655455]
+offset_left = -23.0
+offset_top = -156.0
+offset_right = 27.0
+offset_bottom = 344.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Parede7" type="StaticBody2D" parent="." unique_id=881537866]
+position = Vector2(-1060, 290)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parede7" unique_id=2044160807]
+position = Vector2(2, 92)
+shape = SubResource("RectangleShape2D_co23e")
+
+[node name="ColorRect" type="ColorRect" parent="Parede7" unique_id=1289161577]
+offset_left = -23.0
+offset_top = -158.0
+offset_right = 27.0
+offset_bottom = 342.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Parede4" type="StaticBody2D" parent="." unique_id=2089439413]
+position = Vector2(-1491, -88)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parede4" unique_id=321079431]
+position = Vector2(2, 92)
+shape = SubResource("RectangleShape2D_co23e")
+
+[node name="ColorRect" type="ColorRect" parent="Parede4" unique_id=1277918473]
+offset_left = -23.0
+offset_top = -158.0
+offset_right = 27.0
+offset_bottom = 342.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Parede9" type="StaticBody2D" parent="." unique_id=1921507345]
+position = Vector2(-1491, -110)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parede9" unique_id=1053618272]
+position = Vector2(2, 92)
+shape = SubResource("RectangleShape2D_co23e")
+
+[node name="ColorRect" type="ColorRect" parent="Parede9" unique_id=1811229587]
+offset_left = -23.0
+offset_top = -158.0
+offset_right = 27.0
+offset_bottom = 342.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Parede5" type="StaticBody2D" parent="." unique_id=1530602186]
+position = Vector2(-1491, 391)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parede5" unique_id=2025381283]
+position = Vector2(2, 110)
+shape = SubResource("RectangleShape2D_co23e")
+
+[node name="ColorRect" type="ColorRect" parent="Parede5" unique_id=1373812603]
+offset_left = -23.0
+offset_top = -140.0
+offset_right = 27.0
+offset_bottom = 360.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Parede2" type="StaticBody2D" parent="." unique_id=1889872597]
+position = Vector2(500, 50)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parede2" unique_id=1035886482]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_e015v")
+
+[node name="ColorRect" type="ColorRect" parent="Parede2" unique_id=2021799081]
+offset_left = -25.0
+offset_top = -300.0
+offset_right = 25.0
+offset_bottom = 250.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Parede3" type="StaticBody2D" parent="." unique_id=1988379040]
+position = Vector2(2476, -470)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parede3" unique_id=1707282268]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_e015v")
+
+[node name="ColorRect" type="ColorRect" parent="Parede3" unique_id=1246513148]
+offset_left = -25.0
+offset_top = -300.0
+offset_right = 25.0
+offset_bottom = 250.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Pilar1" type="StaticBody2D" parent="." unique_id=387183130]
+position = Vector2(1000, -30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pilar1" unique_id=15460553]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_h5g31")
+
+[node name="ColorRect" type="ColorRect" parent="Pilar1" unique_id=1690736378]
+offset_left = -75.0
+offset_top = -300.0
+offset_right = 75.0
+offset_bottom = 250.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Pilar2" type="StaticBody2D" parent="." unique_id=686382783]
+position = Vector2(1300, -110)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pilar2" unique_id=1809896314]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_h5g31")
+
+[node name="ColorRect" type="ColorRect" parent="Pilar2" unique_id=1917635396]
+offset_left = -75.0
+offset_top = -300.0
+offset_right = 75.0
+offset_bottom = 250.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Pilar3" type="StaticBody2D" parent="." unique_id=1875711006]
+position = Vector2(1600, -185)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pilar3" unique_id=56544190]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_h5g31")
+
+[node name="ColorRect" type="ColorRect" parent="Pilar3" unique_id=882748970]
+offset_left = -75.0
+offset_top = -300.0
+offset_right = 75.0
+offset_bottom = 250.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Preenchimento" type="StaticBody2D" parent="." unique_id=470316041]
+position = Vector2(1600, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Preenchimento" unique_id=1317643394]
+offset_left = -1100.0
+offset_top = -200.0
+offset_right = 900.0
+offset_bottom = 300.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Preenchimento2" type="StaticBody2D" parent="." unique_id=919968101]
+position = Vector2(1600, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Preenchimento2" unique_id=1110090209]
+offset_left = -2083.0
+offset_top = 303.0
+offset_right = -83.0
+offset_bottom = 803.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Preenchimento3" type="StaticBody2D" parent="." unique_id=967782468]
+position = Vector2(1600, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Preenchimento3" unique_id=2013641468]
+offset_left = -1100.0
+offset_top = 302.0
+offset_right = 900.0
+offset_bottom = 802.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Preenchimento4" type="StaticBody2D" parent="." unique_id=1816529408]
+position = Vector2(1600, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Preenchimento4" unique_id=114391142]
+offset_left = -3115.0
+offset_top = 801.0
+offset_right = -1115.0
+offset_bottom = 1301.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Preenchimento5" type="StaticBody2D" parent="." unique_id=482974069]
+position = Vector2(1600, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Preenchimento5" unique_id=1346525461]
+offset_left = -1115.0
+offset_top = 801.0
+offset_right = 885.0
+offset_bottom = 1301.0
+color = Color(0.34485844, 0.19895488, 0.007550343, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=974303396]
+
+[node name="TelaVitoria" type="ColorRect" parent="CanvasLayer" unique_id=1996251027]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Vitoria" type="Label" parent="CanvasLayer/TelaVitoria" unique_id=1175502241]
+layout_mode = 0
+offset_left = 501.0
+offset_top = 300.0
+offset_right = 604.0
+offset_bottom = 323.0
+text = "Você Venceu!"
+
+[node name="Espinho1" parent="." unique_id=282389875 instance=ExtResource("5_qlcbn")]
+position = Vector2(1505, -276)
+
+[node name="Espinho7" parent="." unique_id=1478048429 instance=ExtResource("5_qlcbn")]
+position = Vector2(-1443.0001, 724.00006)
+
+[node name="Espinho8" parent="." unique_id=1256639100 instance=ExtResource("5_qlcbn")]
+position = Vector2(-1399, 724)
+
+[node name="Espinho9" parent="." unique_id=1823068163 instance=ExtResource("5_qlcbn")]
+position = Vector2(-1354, 724)
+
+[node name="Espinho10" parent="." unique_id=841348679 instance=ExtResource("5_qlcbn")]
+position = Vector2(-1309, 724)
+
+[node name="Espinho11" parent="." unique_id=1899296049 instance=ExtResource("5_qlcbn")]
+position = Vector2(-1264, 724)
+
+[node name="Espinho12" parent="." unique_id=2077060827 instance=ExtResource("5_qlcbn")]
+position = Vector2(-1219, 724)
+
+[node name="Espinho13" parent="." unique_id=55581172 instance=ExtResource("5_qlcbn")]
+position = Vector2(-1174, 724)
+
+[node name="Espinho14" parent="." unique_id=1066161332 instance=ExtResource("5_qlcbn")]
+position = Vector2(-1129, 724)
+
+[node name="Espinho15" parent="." unique_id=1376411839 instance=ExtResource("5_qlcbn")]
+position = Vector2(-1084, 724)
+
+[node name="Espinho16" parent="." unique_id=133824983 instance=ExtResource("5_qlcbn")]
+position = Vector2(-1039, 724)
+
+[node name="Espinho17" parent="." unique_id=994336584 instance=ExtResource("5_qlcbn")]
+position = Vector2(-994, 724)
+
+[node name="Espinho18" parent="." unique_id=173416083 instance=ExtResource("5_qlcbn")]
+position = Vector2(-949, 724)
+
+[node name="Espinho19" parent="." unique_id=712247705 instance=ExtResource("5_qlcbn")]
+position = Vector2(-904, 724)
+
+[node name="Espinho20" parent="." unique_id=2017223917 instance=ExtResource("5_qlcbn")]
+position = Vector2(-859, 724)
+
+[node name="Espinho21" parent="." unique_id=1238140545 instance=ExtResource("5_qlcbn")]
+position = Vector2(-814, 724)
+
+[node name="Espinho22" parent="." unique_id=841222556 instance=ExtResource("5_qlcbn")]
+position = Vector2(-769, 724)
+
+[node name="Espinho23" parent="." unique_id=1820734700 instance=ExtResource("5_qlcbn")]
+position = Vector2(-724, 724)
+
+[node name="Espinho24" parent="." unique_id=1918561648 instance=ExtResource("5_qlcbn")]
+position = Vector2(-679, 724)
+
+[node name="Espinho25" parent="." unique_id=1509871636 instance=ExtResource("5_qlcbn")]
+position = Vector2(-634, 724)
+
+[node name="Espinho26" parent="." unique_id=1903363202 instance=ExtResource("5_qlcbn")]
+position = Vector2(-589, 724)
+
+[node name="Espinho27" parent="." unique_id=1605414338 instance=ExtResource("5_qlcbn")]
+position = Vector2(-544, 724)
+
+[node name="Espinho2" parent="." unique_id=1415294659 instance=ExtResource("5_qlcbn")]
+position = Vector2(1396, -275)
+
+[node name="Espinho3" parent="." unique_id=1428180209 instance=ExtResource("5_qlcbn")]
+position = Vector2(1451, -275)
+
+[node name="Espinho4" parent="." unique_id=1500632250 instance=ExtResource("5_qlcbn")]
+position = Vector2(1205, -276)
+
+[node name="Espinho5" parent="." unique_id=37176440 instance=ExtResource("5_qlcbn")]
+position = Vector2(1096, -275)
+
+[node name="Espinho6" parent="." unique_id=254975905 instance=ExtResource("5_qlcbn")]
+position = Vector2(1151, -275)
+
+[node name="Textura" parent="." unique_id=1155956241 instance=ExtResource("6_gef60")]
+position = Vector2(-261.12, 447.23166)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura2" parent="." unique_id=1540050551 instance=ExtResource("6_gef60")]
+position = Vector2(258.88004, 447.23166)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura3" parent="." unique_id=1741048 instance=ExtResource("6_gef60")]
+position = Vector2(778.8801, 447.2317)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura4" parent="." unique_id=425675590 instance=ExtResource("6_gef60")]
+position = Vector2(1298.8801, 447.2317)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura5" parent="." unique_id=1993486933 instance=ExtResource("6_gef60")]
+position = Vector2(1818.8805, 447.2317)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura6" parent="." unique_id=355996576 instance=ExtResource("6_gef60")]
+position = Vector2(2287.8801, 447.2317)
+scale = Vector2(10.20097, 13.188389)
+
+[node name="Textura50" parent="." unique_id=142446990 instance=ExtResource("6_gef60")]
+position = Vector2(2730.8801, 447.2317)
+scale = Vector2(11.518047, 13.188389)
+
+[node name="Textura7" parent="." unique_id=1772794625 instance=ExtResource("6_gef60")]
+position = Vector2(-261.12, 839.2316)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura8" parent="." unique_id=1797093111 instance=ExtResource("6_gef60")]
+position = Vector2(258.88004, 839.2316)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura13" parent="." unique_id=615008286 instance=ExtResource("6_gef60")]
+position = Vector2(778.8801, 839.2316)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura14" parent="." unique_id=1724911656 instance=ExtResource("6_gef60")]
+position = Vector2(1298.8801, 839.2316)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura15" parent="." unique_id=1570817675 instance=ExtResource("6_gef60")]
+position = Vector2(1818.8804, 839.2316)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura16" parent="." unique_id=1759248263 instance=ExtResource("6_gef60")]
+position = Vector2(2287.8801, 839.2316)
+scale = Vector2(10.20097, 13.188389)
+
+[node name="Textura17" parent="." unique_id=15743823 instance=ExtResource("6_gef60")]
+position = Vector2(-261.12, 1223.2318)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura29" parent="." unique_id=827578778 instance=ExtResource("6_gef60")]
+position = Vector2(-1751.1201, 447.2317)
+scale = Vector2(13.957079, 13.188389)
+
+[node name="Textura30" parent="." unique_id=1618638145 instance=ExtResource("6_gef60")]
+position = Vector2(-1777.1202, 839.2316)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura31" parent="." unique_id=1870660020 instance=ExtResource("6_gef60")]
+position = Vector2(-1777.1202, 1223.2319)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura32" parent="." unique_id=367224593 instance=ExtResource("6_gef60")]
+position = Vector2(-1750.6202, -712.7683)
+scale = Vector2(14.030251, 13.188389)
+
+[node name="Textura33" parent="." unique_id=1141874543 instance=ExtResource("6_gef60")]
+position = Vector2(-1752.12, -320.76837)
+scale = Vector2(14.00586, 13.188389)
+
+[node name="Textura34" parent="." unique_id=1311024363 instance=ExtResource("6_gef60")]
+position = Vector2(-1751.1201, 63.231934)
+scale = Vector2(13.957079, 13.188389)
+
+[node name="Textura25" parent="." unique_id=1145321922 instance=ExtResource("6_gef60")]
+position = Vector2(-781.12, 1055.232)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura24" parent="." unique_id=2019575440 instance=ExtResource("6_gef60")]
+position = Vector2(-781.12, 1223.2318)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura18" parent="." unique_id=1483143526 instance=ExtResource("6_gef60")]
+position = Vector2(258.88004, 1223.2318)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura19" parent="." unique_id=82330126 instance=ExtResource("6_gef60")]
+position = Vector2(778.8802, 1223.2318)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura20" parent="." unique_id=916598589 instance=ExtResource("6_gef60")]
+position = Vector2(1298.88, 1223.2318)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura36" parent="." unique_id=1380214889 instance=ExtResource("6_gef60")]
+position = Vector2(-776.50006, -712.76825)
+scale = Vector2(14.853659, 13.188389)
+
+[node name="Textura37" parent="." unique_id=301684643 instance=ExtResource("6_gef60")]
+position = Vector2(-213.11987, -712.76825)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura38" parent="." unique_id=1087660745 instance=ExtResource("6_gef60")]
+position = Vector2(306.88, -712.76825)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura44" parent="." unique_id=506524489 instance=ExtResource("6_gef60")]
+position = Vector2(826.8801, -923.76825)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura45" parent="." unique_id=1076210522 instance=ExtResource("6_gef60")]
+position = Vector2(1350.5001, -923.7682)
+scale = Vector2(12.902442, 13.188389)
+
+[node name="Textura46" parent="." unique_id=431477759 instance=ExtResource("6_gef60")]
+position = Vector2(1874.8802, -923.7682)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura47" parent="." unique_id=1502515481 instance=ExtResource("6_gef60")]
+position = Vector2(2399.5, -923.7682)
+scale = Vector2(12.853664, 13.188389)
+
+[node name="Textura48" parent="." unique_id=100289253 instance=ExtResource("6_gef60")]
+position = Vector2(2712.9998, -488.1158)
+scale = Vector2(12.68878, 16.42178)
+
+[node name="Textura39" parent="." unique_id=466566030 instance=ExtResource("6_gef60")]
+position = Vector2(122.87998, -366.99994)
+scale = Vector2(12.68878, 9.999996)
+
+[node name="Textura40" parent="." unique_id=583067752 instance=ExtResource("6_gef60")]
+position = Vector2(-397.12006, -366.99994)
+scale = Vector2(12.68878, 9.999996)
+
+[node name="Textura41" parent="." unique_id=620029213 instance=ExtResource("6_gef60")]
+position = Vector2(-869.00006, -366.9999)
+scale = Vector2(10.390245, 9.999996)
+
+[node name="Textura21" parent="." unique_id=235936795 instance=ExtResource("6_gef60")]
+position = Vector2(1818.8805, 1223.2318)
+scale = Vector2(12.68878, 13.188389)
+
+[node name="Textura22" parent="." unique_id=2139428080 instance=ExtResource("6_gef60")]
+position = Vector2(2287.8804, 1223.2318)
+scale = Vector2(10.20097, 13.188389)
+
+[node name="Textura9" parent="." unique_id=759362247 instance=ExtResource("6_gef60")]
+position = Vector2(1816.0002, 5.7316628)
+scale = Vector2(12.829276, 17.153908)
+
+[node name="Textura10" parent="." unique_id=1566461493 instance=ExtResource("6_gef60")]
+position = Vector2(2287.8801, 5.7316628)
+scale = Vector2(10.20097, 17.153908)
+
+[node name="Textura49" parent="." unique_id=518037373 instance=ExtResource("6_gef60")]
+position = Vector2(2730.3801, 5.731663)
+scale = Vector2(11.493652, 17.153908)
+
+[node name="Textura11" parent="." unique_id=2131499052 instance=ExtResource("6_gef60")]
+position = Vector2(802.50006, 5.731659)
+scale = Vector2(16.219517, 17.153908)
+
+[node name="Textura12" parent="." unique_id=1272136111 instance=ExtResource("6_gef60")]
+position = Vector2(1343.8802, 5.731659)
+scale = Vector2(10.20097, 17.153908)
+
+[node name="Textura23" parent="." unique_id=1253999621 instance=ExtResource("7_bm6g6")]
+position = Vector2(-783.3568, 810.5)
+scale = Vector2(85.88107, 23.749998)
+
+[node name="Textura26" parent="." unique_id=587065624 instance=ExtResource("6_gef60")]
+position = Vector2(-1277.0001, 1055.2322)
+scale = Vector2(11.512189, 13.188389)
+
+[node name="Textura27" parent="." unique_id=1854993770 instance=ExtResource("6_gef60")]
+position = Vector2(-1277.0002, 1223.2319)
+scale = Vector2(11.512186, 13.188389)
+
+[node name="Textura28" parent="." unique_id=434036925 instance=ExtResource("7_bm6g6")]
+position = Vector2(-1278.8568, 810.50006)
+scale = Vector2(77.71438, 23.749998)
+
+[node name="Textura35" parent="." unique_id=1963512910 instance=ExtResource("7_bm6g6")]
+position = Vector2(-1489.0715, 701)
+scale = Vector2(8.690529, 23.749998)
+
+[node name="Textura42" parent="." unique_id=1674252307 instance=ExtResource("7_bm6g6")]
+position = Vector2(-1058.0358, 207.00003)
+scale = Vector2(8.345264, 174.00002)
+
+[node name="Textura53" parent="." unique_id=1128296396 instance=ExtResource("7_bm6g6")]
+position = Vector2(1000, -251.75)
+scale = Vector2(24.66666, 4.374998)
+
+[node name="Textura54" parent="." unique_id=1626966598 instance=ExtResource("7_bm6g6")]
+position = Vector2(1601, -255)
+scale = Vector2(24.66666, 4.374998)
+
+[node name="Textura43" parent="." unique_id=2022835983 instance=ExtResource("7_bm6g6")]
+position = Vector2(-497, 101.50001)
+scale = Vector2(9.000002, 65.74999)
+
+[node name="Textura51" parent="." unique_id=673580451 instance=ExtResource("8_qlcbn")]
+position = Vector2(1000, -296)
+scale = Vector2(4.1111135, 2.8333337)
+
+[node name="Textura52" parent="." unique_id=1679173929 instance=ExtResource("8_qlcbn")]
+position = Vector2(1300, -375.5)
+scale = Vector2(4.111113, 2.7916663)
+
+[node name="Textura56" parent="." unique_id=1303802502 instance=ExtResource("8_qlcbn")]
+position = Vector2(1600, -451.00003)
+scale = Vector2(4.1111135, 2.7916663)
+
+[node name="Textura57" parent="." unique_id=1916002983 instance=ExtResource("9_qvhoy")]
+position = Vector2(1300, -315.00003)
+scale = Vector2(3.6097538, 3.250002)
+
+[node name="Textura58" parent="." unique_id=1344927003 instance=ExtResource("9_qvhoy")]
+position = Vector2(1300, -264)
+scale = Vector2(3.6097589, 3.250002)
+
+[node name="Textura59" parent="." unique_id=1683704838 instance=ExtResource("9_qvhoy")]
+position = Vector2(1600.5, -391)
+scale = Vector2(3.6341476, 3.250002)
+
+[node name="Textura60" parent="." unique_id=2000515224 instance=ExtResource("9_qvhoy")]
+position = Vector2(1600.5, -339.99994)
+scale = Vector2(3.6341527, 3.250002)
+
+[node name="Textura61" parent="." unique_id=1596432147 instance=ExtResource("9_qvhoy")]
+position = Vector2(1600.5, -288.00003)
+scale = Vector2(3.6341531, 3.250002)
+
+[node name="Portal" parent="." unique_id=943932327 instance=ExtResource("9_qlcbn")]
+position = Vector2(2415, -282)
+cor = 2
+
+[node name="Portal2" parent="." unique_id=308069843 instance=ExtResource("9_qlcbn")]
+position = Vector2(-1361, -632)
+cor = 1
+id_portal = "chegada-fase3"
+eh_saida = true
