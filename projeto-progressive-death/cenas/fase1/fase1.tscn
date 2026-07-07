@@ -288,7 +288,7 @@ texture = ExtResource("5_r1qh0")
 centered = false
 
 [node name="Player" parent="." unique_id=929203449 instance=ExtResource("2_2l3w2")]
-position = Vector2(46, 208)
+position = Vector2(19, 356)
 altura_jogador = 16.0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=526092004]
@@ -535,7 +535,7 @@ id_portal = "chegada_f1"
 eh_saida = true
 
 [node name="Capacete" parent="." unique_id=2087050338 instance=ExtResource("20_capac")]
-position = Vector2(43.00001, 219)
+position = Vector2(29, 216)
 
 [node name="Portal4" parent="." unique_id=1807852694 instance=ExtResource("14_jy36d")]
 position = Vector2(1739, 730)
